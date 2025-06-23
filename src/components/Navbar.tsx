@@ -15,25 +15,80 @@ export default function Navbar() {
   const [activeSection, setActiveSection] = useState('home')
   const [scrolled, setScrolled] = useState(false)
 
-  // Throttled scroll handler
+  // Improved scroll handler with better section detection
   const handleScroll = useCallback(() => {
     const scrollTop = window.scrollY
     setScrolled(scrollTop > 10)
 
-    // Find the active section based on scroll position
-    const sections = navLinks.map(link => link.id)
-    const currentSection = sections.find(section => {
-      const element = document.getElementById(section)
-      if (!element) return false
+    // Get all sections and their positions
+    const sections = navLinks.map(link => {
+      const element = document.getElementById(link.id)
+      if (!element) return null
       
       const rect = element.getBoundingClientRect()
-      const offset = 100 // Offset for navbar height
+      const offsetTop = element.offsetTop
+      const offsetHeight = element.offsetHeight
       
-      return rect.top <= offset && rect.bottom >= offset
-    })
+      return {
+        id: link.id,
+        offsetTop,
+        offsetHeight,
+        rect,
+        // Check if section is currently visible in viewport
+        isVisible: rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2
+      }
+    }).filter(Boolean)
 
-    if (currentSection && currentSection !== activeSection) {
-      setActiveSection(currentSection)
+    // Find the section that should be active
+    let newActiveSection = 'home'
+    
+    if (scrollTop < 100) {
+      // If we're at the top, home should be active
+      newActiveSection = 'home'
+    } else {
+      // Find the section closest to the center of the viewport
+      const viewportCenter = window.innerHeight / 2
+      let closestSection = null
+      let closestDistance = Infinity
+
+      sections.forEach(section => {
+        if (!section) return
+        
+        const sectionCenter = section.rect.top + (section.rect.height / 2)
+        const distance = Math.abs(sectionCenter - viewportCenter)
+        
+        // Prioritize sections that are actually visible
+        if (section.rect.top <= viewportCenter && section.rect.bottom >= viewportCenter) {
+          if (distance < closestDistance) {
+            closestDistance = distance
+            closestSection = section
+          }
+        }
+      })
+
+      // If no section is in the center, find the one that's closest to being visible
+      if (!closestSection) {
+        sections.forEach(section => {
+          if (!section) return
+          
+          const distance = section.rect.top < 0 
+            ? Math.abs(section.rect.bottom) 
+            : Math.abs(section.rect.top - viewportCenter)
+          
+          if (distance < closestDistance) {
+            closestDistance = distance
+            closestSection = section
+          }
+        })
+      }
+
+      if (closestSection) {
+        newActiveSection = closestSection.id
+      }
+    }
+
+    if (newActiveSection !== activeSection) {
+      setActiveSection(newActiveSection)
     }
   }, [activeSection])
 
@@ -50,15 +105,21 @@ export default function Navbar() {
       }
     }
 
+    // Add scroll listener
     window.addEventListener('scroll', throttledScroll, { passive: true })
     
-    // Set initial active section
-    handleScroll()
+    // Set initial active section after a brief delay to ensure DOM is ready
+    const timer = setTimeout(() => {
+      handleScroll()
+    }, 100)
     
-    return () => window.removeEventListener('scroll', throttledScroll)
+    return () => {
+      window.removeEventListener('scroll', throttledScroll)
+      clearTimeout(timer)
+    }
   }, [handleScroll])
 
-  const handleNavClick = (id) => {
+  const handleNavClick = (id: string) => {
     setActiveSection(id)
     setIsOpen(false)
     
@@ -69,7 +130,7 @@ export default function Navbar() {
       const elementPosition = element.offsetTop - navbarHeight
       
       window.scrollTo({
-        top: elementPosition,
+        top: Math.max(0, elementPosition),
         behavior: 'smooth'
       })
     }
@@ -99,7 +160,7 @@ export default function Navbar() {
             >
               <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pink-100 via-purple-50 to-blue-100 flex items-center justify-center shadow-md transition-all duration-300 ease-out group-hover:shadow-xl group-hover:scale-105 group-hover:rotate-2">
                 <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-100 to-purple-200 flex items-center justify-center text-white text-xs font-bold">
-                  <img src="/projects/SS-logo.png" alt="Logo" />
+                  S
                 </div>
               </div>
               <h1 className="text-xl font-bold text-gray-800 transition-colors duration-300 group-hover:text-blue-600">
@@ -288,223 +349,3 @@ export default function Navbar() {
     </>
   )
 }
-
-// 'use client'
-// import { useState, useEffect } from 'react'
-// import { motion, AnimatePresence } from 'framer-motion'
-// import { Home, User, Code, Briefcase, Mail, Github, Linkedin, Menu, X } from 'lucide-react'
-// import Image from 'next/image'
-
-// const navLinks = [
-//   { id: 'home', label: 'Home', icon: Home },
-//   { id: 'about', label: 'About', icon: User },
-//   { id: 'skills', label: 'Skills', icon: Code },
-//   { id: 'projects', label: 'Projects', icon: Briefcase },
-//   { id: 'contact', label: 'Contact', icon: Mail }
-// ]
-
-// export default function Navbar() {
-//   const [isOpen, setIsOpen] = useState(false)
-//   const [activeSection, setActiveSection] = useState('home')
-//   const [scrolled, setScrolled] = useState(false)
-
-//   useEffect(() => {
-//     const handleScroll = () => {
-//       setScrolled(window.scrollY > 10)
-//     }
-//     window.addEventListener('scroll', handleScroll)
-//     return () => window.removeEventListener('scroll', handleScroll)
-//   }, [])
-
-//   const handleNavClick = (id: string) => {
-//     setActiveSection(id)
-//     setIsOpen(false)
-//   }
-
-//   return (
-//     <>
-//       {/* Main Navbar */}
-//       <motion.nav
-//         initial={{ y: -100 }}
-//         animate={{ y: 0 }}
-//         transition={{ duration: 0.5 }}
-//         className={`fixed w-full z-50 transition-all duration-300 ${
-//           scrolled 
-//             ? 'bg-white/95 backdrop-blur-sm border-b border-gray-100 shadow-sm py-3' 
-//             : 'bg-transparent py-4'
-//         }`}
-//       >
-//         <div className="container mx-auto px-6">
-//           <div className="flex justify-between items-center">
-            
-//             {/* Logo */}
-//             <motion.div
-//               whileHover={{ scale: 1.02 }}
-//               className="flex items-center space-x-3 cursor-pointer"
-//               onClick={() => handleNavClick('home')}
-//             >
-//               <div className="w-9 h-9 rounded-full bg-gradient-to-br from-pink-100 to-blue-100 flex items-center justify-center shadow-md">
-//                 <Image src="/projects/SS-logo.png" alt="Logo" width={24} height={24} />
-//               </div>
-//               <h1 className="text-xl font-semibold text-gray-800">Salman Saleem</h1>
-//             </motion.div>
-
-//             {/* Desktop Navigation */}
-//             <div className="hidden md:flex items-center space-x-6">
-//               <ul className="flex items-center space-x-1">
-//                 {navLinks.map((link) => {
-//                   const Icon = link.icon
-//                   const isActive = activeSection === link.id
-//                   return (
-//                     <motion.li key={link.id} className="relative">
-//                       <motion.a
-//                         href={`#${link.id}`}
-//                         onClick={() => handleNavClick(link.id)}
-//                         className={`flex items-center space-x-1.5 px-3.5 py-2 rounded-lg transition-colors ${
-//                           isActive
-//                             ? 'text-blue-600 bg-blue-50'
-//                             : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-//                         }`}
-//                         whileHover={{ scale: 1.03 }}
-//                         whileTap={{ scale: 0.97 }}
-//                       >
-//                         <Icon size={16} className={isActive ? 'text-blue-500' : 'text-gray-500'} />
-//                         <span className="text-sm font-medium">{link.label}</span>
-//                       </motion.a>
-//                     </motion.li>
-//                   )
-//                 })}
-//               </ul>
-
-//               {/* Social Links */}
-//               <div className="flex items-center space-x-3 ml-4 pl-4 border-l border-gray-200">
-//                 <motion.a
-//                   href="https://github.com/salmansaleem-17"
-//                   target="_blank"
-//                   rel="noopener noreferrer"
-//                   className="p-2 rounded-full text-gray-600 hover:text-gray-900 transition-colors"
-//                   whileHover={{ y: -2 }}
-//                   whileTap={{ scale: 0.95 }}
-//                 >
-//                   <Github size={18} />
-//                 </motion.a>
-//                 <motion.a
-//                   href="https://linkedin.com/in/muhammad-salman-saleem-8a9a96266"
-//                   target="_blank"
-//                   rel="noopener noreferrer"
-//                   className="p-2 rounded-full text-gray-600 hover:text-gray-900 transition-colors"
-//                   whileHover={{ y: -2 }}
-//                   whileTap={{ scale: 0.95 }}
-//                 >
-//                   <Linkedin size={18} />
-//                 </motion.a>
-//                 <motion.a
-//                   href="#contact"
-//                   className="px-3.5 py-2 bg-gradient-to-br from-blue-500 to-purple-600 text-white rounded-lg text-sm font-medium transition-all flex items-center space-x-1.5"
-//                   whileHover={{ y: -2, shadow: '0 4px 12px rgba(99, 102, 241, 0.3)' }}
-//                   whileTap={{ scale: 0.97 }}
-//                 >
-//                   <span>Hire Me</span>
-//                 </motion.a>
-//               </div>
-//             </div>
-
-//             {/* Mobile Menu Button */}
-//             <button
-//               className="md:hidden p-2 rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors"
-//               onClick={() => setIsOpen(!isOpen)}
-//             >
-//               {isOpen ? (
-//                 <X size={22} />
-//               ) : (
-//                 <Menu size={22} />
-//               )}
-//             </button>
-//           </div>
-//         </div>
-//       </motion.nav>
-
-//       {/* Mobile Menu */}
-//       <AnimatePresence>
-//         {isOpen && (
-//           <>
-//             {/* Backdrop */}
-//             <motion.div
-//               initial={{ opacity: 0 }}
-//               animate={{ opacity: 1 }}
-//               exit={{ opacity: 0 }}
-//               className="fixed inset-0 z-40 bg-black/30 backdrop-blur-sm md:hidden"
-//               onClick={() => setIsOpen(false)}
-//             />
-            
-//             {/* Mobile Menu Panel */}
-//             <motion.div
-//               initial={{ x: '100%' }}
-//               animate={{ x: 0 }}
-//               exit={{ x: '100%' }}
-//               transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-//               className="fixed top-0 right-0 z-50 h-full w-64 bg-white shadow-xl md:hidden"
-//             >
-//               <div className="p-6 pt-20 h-full flex flex-col">
-//                 <nav className="space-y-2 flex-1">
-//                   {navLinks.map((link) => {
-//                     const Icon = link.icon
-//                     const isActive = activeSection === link.id
-//                     return (
-//                       <motion.a
-//                         key={link.id}
-//                         href={`#${link.id}`}
-//                         onClick={() => handleNavClick(link.id)}
-//                         className={`flex items-center space-x-3 p-3 rounded-lg transition-colors ${
-//                           isActive
-//                             ? 'text-blue-600 bg-blue-50'
-//                             : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-//                         }`}
-//                         whileHover={{ x: 2 }}
-//                         whileTap={{ scale: 0.98 }}
-//                       >
-//                         <Icon size={18} className={isActive ? 'text-blue-500' : 'text-gray-500'} />
-//                         <span className="text-sm font-medium">{link.label}</span>
-//                       </motion.a>
-//                     )
-//                   })}
-//                 </nav>
-
-//                 {/* Mobile Social Links */}
-//                 <div className="mt-auto pt-6 border-t border-gray-200">
-//                   <div className="flex items-center justify-center space-x-4 mb-6">
-//                     <a
-//                       href="https://github.com/salmansaleem-17"
-//                       target="_blank"
-//                       rel="noopener noreferrer"
-//                       className="p-2 rounded-full text-gray-600 hover:text-gray-900 transition-colors"
-//                     >
-//                       <Github size={20} />
-//                     </a>
-//                     <a
-//                       href="https://linkedin.com/in/muhammad-salman-saleem-8a9a96266"
-//                       target="_blank"
-//                       rel="noopener noreferrer"
-//                       className="p-2 rounded-full text-gray-600 hover:text-gray-900 transition-colors"
-//                     >
-//                       <Linkedin size={20} />
-//                     </a>
-//                   </div>
-//                   <motion.a
-//                     href="#contact"
-//                     onClick={() => setIsOpen(false)}
-//                     className="w-full flex items-center justify-center px-4 py-2.5 bg-gradient-to-br from-blue-500 to-purple-600 text-white rounded-lg text-sm font-medium transition-all"
-//                     whileHover={{ y: -1, shadow: '0 4px 12px rgba(99, 102, 241, 0.3)' }}
-//                     whileTap={{ scale: 0.98 }}
-//                   >
-//                     Hire Me
-//                   </motion.a>
-//                 </div>
-//               </div>
-//             </motion.div>
-//           </>
-//         )}
-//       </AnimatePresence>
-//     </>
-//   )
-// }

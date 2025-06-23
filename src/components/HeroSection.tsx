@@ -24,7 +24,7 @@ import {
 } from "lucide-react";
 
 interface HeroSectionProps {
-  // Remove framer motion props as they're no longer needed
+  // No need for framer motion props since we're using CSS animations
 }
 
 // Custom hook for intersection observer
