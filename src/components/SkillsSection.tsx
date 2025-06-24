@@ -1,28 +1,7 @@
 'use client'
 
-import { Code2, Zap, Target, Sparkles, Star } from "lucide-react";
-import { 
-  FaReact, 
-  FaNodeJs, 
-  FaJs, 
-  FaHtml5, 
-  FaCss3Alt, 
-  FaGitAlt, 
-  FaGithub, 
-  FaBootstrap,
-  FaDatabase,
-  FaNpm
-} from "react-icons/fa";
-import { 
-  SiMongodb, 
-  SiExpress, 
-  SiTailwindcss, 
-  SiTypescript,
-  SiNextdotjs,
-  SiPostman,
-  SiSocketdotio
-} from "react-icons/si";
-import { memo, useMemo, useCallback, useRef, useState, useEffect } from "react";
+import { Code2, Zap, Target, Sparkles } from "lucide-react";
+import { memo, useMemo, useState, useEffect, useRef } from "react";
 
 interface Skill {
   name: string;
@@ -33,71 +12,53 @@ interface Skill {
   years?: number;
 }
 
-// Optimized animation config
-const ANIMATION_CONFIG = {
-  staggerDelay: 40,
-  baseDelay: 80,
-  duration: 300,
-  threshold: 0.1
-};
+interface SkillsSectionProps {
+  skills: Skill[];
+}
 
-// Elegant level configurations
+// Skill level configurations with percentages for bars
 const SKILL_LEVELS = {
   Expert: { 
-    percentage: 95, 
-    stars: 5, 
+    percentage: 95,
     label: 'Expert',
-    gradient: 'from-emerald-400 to-emerald-600',
-    glow: 'emerald-400/20',
-    text: 'text-emerald-600'
+    textColor: 'text-emerald-600',
+    bgColor: 'bg-emerald-50',
+    borderColor: 'border-emerald-200',
+    barColor: 'bg-gradient-to-r from-emerald-400 to-emerald-600'
   },
   Advanced: { 
-    percentage: 80, 
-    stars: 4, 
+    percentage: 80,
     label: 'Advanced',
-    gradient: 'from-blue-400 to-blue-600',
-    glow: 'blue-400/20',
-    text: 'text-blue-600'
+    textColor: 'text-blue-600',
+    bgColor: 'bg-blue-50',
+    borderColor: 'border-blue-200',
+    barColor: 'bg-gradient-to-r from-blue-400 to-blue-600'
   },
   Intermediate: { 
-    percentage: 65, 
-    stars: 3, 
+    percentage: 65,
     label: 'Intermediate',
-    gradient: 'from-amber-400 to-amber-600',
-    glow: 'amber-400/20',
-    text: 'text-amber-600'
+    textColor: 'text-amber-600',
+    bgColor: 'bg-amber-50',
+    borderColor: 'border-amber-200',
+    barColor: 'bg-gradient-to-r from-amber-400 to-amber-600'
   }
 };
 
-// Optimized skill card with elegant design
-const SkillCard = memo(({ 
-  skill, 
-  index,
-  onVisible
-}: {
-  skill: Skill;
-  index: number;
-  onVisible: () => void;
-}) => {
+// High-performance skill card with aesthetic design
+const SkillCard = memo(({ skill, index }: { skill: Skill; index: number }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
-
   const levelConfig = SKILL_LEVELS[skill.level];
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !isVisible) {
-          const timeout = setTimeout(() => {
-            setIsVisible(true);
-            onVisible();
-          }, index * ANIMATION_CONFIG.staggerDelay);
-          
-          return () => clearTimeout(timeout);
+          setTimeout(() => setIsVisible(true), index * 50);
         }
       },
-      { threshold: ANIMATION_CONFIG.threshold }
+      { threshold: 0.1 }
     );
 
     if (cardRef.current) {
@@ -105,96 +66,141 @@ const SkillCard = memo(({
     }
 
     return () => observer.disconnect();
-  }, [index, isVisible, onVisible]);
-
-  // Render star rating
-  const renderStars = useCallback(() => {
-    return Array.from({ length: 5 }, (_, i) => (
-      <Star
-        key={i}
-        className={`w-3 h-3 transition-all duration-200 ${
-          i < levelConfig.stars 
-            ? `text-yellow-400 fill-yellow-400 ${isHovered ? 'scale-110' : ''}` 
-            : 'text-gray-200'
-        }`}
-      />
-    ));
-  }, [levelConfig.stars, isHovered]);
+  }, [index, isVisible]);
 
   return (
     <div
       ref={cardRef}
-      className={`group relative transition-all duration-300 ease-out ${
+      className={`group relative transition-all duration-500 ease-out will-change-transform ${
         isVisible 
           ? 'opacity-100 translate-y-0 scale-100' 
-          : 'opacity-0 translate-y-4 scale-95'
+          : 'opacity-0 translate-y-6 scale-95'
       }`}
       style={{ 
-        transitionDelay: `${index * ANIMATION_CONFIG.staggerDelay}ms`,
-        willChange: isVisible ? 'auto' : 'transform, opacity'
+        transitionDelay: `${index * 50}ms`
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Main card */}
-      <div className="relative h-full bg-white/70 backdrop-blur-sm border border-gray-200/50 rounded-2xl p-6 transition-all duration-300 hover:bg-white/90 hover:border-gray-300/50 hover:shadow-lg hover:-translate-y-1">
+      {/* Main card with glass morphism effect */}
+      <div className="relative h-full bg-white/80 backdrop-blur-sm border border-white/20 rounded-3xl p-6 shadow-lg transition-all duration-300 ease-out hover:bg-white/95 hover:shadow-2xl hover:border-white/40 hover:-translate-y-2 hover:scale-[1.02] group-hover:shadow-xl">
         
-        {/* Skill icon */}
-        <div className="flex justify-center mb-4">
+        {/* Gradient overlay for depth */}
+        <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent rounded-3xl pointer-events-none" />
+        
+        {/* Skill icon with animated container */}
+        <div className="relative flex justify-center mb-5">
           <div 
-            className={`relative w-16 h-16 rounded-xl flex items-center justify-center transition-all duration-300 shadow-lg ${isHovered ? 'shadow-xl scale-105' : ''}`}
+            className={`relative w-18 h-18 rounded-2xl flex items-center justify-center shadow-lg transition-all duration-300 ease-out transform ${
+              isHovered ? 'scale-110 rotate-3' : 'scale-100 rotate-0'
+            }`}
             style={{ 
-              background: `linear-gradient(135deg, ${skill.color}15, ${skill.color}25)`,
-              boxShadow: isHovered ? `0 10px 25px ${skill.color}20` : undefined
+              background: `linear-gradient(135deg, ${skill.color}20, ${skill.color}35)`,
+              boxShadow: isHovered 
+                ? `0 20px 40px ${skill.color}30, 0 0 0 1px ${skill.color}20` 
+                : `0 8px 25px ${skill.color}15`
             }}
           >
             <skill.icon 
-              className="w-8 h-8 transition-transform duration-300"
-              style={{ color: skill.color }}
+              className={`w-9 h-9 transition-all duration-300 ${
+                isHovered ? 'scale-110' : 'scale-100'
+              }`}
+              style={{ 
+                color: skill.color,
+                filter: isHovered ? 'brightness(1.2) saturate(1.2)' : 'brightness(1)'
+              }}
+            />
+            
+            {/* Animated ring effect */}
+            <div 
+              className={`absolute inset-0 rounded-2xl transition-all duration-300 ${
+                isHovered ? 'animate-pulse' : ''
+              }`}
+              style={{ 
+                boxShadow: isHovered ? `0 0 0 4px ${skill.color}20` : 'none'
+              }}
             />
           </div>
         </div>
 
-        {/* Skill name */}
-        <h4 className="font-semibold text-gray-800 text-center mb-3 transition-colors duration-300 group-hover:text-gray-900">
+        {/* Skill name with hover effect */}
+        <h4 className={`font-bold text-gray-800 text-center mb-4 transition-all duration-300 ${
+          isHovered ? 'text-gray-900 scale-105' : ''
+        } text-lg`}>
           {skill.name}
         </h4>
 
-        {/* Star rating */}
-        <div className="flex justify-center gap-1 mb-4">
-          {renderStars()}
-        </div>
-
-        {/* Level badge */}
+        {/* Level badge with enhanced styling */}
         <div className="flex justify-center mb-4">
-          <span className={`px-3 py-1 rounded-full text-xs font-medium transition-all duration-300 ${levelConfig.text} bg-white/80 border border-current/20 ${isHovered ? 'scale-105' : ''}`}>
+          <span className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 ${
+            levelConfig.textColor
+          } ${levelConfig.bgColor} ${levelConfig.borderColor} border-2 ${
+            isHovered ? 'scale-105 shadow-lg' : ''
+          }`}
+          style={{
+            boxShadow: isHovered ? `0 8px 25px ${skill.color}25` : 'none'
+          }}>
             {levelConfig.label}
           </span>
         </div>
 
-        {/* Elegant progress indicator */}
-        <div className="relative">
-          <div className="w-full h-1 bg-gray-100 rounded-full overflow-hidden">
-            <div 
-              className={`h-full bg-gradient-to-r ${levelConfig.gradient} rounded-full transition-all duration-700 ease-out`}
-              style={{ 
-                width: isVisible ? `${levelConfig.percentage}%` : '0%',
-                transitionDelay: `${index * ANIMATION_CONFIG.staggerDelay + 200}ms`
-              }}
-            />
-          </div>
-          
-          {/* Percentage indicator */}
-          <div className="flex justify-end mt-2">
-            <span className={`text-xs font-medium transition-all duration-300 ${levelConfig.text} ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+        {/* Expertise level bar */}
+        <div className="mb-4">
+          <div className="flex justify-between items-center mb-2">
+            <span className="text-xs font-medium text-gray-500">Expertise</span>
+            <span className={`text-xs font-bold ${levelConfig.textColor}`}>
               {levelConfig.percentage}%
             </span>
           </div>
+          
+          {/* Progress bar container */}
+          <div className="relative w-full h-2 bg-gray-100 rounded-full overflow-hidden">
+            {/* Animated progress bar */}
+            <div 
+              className={`h-full ${levelConfig.barColor} rounded-full transition-all duration-1000 ease-out relative overflow-hidden`}
+              style={{ 
+                width: isVisible ? `${levelConfig.percentage}%` : '0%',
+                transitionDelay: `${index * 50 + 300}ms`
+              }}
+            >
+              {/* Shimmer effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent translate-x-[-100%] animate-[shimmer_2s_infinite] group-hover:animate-[shimmer_1s_infinite]" />
+            </div>
+            
+            {/* Glow effect on hover */}
+            <div 
+              className={`absolute inset-0 rounded-full transition-all duration-300 ${
+                isHovered ? 'shadow-inner' : ''
+              }`}
+              style={{ 
+                boxShadow: isHovered ? `inset 0 0 10px ${skill.color}20` : 'none'
+              }}
+            />
+          </div>
         </div>
 
-        {/* Hover glow effect */}
+        {/* Floating orbs effect on hover */}
+        <div className={`absolute inset-0 pointer-events-none transition-opacity duration-300 ${
+          isHovered ? 'opacity-100' : 'opacity-0'
+        }`}>
+          {[...Array(3)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-1 h-1 rounded-full animate-bounce"
+              style={{ 
+                background: skill.color,
+                left: `${25 + i * 25}%`,
+                top: `${20 + i * 15}%`,
+                animationDelay: `${i * 0.2}s`,
+                animationDuration: '1.5s'
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Card glow effect */}
         <div 
-          className={`absolute inset-0 rounded-2xl transition-opacity duration-300 pointer-events-none ${
+          className={`absolute inset-0 rounded-3xl pointer-events-none transition-all duration-300 ${
             isHovered ? 'opacity-100' : 'opacity-0'
           }`}
           style={{ 
@@ -208,21 +214,19 @@ const SkillCard = memo(({
 
 SkillCard.displayName = 'SkillCard';
 
-// Category section with elegant design
+// Category section with smooth animations
 const CategorySection = memo(({ 
   category, 
-  categoryIndex, 
   categorySkills, 
   categoryColor,
   CategoryIcon,
-  onSkillVisible
+  categoryIndex
 }: {
   category: string;
-  categoryIndex: number;
   categorySkills: Skill[];
   categoryColor: string;
   CategoryIcon: any;
-  onSkillVisible: (skillName: string) => void;
+  categoryIndex: number;
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -231,7 +235,7 @@ const CategorySection = memo(({
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !isVisible) {
-          setTimeout(() => setIsVisible(true), categoryIndex * 150);
+          setTimeout(() => setIsVisible(true), categoryIndex * 200);
         }
       },
       { threshold: 0.1 }
@@ -245,30 +249,33 @@ const CategorySection = memo(({
   }, [categoryIndex, isVisible]);
 
   return (
-    <div ref={sectionRef} className="space-y-8">
+    <div ref={sectionRef} className="space-y-10">
       {/* Category header */}
       <div 
-        className={`flex items-center justify-center gap-4 transition-all duration-500 ease-out ${
+        className={`flex items-center justify-center gap-6 transition-all duration-700 ease-out ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
         }`}
       >
-        <div className={`p-3 bg-gradient-to-r ${categoryColor} rounded-xl shadow-lg`}>
-          <CategoryIcon className="w-6 h-6 text-white" />
+        <div className={`p-4 bg-gradient-to-r ${categoryColor} rounded-2xl shadow-xl transition-all duration-300 hover:scale-110 hover:rotate-3 hover:shadow-2xl`}>
+          <CategoryIcon className="w-7 h-7 text-white" />
         </div>
-        <h3 className="text-2xl font-bold text-gray-800">
+        <h3 className="text-3xl font-bold text-gray-800 transition-all duration-300 hover:scale-105">
           {category}
         </h3>
-        <div className={`h-0.5 w-16 bg-gradient-to-r ${categoryColor} rounded-full`} />
+        <div className={`h-1 bg-gradient-to-r ${categoryColor} rounded-full transition-all duration-1000 ease-out`}
+          style={{
+            width: isVisible ? '4rem' : '0rem'
+          }}
+        />
       </div>
 
       {/* Skills grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
         {categorySkills.map((skill, index) => (
           <SkillCard
             key={skill.name}
             skill={skill}
             index={index}
-            onVisible={() => onSkillVisible(skill.name)}
           />
         ))}
       </div>
@@ -278,8 +285,7 @@ const CategorySection = memo(({
 
 CategorySection.displayName = 'CategorySection';
 
-export default memo(function ElegantSkillsSection() {
-  const [visibleSkills, setVisibleSkills] = useState<Set<string>>(new Set());
+export default memo(function SkillsSection({ skills }: SkillsSectionProps) {
   const [headerVisible, setHeaderVisible] = useState(false);
   const headerRef = useRef<HTMLDivElement>(null);
 
@@ -300,96 +306,69 @@ export default memo(function ElegantSkillsSection() {
     return () => observer.disconnect();
   }, [headerVisible]);
 
-  const handleSkillVisible = useCallback((skillName: string) => {
-    setVisibleSkills(prev => new Set([...prev, skillName]));
-  }, []);
-
-  // Skills data with better organization
+  // Organize skills by category
   const categorizedSkills = useMemo(() => {
-    const skillsData: Skill[] = [
-      // Frontend
-      { name: "React", level: "Expert", color: "#61DAFB", icon: FaReact, category: "Frontend", years: 3 },
-      { name: "Next.js", level: "Advanced", color: "#000000", icon: SiNextdotjs, category: "Frontend", years: 2 },
-      { name: "TypeScript", level: "Advanced", color: "#3178C6", icon: SiTypescript, category: "Frontend", years: 2 },
-      { name: "JavaScript", level: "Expert", color: "#F7DF1E", icon: FaJs, category: "Frontend", years: 4 },
-      { name: "HTML5", level: "Expert", color: "#E34F26", icon: FaHtml5, category: "Frontend", years: 5 },
-      { name: "CSS3", level: "Advanced", color: "#1572B6", icon: FaCss3Alt, category: "Frontend", years: 4 },
-      { name: "Tailwind", level: "Advanced", color: "#06B6D4", icon: SiTailwindcss, category: "Frontend", years: 2 },
-      { name: "Bootstrap", level: "Advanced", color: "#7952B3", icon: FaBootstrap, category: "Frontend", years: 3 },
-
-      // Backend
-      { name: "Node.js", level: "Advanced", color: "#339933", icon: FaNodeJs, category: "Backend", years: 3 },
-      { name: "Express.js", level: "Advanced", color: "#000000", icon: SiExpress, category: "Backend", years: 3 },
-      { name: "MongoDB", level: "Advanced", color: "#47A248", icon: SiMongodb, category: "Backend", years: 2 },
-      { name: "Socket.IO", level: "Intermediate", color: "#010101", icon: SiSocketdotio, category: "Backend", years: 1 },
-      { name: "REST APIs", level: "Advanced", color: "#FF6B6B", icon: FaDatabase, category: "Backend", years: 3 },
-
-      // Tools & DevOps
-      { name: "Git", level: "Advanced", color: "#F05032", icon: FaGitAlt, category: "Tools", years: 4 },
-      { name: "GitHub", level: "Advanced", color: "#181717", icon: FaGithub, category: "Tools", years: 4 },
-      { name: "Postman", level: "Advanced", color: "#FF6C37", icon: SiPostman, category: "Tools", years: 3 },
-      { name: "NPM", level: "Advanced", color: "#CB3837", icon: FaNpm, category: "Tools", years: 4 }
-    ];
-
     return [
       { 
         name: "Frontend Development", 
         color: "from-blue-500 to-cyan-500", 
         icon: Code2,
-        skills: skillsData.filter(skill => skill.category === "Frontend")
+        skills: skills.filter(skill => skill.category === "Frontend")
       },
       { 
         name: "Backend Development", 
         color: "from-emerald-500 to-teal-500", 
         icon: Zap,
-        skills: skillsData.filter(skill => skill.category === "Backend")
+        skills: skills.filter(skill => skill.category === "Backend")
       },
       { 
         name: "Tools & DevOps", 
         color: "from-purple-500 to-pink-500", 
         icon: Target,
-        skills: skillsData.filter(skill => skill.category === "Tools")
+        skills: skills.filter(skill => skill.category === "Tools")
       }
     ];
-  }, []);
+  }, [skills]);
 
   return (
-    <section className="relative min-h-screen py-20 bg-gradient-to-br from-slate-50 via-white to-blue-50/30">
-      {/* Subtle background elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-400/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-purple-400/5 rounded-full blur-3xl" />
-        <div className="absolute top-3/4 left-3/4 w-48 h-48 bg-emerald-400/5 rounded-full blur-2xl" />
+    <section className="relative min-h-screen py-24 bg-gradient-to-br from-slate-50 via-white to-blue-50/30 overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-blue-400/5 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-400/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-3/4 left-3/4 w-64 h-64 bg-emerald-400/5 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '2s' }} />
       </div>
 
       <div className="relative z-10 container mx-auto px-6">
         {/* Header */}
         <div 
           ref={headerRef}
-          className={`text-center mb-16 transition-all duration-700 ease-out ${
+          className={`text-center mb-20 transition-all duration-1000 ease-out ${
             headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full border border-gray-200/50 mb-8 shadow-sm">
-            <Sparkles className="w-4 h-4 text-purple-500" />
-            <span className="text-sm font-medium text-gray-700">Technical Expertise</span>
+          <div className="inline-flex items-center gap-3 px-6 py-3 bg-white/90 backdrop-blur-sm rounded-full border border-white/30 mb-8 shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-white">
+            <div className="animate-spin">
+              <Sparkles className="w-5 h-5 text-purple-500" />
+            </div>
+            <span className="text-sm font-semibold text-gray-700">Technical Expertise</span>
           </div>
 
-          {/* Title */}
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 bg-clip-text text-transparent">
+          {/* Title with same color theme */}
+          <h2 className="text-5xl md:text-6xl font-bold mb-8 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-700 bg-clip-text text-transparent transition-all duration-300 hover:scale-105">
             Skills & Technologies
           </h2>
           
           {/* Subtitle */}
-          <p className="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">
+          <p className="text-gray-600 max-w-3xl mx-auto text-xl leading-relaxed">
             A curated collection of technologies I've mastered through years of 
-            <span className="text-purple-600 font-medium"> hands-on experience</span> and continuous learning
+            <span className="text-purple-600 font-semibold"> hands-on experience</span> and continuous learning
           </p>
         </div>
 
         {/* Skills categories */}
-        <div className="space-y-16">
+        <div className="space-y-20">
           {categorizedSkills.map((category, categoryIndex) => (
             <CategorySection
               key={category.name}
@@ -398,31 +377,17 @@ export default memo(function ElegantSkillsSection() {
               categorySkills={category.skills}
               categoryColor={category.color}
               CategoryIcon={category.icon}
-              onSkillVisible={handleSkillVisible}
             />
           ))}
         </div>
-
-        {/* Stats summary */}
-        <div className="mt-20 text-center">
-          <div className="inline-flex items-center gap-8 px-8 py-4 bg-white/60 backdrop-blur-sm rounded-2xl border border-gray-200/50">
-            <div className="text-center">
-              <div className="text-2xl font-bold text-gray-800">{categorizedSkills.reduce((acc, cat) => acc + cat.skills.length, 0)}+</div>
-              <div className="text-sm text-gray-600">Technologies</div>
-            </div>
-            <div className="w-px h-8 bg-gray-300" />
-            <div className="text-center">
-              <div className="text-2xl font-bold text-gray-800">{categorizedSkills.length}</div>
-              <div className="text-sm text-gray-600">Categories</div>
-            </div>
-            <div className="w-px h-8 bg-gray-300" />
-            <div className="text-center">
-              <div className="text-2xl font-bold text-gray-800">4+</div>
-              <div className="text-sm text-gray-600">Years Experience</div>
-            </div>
-          </div>
-        </div>
       </div>
+
+      <style jsx>{`
+        @keyframes shimmer {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
+        }
+      `}</style>
     </section>
   );
 });

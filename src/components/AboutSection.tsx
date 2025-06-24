@@ -4,9 +4,15 @@ import { GraduationCap, Star, Code, Sparkles, Trophy, Zap } from "lucide-react";
 import { FaReact, FaNodeJs, FaDatabase, FaJs } from "react-icons/fa";
 import { SiMongodb, SiExpress, SiTailwindcss } from "react-icons/si";
 import { memo, useMemo, useEffect, useRef, useState } from "react";
+import { Variants } from "framer-motion";
+
+interface AboutSectionProps {
+  containerVariants?: Variants;
+  itemVariants?: Variants;
+}
 
 // Memoized tech stack component
-const TechStackItem = memo(({ tech, index }) => {
+const TechStackItem = memo(({ tech, index, itemVariants }: { tech: any, index: number, itemVariants?: Variants }) => {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef(null);
 
@@ -44,7 +50,7 @@ const TechStackItem = memo(({ tech, index }) => {
 });
 
 // Memoized strength item component
-const StrengthItem = memo(({ item, index }) => {
+const StrengthItem = memo(({ item, index, itemVariants }: { item: any, index: number, itemVariants?: Variants }) => {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef(null);
 
@@ -89,7 +95,7 @@ const AnimatedBackground = memo(() => (
 ));
 
 // Floating animation component
-const FloatingElement = memo(({ children, delay = 0 }) => (
+const FloatingElement = memo(({ children, delay = 0 }: { children: React.ReactNode, delay?: number }) => (
   <div 
     className="animate-bounce transform-gpu will-change-transform"
     style={{ 
@@ -103,7 +109,7 @@ const FloatingElement = memo(({ children, delay = 0 }) => (
 ));
 
 // Glow effect component
-const GlowCard = memo(({ children, className = "" }) => (
+const GlowCard = memo(({ children, className = "" }: { children: React.ReactNode, className?: string }) => (
   <div className={`relative ${className}`}>
     <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 blur-sm -z-10 
       animate-pulse"></div>
@@ -111,7 +117,7 @@ const GlowCard = memo(({ children, className = "" }) => (
   </div>
 ));
 
-export default function AboutSection() {
+export default function AboutSection({ containerVariants, itemVariants }: AboutSectionProps) {
   const [sectionVisible, setSectionVisible] = useState(false);
   const [headerVisible, setHeaderVisible] = useState(false);
   const [contentVisible, setContentVisible] = useState(false);
@@ -223,7 +229,7 @@ export default function AboutSection() {
                   </p>
                   <div className="flex flex-wrap gap-3">
                     {techStack.map((tech, index) => (
-                      <TechStackItem key={tech.name} tech={tech} index={index} />
+                      <TechStackItem key={tech.name} tech={tech} index={index} itemVariants={itemVariants} />
                     ))}
                   </div>
                 </div>
@@ -290,7 +296,7 @@ export default function AboutSection() {
                 
                 <div className="grid grid-cols-1 gap-3 relative z-10">
                   {strengths.map((item, index) => (
-                    <StrengthItem key={index} item={item} index={index} />
+                    <StrengthItem key={index} item={item} index={index} itemVariants={itemVariants} />
                   ))}
                 </div>
               </div>
@@ -298,8 +304,6 @@ export default function AboutSection() {
           </div>
         </div>
       </section>
-
-
     </div>
   );
 }

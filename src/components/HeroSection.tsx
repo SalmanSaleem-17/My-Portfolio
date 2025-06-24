@@ -22,9 +22,11 @@ import {
   Star,
   Sparkles
 } from "lucide-react";
+import { Variants } from "framer-motion";
 
 interface HeroSectionProps {
-  // No need for framer motion props since we're using CSS animations
+  containerVariants?: Variants;
+  itemVariants?: Variants;
 }
 
 // Custom hook for intersection observer
@@ -56,11 +58,13 @@ const useIntersectionObserver = (
 export default function HeroSection({}: HeroSectionProps) {
   const [currentSkillIndex, setCurrentSkillIndex] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   const isVisible = useIntersectionObserver(sectionRef);
 
-  // Trigger initial load animation
+  // Fix hydration mismatch by ensuring client-side only rendering for random elements
   useEffect(() => {
+    setIsMounted(true);
     const timer = setTimeout(() => setIsLoaded(true), 100);
     return () => clearTimeout(timer);
   }, []);
@@ -81,6 +85,13 @@ export default function HeroSection({}: HeroSectionProps) {
 
   // Memoize floating icons data
   const floatingIcons = useMemo(() => [Code, Database, Globe, Shield, Smartphone, Zap], []);
+
+  // Generate deterministic positions for floating particles to avoid hydration mismatch
+  const particlePositions = useMemo(() => [
+    { left: 22.6, top: 70.2, delay: 0, duration: 7.8 },
+    { left: 37.7, top: 59.8, delay: 2, duration: 8.6 },
+    { left: 32.5, top: 39.4, delay: 4, duration: 7.2 }
+  ], []);
 
   // Optimize skill rotation with useCallback
   const rotateSkill = useCallback(() => {
@@ -126,8 +137,8 @@ export default function HeroSection({}: HeroSectionProps) {
             animate-pulse-slow
           `} />
 
-          {/* Optimized floating particles */}
-          {[...Array(3)].map((_, i) => (
+          {/* Fixed floating particles - only render after mount to avoid hydration mismatch */}
+          {isMounted && particlePositions.map((particle, i) => (
             <div
               key={i}
               className={`
@@ -137,10 +148,10 @@ export default function HeroSection({}: HeroSectionProps) {
                 ${isVisible ? 'opacity-40' : 'opacity-0'}
               `}
               style={{
-                left: `${20 + Math.random() * 60}%`,
-                top: `${20 + Math.random() * 60}%`,
-                animationDelay: `${i * 2}s`,
-                animationDuration: `${6 + Math.random() * 4}s`,
+                left: `${particle.left}%`,
+                top: `${particle.top}%`,
+                animationDelay: `${particle.delay}s`,
+                animationDuration: `${particle.duration}s`,
                 transitionDelay: `${i * 200}ms`
               }}
             />
