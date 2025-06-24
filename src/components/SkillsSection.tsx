@@ -2,6 +2,7 @@
 
 import { Code2, Zap, Target, Sparkles } from "lucide-react";
 import { memo, useMemo, useState, useEffect, useRef } from "react";
+import { Variants } from "framer-motion";
 
 interface Skill {
   name: string;
@@ -11,8 +12,10 @@ interface Skill {
   category: string;
   years?: number;
 }
-
 interface SkillsSectionProps {
+  containerVariants?: Variants;
+  itemVariants?: Variants;
+  skillVariants?: Variants;
   skills: Skill[];
 }
 
@@ -331,7 +334,7 @@ export default memo(function SkillsSection({ skills }: SkillsSectionProps) {
   }, [skills]);
 
   return (
-    <section className="relative min-h-screen py-24 bg-gradient-to-br from-slate-50 via-white to-blue-50/30 overflow-hidden">
+    <section className="relative min-h-screen py-8 bg-gradient-to-br from-slate-50 via-white to-blue-50/30 overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-blue-400/5 rounded-full blur-3xl animate-pulse" />

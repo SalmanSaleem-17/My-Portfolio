@@ -31,7 +31,7 @@ interface HeroSectionProps {
 
 // Custom hook for intersection observer
 const useIntersectionObserver = (
-  elementRef: React.RefObject<Element>,
+  elementRef: React.RefObject<HTMLElement | null>,
   options: IntersectionObserverInit = {}
 ) => {
   const [isVisible, setIsVisible] = useState(false);
