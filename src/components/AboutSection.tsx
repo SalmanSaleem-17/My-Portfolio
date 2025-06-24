@@ -158,7 +158,7 @@ export default function AboutSection({ containerVariants, itemVariants }: AboutS
   }, []);
 
   return (
-    <div className="relative overflow-hidden pb-10">
+    <div className="relative overflow-hidden py-8">
       <AnimatedBackground />
 
       <section 

@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect, useCallback } from 'react'
 import { Home, User, Code, Briefcase, Mail, Github, Linkedin, Menu, X } from 'lucide-react'
+import Image from 'next/image'
 
 const navLinks = [
   { id: 'home', label: 'Home', icon: Home },
@@ -140,7 +141,12 @@ export default function Navbar() {
             >
               <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pink-100 via-purple-50 to-blue-100 flex items-center justify-center shadow-md transition-all duration-300 ease-out group-hover:shadow-xl group-hover:scale-105 group-hover:rotate-2">
                 <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-100 to-purple-200 flex items-center justify-center text-blue-600 text-xs font-bold">
-                  S
+                  <Image
+                  src="/projects/SS-logo.png"
+                  alt="Logo"
+                  width={24}
+                  height={24}
+                  />
                 </div>
               </div>
               <h1 className="text-xl font-bold text-gray-800 transition-colors duration-300 group-hover:text-blue-600">
