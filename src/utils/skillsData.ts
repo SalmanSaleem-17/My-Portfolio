@@ -18,7 +18,8 @@ import {
   SiTypescript,
   SiNextdotjs,
   SiPostman,
-  SiSocketdotio
+  SiSocketdotio,
+  SiVscodium
 } from "react-icons/si";
 
 export interface Skill {
@@ -36,7 +37,7 @@ export const skills: Skill[] = [
   { name: "Next.js", level: "Advanced", color: "#000000", icon: SiNextdotjs, category: "Frontend" },
   { name: "TypeScript", level: "Advanced", color: "#3178C6", icon: SiTypescript, category: "Frontend" },
   { name: "JavaScript", level: "Expert", color: "#F7DF1E", icon: FaJs, category: "Frontend" },
-  { name: "HTML5", level: "Expert", color: "#E34F26", icon: FaHtml5, category: "Frontend"},
+  { name: "HTML5", level: "Expert", color: "#E34F26", icon: FaHtml5, category: "Frontend" },
   { name: "CSS3", level: "Advanced", color: "#1572B6", icon: FaCss3Alt, category: "Frontend" },
   { name: "Tailwind", level: "Advanced", color: "#06B6D4", icon: SiTailwindcss, category: "Frontend" },
   { name: "Bootstrap", level: "Advanced", color: "#7952B3", icon: FaBootstrap, category: "Frontend" },
@@ -52,5 +53,6 @@ export const skills: Skill[] = [
   { name: "Git", level: "Advanced", color: "#F05032", icon: FaGitAlt, category: "Tools" },
   { name: "GitHub", level: "Advanced", color: "#181717", icon: FaGithub, category: "Tools" },
   { name: "Postman", level: "Advanced", color: "#FF6C37", icon: SiPostman, category: "Tools" },
-  { name: "NPM", level: "Advanced", color: "#CB3837", icon: FaNpm, category: "Tools" }
+  { name: "NPM", level: "Advanced", color: "#CB3837", icon: FaNpm, category: "Tools" },
+  { name: "Visual Studio Code", level: "Advanced", color: "#007ACC", icon: SiVscodium, category: "Tools" }
 ];
