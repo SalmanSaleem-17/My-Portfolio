@@ -15,7 +15,7 @@ export const projects = [
     mockupType: 'laptop',
     
     // Links & Status
-    link: 'https://github.com/SalmanSaleem17/jewel-heaven',
+    link: 'https://github.com/SalmanSaleem-17/Jewel-Heaven',
     demoLink: 'https://jewel-heaven-demo.vercel.app',
     category: 'E-commerce',
     status: 'Completed',
@@ -70,7 +70,7 @@ export const projects = [
     mockupType: 'mobile',
     
     // Links & Status
-    link: 'https://github.com/SalmanSaleem17/aurumlog',
+    link: 'https://github.com/SalmanSaleem-17/AurumLog',
     playStoreLink: 'https://play.google.com/store/apps/details?id=com.aurumlog',
     appStoreLink: 'https://apps.apple.com/app/aurumlog/id123456789',
     category: 'Productivity',
