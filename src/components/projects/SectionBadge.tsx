@@ -1,7 +1,8 @@
 'use client'
 
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, Variants } from 'framer-motion';
+import { Sparkles, Star } from 'lucide-react';
 
 interface SectionBadgeProps {
   label: string;
@@ -11,48 +12,52 @@ interface SectionBadgeProps {
 }
 
 const SectionBadge: React.FC<SectionBadgeProps> = ({ label, title, description, itemVariants }) => {
-  const words     = title.trim().split(' ');
-  const firstWord = words[0];
-  const restWords = words.slice(1).join(' ');
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setTimeout(() => setIsVisible(true), 100); },
+      { threshold: 0.2 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <motion.div variants={itemVariants} className="text-center space-y-5 mb-16">
+    <motion.div ref={ref} variants={itemVariants} className="text-center mb-16 space-y-0">
 
-      {/* Pill badge — violet tint matching hero */}
-      <div className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full
-                      border border-violet-400/30 bg-violet-50 backdrop-blur-sm">
-        <span className="w-1.5 h-1.5 rounded-full bg-violet-500 animate-pulse" />
-        <span className="text-violet-600 font-semibold text-[11px] tracking-[0.18em] uppercase">
-          {label}
-        </span>
-        <span className="w-1.5 h-1.5 rounded-full bg-violet-500 animate-pulse" />
+      {/* Badge — matches AboutHeader exactly */}
+      <div className="inline-flex items-center gap-2 px-6 py-3
+        bg-gradient-to-r from-blue-500/10 to-purple-500/10
+        rounded-full border border-blue-200/30 mb-6
+        hover:scale-105 hover:from-blue-500/15 hover:to-purple-500/15
+        transition-all duration-300 ease-out cursor-pointer">
+        <Sparkles className="w-5 h-5 text-blue-500" />
+        <span className="text-sm font-medium text-gray-700">{label}</span>
       </div>
 
-      {/* Main title */}
-      <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-none">
-        <span className="text-gray-900">{firstWord}</span>
-        {restWords && (
-          <>
-            {' '}
-            <span
-              className="text-transparent bg-clip-text"
-              style={{
-                backgroundImage: 'linear-gradient(135deg, #7c3aed 0%, #a855f7 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-              }}
-            >
-              {restWords}
-            </span>
-          </>
-        )}
+      {/* Title — matches AboutHeader font size + gradient */}
+      <h2 className="text-4xl md:text-5xl font-bold mb-6
+        bg-gradient-to-r from-gray-900 via-blue-800 to-purple-800 bg-clip-text text-transparent">
+        {title}
       </h2>
 
-      {/* Decorative rule — violet */}
-      <div className="flex items-center justify-center gap-3 pt-1">
-        <div className="h-px w-20 bg-gradient-to-r from-transparent to-violet-400/60" />
-        <div className="w-2 h-2 rotate-45 bg-violet-400/80" />
-        <div className="h-px w-20 bg-gradient-to-l from-transparent to-violet-400/60" />
+      {/* Animated expanding lines + spinning star — identical to AboutHeader */}
+      <div className="flex justify-center items-center gap-2 mb-6">
+        <div
+          className={`h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full transition-all duration-700 ease-out
+            ${isVisible ? 'w-16' : 'w-0'}`}
+          style={{ transitionDelay: '300ms' }}
+        />
+        <div className="animate-spin" style={{ animationDuration: '15s' }}>
+          <Star className="w-6 h-6 text-yellow-500 fill-current" />
+        </div>
+        <div
+          className={`h-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full transition-all duration-700 ease-out
+            ${isVisible ? 'w-16' : 'w-0'}`}
+          style={{ transitionDelay: '500ms' }}
+        />
       </div>
 
       {/* Subtitle */}

@@ -11,7 +11,7 @@ export const projects = [
   // Basic Info
   platform: 'Web Application (Full-Stack)',
   deviceTargets: ['Desktop', 'Tablet', 'Mobile'],
-  image: '/goldify-hero.jpg',
+  image: '/goldify-icon.png',
   screenshots: [
     '/goldify-home.jpg',
     '/goldify-calculator.jpg',
