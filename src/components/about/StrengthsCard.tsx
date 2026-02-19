@@ -21,11 +21,13 @@ const StrengthItem = memo(({ item, index }: { item: typeof STRENGTHS[0]; index: 
     <div
       ref={ref}
       className={`flex items-center gap-3 p-3 bg-white/70 rounded-xl backdrop-blur-sm border border-white/30
-        hover:translate-x-1 transition-all duration-300 ease-out cursor-pointer
+        transition-all duration-300 ease-out cursor-pointer
         ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}
-      style={{ transitionDelay: isVisible ? `${index * 50}ms` : '0ms' }}
+      style={{ transitionDelay: isVisible ? `${index * 50}ms` : '0ms', willChange: 'transform' }}
+      onMouseEnter={e => (e.currentTarget.style.transform = 'translateX(4px)')}
+      onMouseLeave={e => (e.currentTarget.style.transform = isVisible ? 'translateX(0)' : 'translateX(-16px)')}
     >
-      <div className={`p-2 bg-gradient-to-r ${item.color} rounded-lg hover:scale-110 transition-transform duration-200`}>
+      <div className={`p-2 bg-gradient-to-r ${item.color} rounded-lg transition-transform duration-200 hover:scale-110`}>
         <item.icon className="w-4 h-4 text-white" />
       </div>
       <span className="text-gray-700 font-medium">{item.text}</span>
@@ -35,11 +37,15 @@ const StrengthItem = memo(({ item, index }: { item: typeof STRENGTHS[0]; index: 
 StrengthItem.displayName = 'StrengthItem';
 
 const StrengthsCard = memo(() => (
-  <div className="relative bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50 p-8 rounded-3xl
-    border border-green-200/50 shadow-xl overflow-hidden
-    hover:scale-[1.02] hover:shadow-2xl transition-all duration-500 ease-out cursor-pointer group">
-
-    {/* Ambient orb */}
+  <div
+    className="relative bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50 p-8 rounded-3xl
+      border border-green-200/50 shadow-xl overflow-hidden
+      transition-shadow duration-500 ease-out cursor-pointer group"
+    style={{ willChange: 'transform' }}
+    onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.02)')}
+    onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')}
+  >
+    {/* Ambient orb — contained by overflow-hidden on parent */}
     <div className="absolute top-4 right-4 w-24 h-24 bg-gradient-to-br from-green-400/15 to-emerald-400/15
       rounded-full blur-xl group-hover:w-28 group-hover:h-28 transition-all duration-500" />
 

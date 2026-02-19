@@ -3,31 +3,12 @@
 import { memo } from 'react';
 
 const AboutBackground = memo(() => (
-  <div className="absolute inset-0 pointer-events-none">
-
-    {/* Top-left purple blob — matches hero top-right blob color, no overflow */}
-    <div
-      className="absolute top-0 left-0 w-80 h-80
-        bg-gradient-to-br from-purple-200 via-violet-200 to-indigo-200
-        rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-float-slow"
-      style={{ transform: 'translate(-30%, -30%)' }}
-    />
-
-    {/* Bottom-right pink blob — matches hero bottom-left blob */}
-    <div
-      className="absolute bottom-0 right-0 w-80 h-80
-        bg-gradient-to-tl from-purple-300 via-pink-200 to-rose-200
-        rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-float-reverse"
-      style={{ transform: 'translate(30%, 30%)' }}
-    />
-
-    {/* Centre soft pulse — same as hero */}
-    <div
-      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
-        w-96 h-96 bg-gradient-to-r from-blue-200 via-purple-200 to-pink-200
-        rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse-slow"
-    />
-
+  <div className="absolute inset-0 pointer-events-none overflow-hidden">
+    <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-blue-400/15 to-purple-400/15 rounded-full blur-xl opacity-60 animate-pulse" />
+    <div className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-r from-pink-400/15 to-orange-400/15 rounded-full blur-xl opacity-60 animate-pulse"
+      style={{ animationDelay: '1s' }} />
+    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-60 h-60 bg-gradient-to-r from-indigo-400/8 to-cyan-400/8 rounded-full blur-2xl opacity-60 animate-pulse"
+      style={{ animationDelay: '2s' }} />
   </div>
 ));
 

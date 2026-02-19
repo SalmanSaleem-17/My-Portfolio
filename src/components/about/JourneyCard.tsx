@@ -5,15 +5,25 @@ import { Code } from 'lucide-react';
 import TechStackGrid from './TechStackGrid';
 
 const JourneyCard = memo(() => (
-  <div className="relative bg-white/80 backdrop-blur-sm p-8 rounded-3xl border border-white/20 shadow-2xl
-    hover:scale-[1.02] hover:shadow-xl transition-all duration-500 ease-out">
-
-    {/* Glow */}
-    <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 blur-sm -z-10 animate-pulse" />
-
+  /*
+    hover:scale uses transform so it doesn't trigger layout reflow.
+    Removed the absolute -z-10 glow div — blur on a negative-z element
+    creates paint layers that bleed outside bounds and cause repaint jitter.
+    Replaced with box-shadow ring on the wrapper for the same glow effect.
+  */
+  <div
+    className="relative bg-white/80 backdrop-blur-sm p-8 rounded-3xl border border-white/20 shadow-2xl
+      transition-all duration-500 ease-out"
+    style={{
+      boxShadow: '0 25px 50px -12px rgba(0,0,0,0.1), 0 0 0 1px rgba(255,255,255,0.2), inset 0 0 80px rgba(139,92,246,0.04)',
+      willChange: 'transform',
+    }}
+    onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.02)')}
+    onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')}
+  >
     {/* Heading */}
     <div className="flex items-center gap-3 mb-6">
-      <div className="p-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg hover:scale-110 transition-transform duration-200">
+      <div className="p-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg transition-transform duration-200 hover:scale-110">
         <Code className="w-6 h-6 text-white" />
       </div>
       <h3 className="text-xl font-bold text-gray-800">My Journey</h3>
