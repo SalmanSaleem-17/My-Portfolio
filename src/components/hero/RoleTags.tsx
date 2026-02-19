@@ -9,12 +9,13 @@ interface RoleTagsProps {
 
 const RoleTags: React.FC<RoleTagsProps> = ({ isMobile = false }) => {
   return (
-    <div className={`flex flex-wrap gap-3 ${isMobile ? 'justify-center' : ''} mb-8`}>
+    <div className={`flex gap-3 mb-8
+      ${isMobile ? 'flex-wrap justify-center' : 'flex-nowrap'}`}>
       {ROLE_TAGS.map((tag, i) => (
         <span
           key={i}
           className={`bg-gradient-to-r ${tag.color} rounded-full font-semibold shadow-md
-            transform transition-all duration-300 ease-out
+            whitespace-nowrap transform transition-all duration-300 ease-out
             hover:scale-105 hover:-translate-y-1 cursor-default border
             ${isMobile ? 'px-4 py-2 text-sm' : 'px-6 py-3 text-sm'}`}
         >
