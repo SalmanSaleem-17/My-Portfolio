@@ -13,7 +13,7 @@ import ContactSection  from "@/components/ContactSection";
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 overflow-x-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
 
       {/* ── Hero — full bleed ── */}
       <section id="home">
@@ -57,6 +57,6 @@ export default function HomePage() {
         </section>
 
       </div>
-    </main>
+    </div>
   );
 }

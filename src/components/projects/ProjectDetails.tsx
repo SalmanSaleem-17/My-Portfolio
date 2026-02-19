@@ -26,8 +26,8 @@ const ProjectDetails: React.FC<{ project: Project }> = ({ project }) => {
 
       {/* ── Scrollable body ── */}
       <div
-        className="flex-1 min-h-0 overflow-y-auto px-6 py-6 lg:px-8 lg:py-7 xl:px-10 xl:py-8 space-y-7"
-        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        className="flex-1 min-h-0 overflow-y-scroll px-6 py-6 lg:px-8 lg:py-7 xl:px-10 xl:py-8 space-y-7"
+        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch' }}
       >
         {/* Overview — left violet accent bar */}
         <p
@@ -40,16 +40,16 @@ const ProjectDetails: React.FC<{ project: Project }> = ({ project }) => {
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-3">
           <div className="p-4 rounded-xl bg-red-50 border border-red-100">
             <div className="flex items-center gap-2 mb-2.5">
-              <Target size={13} className="text-red-500 flex-shrink-0" />
-              <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-red-500">Problem</span>
+              <Target size={13} className="text-red-700 flex-shrink-0" />
+              <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-red-700">Problem</span>
             </div>
             <p className="text-[12px] text-gray-600 leading-relaxed">{project.problemStatement}</p>
           </div>
 
           <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-100">
             <div className="flex items-center gap-2 mb-2.5">
-              <Lightbulb size={13} className="text-emerald-600 flex-shrink-0" />
-              <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-emerald-600">Solution</span>
+              <Lightbulb size={13} className="text-emerald-700 flex-shrink-0" />
+              <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-emerald-700">Solution</span>
             </div>
             <p className="text-[12px] text-gray-600 leading-relaxed">{project.solution}</p>
           </div>

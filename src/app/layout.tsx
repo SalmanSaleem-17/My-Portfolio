@@ -18,10 +18,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-white text-gray-900 scroll-smooth">
-        <Navbar />
-        <main className="min-h-screen">
-          {children}
-        </main>
+        {/*
+          clip-x uses overflow-x: clip (NOT hidden).
+          "clip" prevents horizontal overflow WITHOUT creating a scroll container,
+          so it does NOT cancel the scrollbar-gutter reservation on <html>.
+          This is the key difference from overflow-x: hidden.
+        */}
+        <div className="clip-x">
+          <Navbar />
+          <main className="min-h-screen">
+            {children}
+          </main>
+        </div>
       </body>
     </html>
   )

@@ -29,6 +29,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, itemVariants 
     >
       {/* Top hairline — purple gradient */}
       <div
+        aria-hidden="true"
         className="absolute top-0 inset-x-0 h-px z-10"
         style={{
           background: 'linear-gradient(90deg, transparent 0%, rgba(124,58,237,0.55) 45%, rgba(168,85,247,0.55) 55%, transparent 100%)',

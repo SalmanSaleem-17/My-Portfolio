@@ -5,8 +5,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Scrollbar jerk fix ──────────────────────────────────────────────────────
+   CRITICAL: overflow-x must NOT be on body — it promotes body to scroll root
+   and silently cancels scrollbar-gutter on html. Instead we use a clip wrapper
+   in layout to handle horizontal overflow (see layout.tsx).
+───────────────────────────────────────────────────────────────────────────── */
 html {
-  scroll-behavior: smooth;
+  scroll-behavior:  smooth;
+  scrollbar-gutter: stable;        /* reserves scrollbar space permanently    */
+  overflow-y:       scroll;        /* Safari fallback — always show the track  */
+  /* NO overflow-x here — let the layout wrapper handle horizontal clipping   */
 }
 
 :root {
@@ -29,17 +37,22 @@ html {
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background:  var(--background);
+  color:       var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  /* NO overflow-x: hidden here — it would cancel scrollbar-gutter on html */
 }
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   ADD THESE LINES TO YOUR EXISTING src/app/globals.css
-   (paste at the bottom, after your existing Tailwind directives)
+/* ── Horizontal overflow isolation ──────────────────────────────────────────
+   Applied to a wrapper div in layout.tsx (NOT html/body).
+   clip is used instead of hidden — clip does not create a scroll container
+   so it doesn't interfere with scrollbar-gutter. 
 ───────────────────────────────────────────────────────────────────────────── */
+.clip-x {
+  overflow-x: clip; /* clips without creating scroll container */
+}
 
-/* Keyframes */
+/* ── Keyframes ───────────────────────────────────────────────────────────── */
 @keyframes float-slow {
   0%, 100% { transform: translateY(0px) rotate(0deg); }
   50%       { transform: translateY(-20px) rotate(180deg); }
@@ -78,8 +91,12 @@ body {
   80%  { opacity: 1; transform: translateY(0px);   }
   100% { opacity: 0; transform: translateY(-10px); }
 }
+@keyframes shimmer {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(300%);  }
+}
 
-/* Animation utility classes */
+/* ── Animation utility classes ───────────────────────────────────────────── */
 .animate-float-slow    { animation: float-slow    15s  ease-in-out infinite; }
 .animate-float-reverse { animation: float-reverse 15s  ease-in-out infinite; }
 .animate-float         { animation: float          6s  ease-in-out infinite; }
@@ -89,3 +106,12 @@ body {
 .animate-pulse-gentle  { animation: pulse-gentle   4s  ease-in-out infinite; }
 .animate-bounce-x      { animation: bounce-x       1.5s ease-in-out infinite; }
 .animate-skill-fade    { animation: skill-fade     2.5s ease-in-out infinite; }
+
+/* ── Accessibility ───────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .animate-float-slow, .animate-float-reverse, .animate-float,
+  .animate-spin-slow,  .animate-spin-reverse,  .animate-pulse-slow,
+  .animate-pulse-gentle, .animate-bounce-x,    .animate-skill-fade {
+    animation: none;
+  }
+}

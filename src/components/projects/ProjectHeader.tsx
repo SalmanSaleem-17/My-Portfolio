@@ -26,7 +26,7 @@ const ProjectHeader: React.FC<{ project: Project; index: number }> = ({ project,
 
   const containerClass: Record<string, string> = {
     landscape: 'w-full',
-    square:    'w-[70%] sm:w-[70%] lg:w-[70%] mx-auto',
+    square:    'w-[55%] sm:w-[45%] lg:w-[70%] mx-auto',
     portrait:  'w-[55%] sm:w-[50%] lg:w-[60%] mx-auto',
   };
 
@@ -44,6 +44,7 @@ const ProjectHeader: React.FC<{ project: Project; index: number }> = ({ project,
       {/* Ambient glow */}
       <div
         className="absolute top-0 inset-x-0 h-56 pointer-events-none"
+        aria-hidden="true"
         style={{
           background: 'radial-gradient(ellipse 80% 55% at 50% -10%, rgba(167,139,250,0.18) 0%, transparent 100%)',
         }}
@@ -52,6 +53,7 @@ const ProjectHeader: React.FC<{ project: Project; index: number }> = ({ project,
       {/* Watermark */}
       <span
         className="absolute bottom-3 right-4 text-[6.5rem] font-black leading-none select-none pointer-events-none"
+        aria-hidden="true"
         style={{ color: '#7c3aed', opacity: 0.05 }}
       >
         {String(index + 1).padStart(2, '0')}
@@ -129,7 +131,7 @@ const ProjectHeader: React.FC<{ project: Project; index: number }> = ({ project,
                          bg-white border border-violet-100 shadow-sm"
             >
               <Icon size={12} className="text-violet-500" />
-              <span className="text-[9px] text-gray-400 uppercase tracking-wider leading-none">
+              <span className="text-[9px] text-gray-500 uppercase tracking-wider leading-none">
                 {label}
               </span>
               <span className="text-[11px] text-gray-800 font-bold leading-none text-center w-full px-1 truncate">
