@@ -39,7 +39,7 @@ const ProjectHeader: React.FC<{ project: Project; index: number }> = ({ project,
   return (
     <div
       className="relative flex flex-col overflow-hidden h-full"
-      style={{ background: 'linear-gradient(160deg, #faf9ff 0%, #f3f0ff 100%)' }}
+      style={{ background: 'var(--project-header-bg)' }}
     >
       {/* Ambient glow */}
       <div
@@ -64,17 +64,17 @@ const ProjectHeader: React.FC<{ project: Project; index: number }> = ({ project,
         {/* ── Badges ── */}
         <div className="flex flex-wrap gap-2 flex-shrink-0">
           <span className="text-[10px] font-bold tracking-[0.14em] uppercase px-3 py-1.5 rounded-full
-                           text-violet-700 bg-violet-100 border border-violet-200">
+                           text-violet-700 dark:text-violet-300 bg-violet-100 dark:bg-violet-900/30 border border-violet-200 dark:border-violet-700">
             {project.category}
           </span>
           <span
             className={[
               'text-[10px] font-semibold px-3 py-1.5 rounded-full border',
               project.status === 'Live Production'
-                ? 'text-emerald-700 bg-emerald-50 border-emerald-200'
+                ? 'text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-900/30 border-emerald-200 dark:border-emerald-700'
                 : project.status === 'Completed'
-                ? 'text-sky-700 bg-sky-50 border-sky-200'
-                : 'text-amber-700 bg-amber-50 border-amber-200',
+                ? 'text-sky-700 dark:text-sky-300 bg-sky-50 dark:bg-sky-900/30 border-sky-200 dark:border-sky-700'
+                : 'text-amber-700 dark:text-amber-300 bg-amber-50 dark:bg-amber-900/30 border-amber-200 dark:border-amber-700',
             ].join(' ')}
           >
             {project.status === 'Live Production' ? '● Live'
@@ -114,10 +114,10 @@ const ProjectHeader: React.FC<{ project: Project; index: number }> = ({ project,
 
         {/* ── Title + subtitle ── */}
         <div className="flex-shrink-0">
-          <h3 className="text-2xl xl:text-[1.75rem] font-black text-gray-900 leading-tight tracking-tight">
+          <h3 className="text-2xl xl:text-[1.75rem] font-black text-gray-900 dark:text-slate-100 leading-tight tracking-tight">
             {project.title}
           </h3>
-          <p className="text-[13px] text-gray-500 mt-1 leading-snug line-clamp-2">
+          <p className="text-[13px] text-gray-500 dark:text-slate-400 mt-1 leading-snug line-clamp-2">
             {project.subtitle}
           </p>
         </div>
@@ -128,13 +128,13 @@ const ProjectHeader: React.FC<{ project: Project; index: number }> = ({ project,
             <div
               key={label}
               className="flex flex-col items-center gap-1 rounded-xl py-3 px-1
-                         bg-white border border-violet-100 shadow-sm"
+                         bg-white dark:bg-slate-700 border border-violet-100 dark:border-slate-600 shadow-sm"
             >
               <Icon size={12} className="text-violet-500" />
-              <span className="text-[9px] text-gray-500 uppercase tracking-wider leading-none">
+              <span className="text-[9px] text-gray-500 dark:text-slate-400 uppercase tracking-wider leading-none">
                 {label}
               </span>
-              <span className="text-[11px] text-gray-800 font-bold leading-none text-center w-full px-1 truncate">
+              <span className="text-[11px] text-gray-800 dark:text-slate-200 font-bold leading-none text-center w-full px-1 truncate">
                 {value}
               </span>
             </div>

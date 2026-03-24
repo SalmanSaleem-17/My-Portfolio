@@ -18,8 +18,8 @@ const SkillBadge: React.FC<SkillBadgeProps> = ({ currentIndex, isMobile = false 
       <div
         key={currentIndex}
         className={`rounded-2xl font-bold
-          bg-gradient-to-r ${skill.bg}
-          border border-white/20 shadow-lg backdrop-blur-sm
+          bg-gradient-to-r ${skill.bg} dark:from-slate-700/90 dark:to-slate-800/90
+          border border-white/20 dark:border-slate-600/60 shadow-lg backdrop-blur-sm
           transform transition-all duration-500 ease-out animate-skill-fade
           ${isMobile ? 'px-6 py-3 text-base' : 'px-8 py-4 text-lg'}`}
       >
@@ -28,8 +28,8 @@ const SkillBadge: React.FC<SkillBadgeProps> = ({ currentIndex, isMobile = false 
             className={`${isMobile ? 'w-5 h-5' : 'w-6 h-6'} transition-transform duration-300 hover:scale-110`}
             style={{ color: skill.color }}
           />
-          <span className="text-gray-800">{skill.name}</span>
-          <Sparkles className={`${isMobile ? 'w-4 h-4' : 'w-5 h-5'} text-purple-600`} />
+          <span className="text-gray-800 dark:text-slate-100">{skill.name}</span>
+          <Sparkles className={`${isMobile ? 'w-4 h-4' : 'w-5 h-5'} text-purple-600 dark:text-purple-400`} />
         </div>
       </div>
     </div>

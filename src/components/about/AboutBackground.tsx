@@ -3,7 +3,7 @@
 import { memo } from 'react';
 
 const AboutBackground = memo(() => (
-  <div className="absolute inset-0 pointer-events-none overflow-hidden">
+  <div className="absolute inset-0 pointer-events-none overflow-hidden dark:hidden">
     <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-blue-400/15 to-purple-400/15 rounded-full blur-xl opacity-60 animate-pulse" />
     <div className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-r from-pink-400/15 to-orange-400/15 rounded-full blur-xl opacity-60 animate-pulse"
       style={{ animationDelay: '1s' }} />

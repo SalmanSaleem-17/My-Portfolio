@@ -20,14 +20,14 @@ const TechPill = memo(({ tech, index }: { tech: typeof TECH_STACK[0]; index: num
   return (
     <div
       ref={ref}
-      className={`flex items-center gap-2 px-3 py-2 bg-gray-50 rounded-lg border border-gray-200
-        hover:border-gray-300 hover:scale-105 hover:-translate-y-0.5
+      className={`flex items-center gap-2 px-3 py-2 bg-gray-50 dark:bg-slate-700 rounded-lg border border-gray-200 dark:border-slate-600
+        hover:border-gray-300 dark:hover:border-slate-500 hover:scale-105 hover:-translate-y-0.5
         transition-all duration-300 ease-out cursor-pointer
         ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}
       style={{ transitionDelay: isVisible ? `${index * 50}ms` : '0ms' }}
     >
       <tech.icon className={`w-5 h-5 ${tech.color}`} />
-      <span className="text-sm font-medium text-gray-700">{tech.name}</span>
+      <span className="text-sm font-medium text-gray-700 dark:text-slate-300">{tech.name}</span>
     </div>
   );
 });
@@ -35,7 +35,7 @@ TechPill.displayName = 'TechPill';
 
 const TechStackGrid = memo(() => (
   <div className="mt-8">
-    <p className="text-sm font-semibold text-gray-600 mb-4 flex items-center gap-2">
+    <p className="text-sm font-semibold text-gray-600 dark:text-slate-400 mb-4 flex items-center gap-2">
       <Zap className="w-4 h-4 text-yellow-500" />
       Technologies I work with
     </p>

@@ -28,8 +28,8 @@ const ContactCard = memo(({ method, index }: ContactCardProps) => {
       href={method.href}
       target={method.external ? '_blank' : '_self'}
       rel={method.external ? 'noopener noreferrer' : undefined}
-      className={`relative group block ${method.bgColor} p-4 sm:p-6 rounded-xl sm:rounded-2xl
-        border border-white/40
+      className={`relative group block ${method.bgColor} dark:from-slate-700/70 dark:to-slate-800/70 p-4 sm:p-6 rounded-xl sm:rounded-2xl
+        border border-white/40 dark:border-slate-600/50
         transition-all duration-500 ease-out
         hover:scale-105 hover:shadow-xl hover:-translate-y-1 sm:hover:-translate-y-3
         ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
@@ -53,8 +53,8 @@ const ContactCard = memo(({ method, index }: ContactCardProps) => {
         {/* Text */}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-1 sm:mb-2">
-            <h4 className="font-bold text-slate-900 text-base sm:text-lg
-              group-hover:text-purple-700 transition-colors duration-300 truncate">
+            <h4 className="font-bold text-slate-900 dark:text-slate-100 text-base sm:text-lg
+              group-hover:text-purple-700 dark:group-hover:text-purple-300 transition-colors duration-300 truncate">
               {method.label}
             </h4>
             {method.external && (
@@ -62,10 +62,10 @@ const ContactCard = memo(({ method, index }: ContactCardProps) => {
                 group-hover:text-purple-500 transition-colors duration-300 flex-shrink-0" />
             )}
           </div>
-          <p className="text-slate-700 text-sm sm:text-base mb-1 sm:mb-2 font-medium break-all sm:break-normal">
+          <p className="text-slate-700 dark:text-slate-300 text-sm sm:text-base mb-1 sm:mb-2 font-medium break-all sm:break-normal">
             {method.value}
           </p>
-          <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">{method.description}</p>
+          <p className="text-slate-500 dark:text-slate-400 text-xs sm:text-sm leading-relaxed">{method.description}</p>
         </div>
       </div>
 

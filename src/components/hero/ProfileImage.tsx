@@ -9,131 +9,250 @@ interface ProfileImageProps {
   isMobile?: boolean;
 }
 
+// Desktop: 6 badge icons on the orbit ring of a 460px container
+const DESKTOP_BADGE_POSITIONS: React.CSSProperties[] = [
+  { top: '8%',  left: '50%', transform: 'translateX(-50%)' }, // 12 o'clock
+  { top: '23%', right: '4%'                                 }, // 2 o'clock
+  { top: '63%', right: '4%'                                 }, // 4 o'clock
+  { top: '84%', left: '50%', transform: 'translateX(-50%)' }, // 6 o'clock
+  { top: '63%', left: '4%'                                  }, // 8 o'clock
+  { top: '23%', left: '4%'                                  }, // 10 o'clock
+];
+
+// Mobile: 4 badge icons
+const MOBILE_BADGE_POSITIONS: React.CSSProperties[] = [
+  { top: '7%',  left: '50%', transform: 'translateX(-50%)' },
+  { top: '36%', right: '3%'                                 },
+  { top: '57%', right: '3%'                                 },
+  { top: '86%', left: '50%', transform: 'translateX(-50%)' },
+];
+
+// 5 colorful floating shapes matching the reference image
+interface ColorShape {
+  style:    React.CSSProperties;
+  gradient: string;
+  shape:    string;
+  anim:     string;
+  dur:      string;
+  delay:    string;
+  opacity:  number;
+}
+
+const COLOR_SHAPES: ColorShape[] = [
+  // Pink circle — top-left
+  {
+    style:    { top: '-20px', left: '-28px', width: '50px', height: '50px' },
+    gradient: 'linear-gradient(135deg, #f472b6 0%, #fb7185 100%)',
+    shape:    'rounded-full',
+    anim:     'animate-float',
+    dur:      '4.2s', delay: '0s', opacity: 0.90,
+  },
+  // Pink → orange tilted rounded rect — top-right
+  {
+    style:    { top: '-12px', right: '-40px', width: '58px', height: '46px', transform: 'rotate(12deg)' },
+    gradient: 'linear-gradient(135deg, #f472b6 0%, #fb923c 100%)',
+    shape:    'rounded-2xl',
+    anim:     'animate-float-reverse',
+    dur:      '5s', delay: '0.5s', opacity: 0.85,
+  },
+  // Blue rounded square — mid-right
+  {
+    style:    { top: '37%', right: '-42px', width: '46px', height: '46px', transform: 'rotate(-8deg)' },
+    gradient: 'linear-gradient(135deg, #60a5fa 0%, #4f46e5 100%)',
+    shape:    'rounded-xl',
+    anim:     'animate-float',
+    dur:      '6s', delay: '1s', opacity: 0.80,
+  },
+  // Teal rounded square — bottom-right
+  {
+    style:    { bottom: '10%', right: '-34px', width: '38px', height: '38px', transform: 'rotate(10deg)' },
+    gradient: 'linear-gradient(135deg, #2dd4bf 0%, #34d399 100%)',
+    shape:    'rounded-xl',
+    anim:     'animate-float-reverse',
+    dur:      '4.5s', delay: '1.5s', opacity: 0.75,
+  },
+  // Lavender / blue circle — bottom-left
+  {
+    style:    { bottom: '-18px', left: '-28px', width: '54px', height: '54px' },
+    gradient: 'linear-gradient(135deg, #93c5fd 0%, #a78bfa 100%)',
+    shape:    'rounded-full',
+    anim:     'animate-float',
+    dur:      '5.5s', delay: '0.8s', opacity: 0.78,
+  },
+];
+
 const ProfileImage: React.FC<ProfileImageProps> = ({ isLoaded, isMobile = false }) => {
-  const imgSize = isMobile ? 'w-48 h-48' : 'w-64 h-64 xl:w-80 xl:h-80';
-  const icons   = isMobile ? FLOATING_ICONS.slice(0, 4) : FLOATING_ICONS;
+  const icons     = isMobile ? FLOATING_ICONS.slice(0, 4) : FLOATING_ICONS;
+  const positions = isMobile ? MOBILE_BADGE_POSITIONS : DESKTOP_BADGE_POSITIONS;
 
-  // Icon positions — tighter on mobile so they stay within viewport
-  const mobileIconPositions = [
-    { left: '4%',  top:    '18%' },
-    { right: '4%', top:    '18%' },
-    { left: '4%',  bottom: '18%' },
-    { right: '4%', bottom: '18%' },
-  ];
-
-  const desktopIconPositions = [
-    { left: '-5%',  top:    '15%' },
-    { right: '-5%', top:    '15%' },
-    { left: '-5%',  bottom: '15%' },
-    { right: '-5%', bottom: '15%' },
-    { left: '50%',  top:    '-5%',    transform: 'translateX(-50%)' },
-    { left: '50%',  bottom: '-5%',    transform: 'translateX(-50%)' },
-  ];
-
-  const positions = isMobile ? mobileIconPositions : desktopIconPositions;
-
-  // Geometric shapes — scaled down on mobile but present on both
-  const geoMobile = 'opacity-25';
-  const geoDeskop = 'opacity-20';
+  const containerCls = isMobile ? 'w-[340px] h-[340px]' : 'w-[460px] h-[460px]';
+  const photoCls     = isMobile ? 'w-[218px] h-[218px]' : 'w-[290px] h-[290px]';
 
   return (
-    <div className="relative">
-      <div
-        className={`relative transform transition-all duration-600 ease-out
-          ${isLoaded ? 'scale-100 opacity-100' : 'scale-95 opacity-0'}`}
-      >
+    <div className="relative flex items-center justify-center">
+      <div className={`relative ${containerCls} flex items-center justify-center`}>
 
-        {/* ── Decorative rings ───────────────────────────────────────────── */}
-        <div className="absolute -inset-16 rounded-full bg-gradient-to-br from-purple-300 via-pink-300 to-violet-300 opacity-15 animate-spin-slow" />
-        <div className="absolute -inset-12 rounded-full bg-gradient-to-tr from-blue-300 via-purple-300 to-pink-300 opacity-20 animate-spin-reverse" />
-        <div className="absolute -inset-8  rounded-full bg-gradient-to-bl from-violet-300 via-purple-300 to-indigo-300 opacity-25 animate-float-slow" />
-        <div className="absolute -inset-6  rounded-full bg-gradient-to-r from-purple-400 via-pink-400 to-violet-400 opacity-30 blur-md animate-pulse-gentle" />
+        {/* ── Colorful floating shapes (desktop only) ───────────────────── */}
+        {!isMobile && COLOR_SHAPES.map((s, i) => (
+          <div
+            key={i}
+            className={`absolute pointer-events-none ${s.shape} ${s.anim}
+              transition-opacity duration-700 ${isLoaded ? '' : 'opacity-0'}`}
+            style={{
+              ...s.style,
+              background: s.gradient,
+              opacity: isLoaded ? s.opacity : 0,
+              animationDuration: s.dur,
+              animationDelay:    s.delay,
+              transitionDelay:   `${480 + i * 130}ms`,
+            }}
+          />
+        ))}
 
-        {/* ── Geometric accents — ALL screen sizes ──────────────────────── */}
-
-        {/* Top-right diamond */}
+        {/* ── BLOB 1: Main large purple/violet center blob ──────────────── */}
         <div
-          className={`absolute bg-gradient-to-br from-purple-400 to-pink-500 rounded-lg animate-float rotate-45
-            ${isMobile ? `-top-5 -right-5 w-9 h-9 ${geoMobile}` : `-top-8 -right-8 w-16 h-16 ${geoDeskop}`}`}
+          className="absolute inset-[4%] rounded-full blur-3xl animate-pulse-gentle pointer-events-none"
+          style={{
+            background: 'radial-gradient(circle, rgba(147,51,234,0.82) 0%, rgba(168,85,247,0.65) 28%, rgba(192,132,252,0.38) 55%, rgba(233,213,255,0.12) 78%, transparent 100%)',
+            animationDuration: '4s',
+          }}
         />
 
-        {/* Bottom-left circle */}
+        {/* ── BLOB 2: Inner bright core glow ────────────────────────────── */}
         <div
-          className={`absolute bg-gradient-to-tr from-blue-400 to-violet-500 rounded-full animate-float-reverse
-            ${isMobile ? `-bottom-5 -left-5 w-7 h-7 ${geoMobile}` : `-bottom-8 -left-8 w-12 h-12 ${geoDeskop}`}`}
+          className="absolute inset-[20%] rounded-full blur-2xl animate-pulse-gentle pointer-events-none"
+          style={{
+            background: 'radial-gradient(circle, rgba(192,80,255,0.65) 0%, rgba(168,85,247,0.45) 45%, transparent 100%)',
+            animationDuration: '3s',
+            animationDelay: '1s',
+          }}
         />
 
-        {/* Mid-left dot */}
+        {/* ── BLOB 3: Left-side violet blob ─────────────────────────────── */}
         <div
-          className={`absolute bg-gradient-to-r from-pink-400 to-purple-500 rounded-full animate-pulse-slow
-            ${isMobile ? `top-1/2 -left-7 w-5 h-5 opacity-30` : `top-1/2 -left-12 w-8 h-8 opacity-30`}`}
+          className="absolute rounded-full blur-3xl animate-float-slow pointer-events-none"
+          style={{
+            width: '52%', height: '52%',
+            top: '22%', left: '0%',
+            background: 'radial-gradient(circle, rgba(124,58,237,0.42) 0%, rgba(109,40,217,0.22) 55%, transparent 100%)',
+          }}
         />
 
-        {/* Top-right small square */}
+        {/* ── BLOB 4: Right-side pink-violet blob ───────────────────────── */}
         <div
-          className={`absolute bg-gradient-to-l from-violet-400 to-blue-500 rounded-lg animate-float rotate-12
-            ${isMobile ? `top-1/4 -right-7 w-6 h-6 opacity-30` : `top-1/4 -right-12 w-10 h-10 ${geoDeskop}`}`}
+          className="absolute rounded-full blur-3xl animate-float-reverse pointer-events-none"
+          style={{
+            width: '50%', height: '50%',
+            top: '24%', right: '0%',
+            background: 'radial-gradient(circle, rgba(192,38,211,0.32) 0%, rgba(236,72,153,0.18) 58%, transparent 100%)',
+          }}
         />
 
-        {/* Extra: bottom-right triangle-ish (desktop + mobile smaller) */}
+        {/* ── BLOB 5: Bottom soft lavender glow ─────────────────────────── */}
         <div
-          className={`absolute bg-gradient-to-tl from-emerald-400 to-cyan-400 rounded-lg animate-float-slow rotate-[30deg]
-            ${isMobile ? `-bottom-4 -right-6 w-5 h-5 opacity-20` : `-bottom-6 -right-10 w-9 h-9 opacity-15`}`}
+          className="absolute rounded-full blur-3xl animate-pulse-gentle pointer-events-none"
+          style={{
+            width: '60%', height: '45%',
+            bottom: '4%', left: '20%',
+            background: 'radial-gradient(circle, rgba(216,180,254,0.28) 0%, rgba(192,132,252,0.14) 60%, transparent 100%)',
+            animationDuration: '5s',
+            animationDelay: '0.5s',
+          }}
         />
 
-        {/* Extra: top-left small orb */}
+        {/* ── BLOB 6: Outer halo ring glow (rim lighting) ───────────────── */}
         <div
-          className={`absolute bg-gradient-to-br from-rose-400 to-pink-500 rounded-full animate-pulse-gentle
-            ${isMobile ? `-top-4 -left-5 w-5 h-5 opacity-25` : `-top-6 -left-10 w-8 h-8 opacity-20`}`}
+          className="absolute inset-0 rounded-full pointer-events-none"
+          style={{
+            background: 'radial-gradient(circle, transparent 42%, rgba(167,139,250,0.18) 60%, rgba(216,180,254,0.12) 75%, transparent 100%)',
+            filter: 'blur(8px)',
+          }}
         />
 
-        {/* Orbiting ring glow — desktop only (too large for mobile) */}
-        {!isMobile && (
-          <div className="absolute -inset-20 rounded-full border border-purple-300/30 animate-spin-slow" />
-        )}
-
-        {/* ── Glowing halo behind photo ──────────────────────────────────── */}
+        {/* ── Outermost soft shadow ring (blur, no hard line) ──────────── */}
         <div
-          className={`absolute inset-0 rounded-full
-            bg-gradient-to-br from-violet-400/40 via-purple-400/30 to-pink-400/40
-            blur-xl animate-pulse-gentle
-            ${isMobile ? 'scale-110' : 'scale-125'}`}
+          className="absolute inset-0 rounded-full pointer-events-none"
+          style={{
+            background: 'radial-gradient(circle, transparent 47%, rgba(192,132,252,0.22) 49%, rgba(192,132,252,0.22) 51%, transparent 53%)',
+            filter: 'blur(4px)',
+          }}
+        />
+
+        {/* ── Inner orbit soft shadow ring ──────────────────────────────── */}
+        <div
+          className="absolute inset-[8%] rounded-full pointer-events-none"
+          style={{
+            background: 'radial-gradient(circle, transparent 47%, rgba(216,180,254,0.18) 49%, rgba(216,180,254,0.18) 51%, transparent 53%)',
+            filter: 'blur(3px)',
+          }}
         />
 
         {/* ── Photo ─────────────────────────────────────────────────────── */}
-        <div className={`relative ${imgSize} mx-auto`}>
-          {/* Multi-layer ring border around photo */}
-          <div className="absolute -inset-1.5 rounded-full bg-gradient-to-br from-purple-400 via-pink-400 to-violet-500 opacity-60 blur-[2px]" />
-          <div className="absolute -inset-1 rounded-full bg-gradient-to-tr from-violet-500 via-purple-400 to-pink-500 opacity-40" />
-          <Image
-            src="/images/profile.jpg"
-            alt="Muhammad Salman Saleem"
-            fill
-            className="rounded-full border-4 border-white shadow-2xl object-cover relative z-10"
-            priority
-            sizes="(max-width:768px) 192px, (max-width:1280px) 256px, 320px"
+        <div
+          className={`relative ${photoCls} shrink-0 z-10
+            transform transition-all duration-700 ease-out
+            ${isLoaded ? 'scale-100 opacity-100' : 'scale-90 opacity-0'}`}
+        >
+          {/* Outer soft violet glow halo */}
+          <div
+            className="absolute -inset-5 rounded-full pointer-events-none animate-pulse-gentle"
+            style={{
+              background: 'radial-gradient(circle, rgba(139,92,246,0.30) 55%, transparent 100%)',
+              animationDuration: '3s',
+            }}
           />
+
+          {/* Thick white glowing ring */}
+          <div
+            className="absolute rounded-full"
+            style={{
+              inset: '-5px',
+              background: 'white',
+              boxShadow:
+                '0 0 22px 5px rgba(167,139,250,0.55),' +
+                '0 0 45px 10px rgba(139,92,246,0.28),' +
+                'inset 0 0 12px rgba(139,92,246,0.12)',
+            }}
+          />
+          {/* Thin gap between white ring and photo */}
+          <div className="absolute -inset-px rounded-full bg-white dark:bg-slate-950" />
+
+          {/* Photo */}
+          <div className="relative w-full h-full rounded-full overflow-hidden z-10">
+            <Image
+              src="/images/profile.jpg"
+              alt="Muhammad Salman Saleem"
+              fill
+              className="object-cover rounded-full"
+              priority
+              sizes="(max-width:768px) 218px, 290px"
+            />
+            {/* Subtle inner shadow overlay */}
+            <div
+              className="absolute inset-0 rounded-full pointer-events-none"
+              style={{ boxShadow: 'inset 0 0 32px rgba(139,92,246,0.28)' }}
+            />
+          </div>
         </div>
 
-        {/* ── Floating skill icon buttons ───────────────────────────────── */}
+        {/* ── Badge icons (white circles on the orbit ring) ─────────────── */}
         {icons.map((Icon, i) => (
           <div
             key={i}
-            className={`absolute bg-white rounded-full shadow-xl flex items-center justify-center
-              border-2 border-purple-100
-              transform transition-all duration-500 ease-out
-              hover:scale-125 hover:rotate-12 hover:shadow-purple-200/60 cursor-pointer
-              ${isMobile ? 'w-8 h-8' : 'w-12 h-12'}
+            className={`absolute z-20
+              w-11 h-11 rounded-full flex items-center justify-center
+              bg-white/95 dark:bg-slate-800/90 backdrop-blur-md
+              border border-violet-100/60 dark:border-violet-700/40
+              transform transition-all duration-500 ease-out cursor-pointer
+              hover:scale-125 hover:-translate-y-1
               ${isLoaded ? 'scale-100 opacity-100' : 'scale-0 opacity-0'}`}
             style={{
               ...positions[i],
-              transitionDelay:  `${(isMobile ? 500 : 800) + i * 100}ms`,
-              boxShadow: '0 4px 16px rgba(124,58,237,0.18)',
+              transitionDelay: `${600 + i * 100}ms`,
+              boxShadow: '0 4px 18px rgba(139,92,246,0.22), 0 1px 5px rgba(0,0,0,0.10)',
             }}
           >
-            {/* Inner glow ring on icon buttons */}
-            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-purple-100 to-violet-100 opacity-60" />
-            <Icon className={`${isMobile ? 'w-4 h-4' : 'w-6 h-6'} text-purple-600 relative z-10`} />
+            <Icon className="w-5 h-5 text-violet-600 dark:text-violet-400" />
           </div>
         ))}
 

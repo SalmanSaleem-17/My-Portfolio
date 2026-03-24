@@ -20,7 +20,7 @@ const StrengthItem = memo(({ item, index }: { item: typeof STRENGTHS[0]; index: 
   return (
     <div
       ref={ref}
-      className={`flex items-center gap-3 p-3 bg-white/70 rounded-xl backdrop-blur-sm border border-white/30
+      className={`flex items-center gap-3 p-3 bg-white/70 dark:bg-slate-700/70 rounded-xl backdrop-blur-sm border border-white/30 dark:border-slate-600/30
         transition-all duration-300 ease-out cursor-pointer
         ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}
       style={{ transitionDelay: isVisible ? `${index * 50}ms` : '0ms', willChange: 'transform' }}
@@ -30,7 +30,7 @@ const StrengthItem = memo(({ item, index }: { item: typeof STRENGTHS[0]; index: 
       <div className={`p-2 bg-gradient-to-r ${item.color} rounded-lg transition-transform duration-200 hover:scale-110`}>
         <item.icon className="w-4 h-4 text-white" />
       </div>
-      <span className="text-gray-700 font-medium">{item.text}</span>
+      <span className="text-gray-700 dark:text-slate-300 font-medium">{item.text}</span>
     </div>
   );
 });
@@ -38,8 +38,8 @@ StrengthItem.displayName = 'StrengthItem';
 
 const StrengthsCard = memo(() => (
   <div
-    className="relative bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50 p-8 rounded-3xl
-      border border-green-200/50 shadow-xl overflow-hidden
+    className="relative bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50 dark:from-slate-800 dark:via-slate-800 dark:to-slate-800 p-8 rounded-3xl
+      border border-green-200/50 dark:border-green-700/50 shadow-xl overflow-hidden
       transition-shadow duration-500 ease-out cursor-pointer group"
     style={{ willChange: 'transform' }}
     onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.02)')}
@@ -51,11 +51,11 @@ const StrengthsCard = memo(() => (
 
     {/* Header */}
     <div className="flex items-center gap-4 mb-6 relative z-10">
-      <div className="animate-bounce p-3 bg-white rounded-2xl shadow-lg"
+      <div className="animate-bounce p-3 bg-white dark:bg-slate-700 rounded-2xl shadow-lg"
         style={{ animationDuration: '4s', animationDelay: '1000ms' }}>
         <Trophy className="w-8 h-8 text-green-600" />
       </div>
-      <h3 className="font-bold text-xl text-gray-900 group-hover:text-green-800 transition-colors duration-300">
+      <h3 className="font-bold text-xl text-gray-900 dark:text-slate-100 group-hover:text-green-800 dark:group-hover:text-green-300 transition-colors duration-300">
         Key Strengths
       </h3>
     </div>

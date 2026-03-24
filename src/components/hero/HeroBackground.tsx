@@ -10,12 +10,12 @@ interface HeroBackgroundProps {
 
 const HeroBackground: React.FC<HeroBackgroundProps> = ({ isVisible, isMounted }) => {
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div className="absolute inset-0 overflow-hidden pointer-events-none dark:hidden">
       {/* Blob top-right */}
       <div
         className={`absolute -top-40 -right-40 w-96 h-96
           bg-gradient-to-br from-purple-200 via-violet-200 to-indigo-200
-          rounded-full mix-blend-multiply filter blur-xl
+          rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-xl
           transform transition-all duration-1000 ease-out animate-float-slow
           ${isVisible ? 'translate-y-0 opacity-40' : 'translate-y-10 opacity-0'}`}
       />
@@ -24,7 +24,7 @@ const HeroBackground: React.FC<HeroBackgroundProps> = ({ isVisible, isMounted })
       <div
         className={`absolute -bottom-40 -left-40 w-96 h-96
           bg-gradient-to-tr from-purple-300 via-pink-200 to-rose-200
-          rounded-full mix-blend-multiply filter blur-xl
+          rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-xl
           transform transition-all duration-1000 ease-out animate-float-reverse
           ${isVisible ? 'translate-y-0 opacity-40' : '-translate-y-10 opacity-0'}`}
       />
@@ -33,7 +33,7 @@ const HeroBackground: React.FC<HeroBackgroundProps> = ({ isVisible, isMounted })
       <div
         className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
           w-80 h-80 bg-gradient-to-r from-blue-200 via-purple-200 to-pink-200
-          rounded-full mix-blend-multiply filter blur-2xl
+          rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-2xl
           transition-all duration-1000 ease-out animate-pulse-slow
           ${isVisible ? 'scale-100 opacity-20' : 'scale-75 opacity-0'}`}
       />

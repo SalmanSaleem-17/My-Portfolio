@@ -5,6 +5,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Class-based dark mode for Tailwind v4 ────────────────────────────────── */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* ── Scrollbar jerk fix ──────────────────────────────────────────────────────
    CRITICAL: overflow-x must NOT be on body — it promotes body to scroll root
    and silently cancels scrollbar-gutter on html. Instead we use a clip wrapper
@@ -20,6 +23,41 @@ html {
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  /* ── Component-level tokens for inline-style dark mode ─────────────────── */
+  --card-bg:              rgba(255, 255, 255, 0.8);
+  --card-bg-solid:        #ffffff;
+  --project-header-bg:    linear-gradient(160deg, #faf9ff 0%, #f3f0ff 100%);
+  --project-details-bg:   #ffffff;
+  --scroll-fade:          linear-gradient(to bottom, transparent, #ffffff);
+
+  /* ── Profile image ring color tokens ────────────────────────────────────── */
+  --ring-outer:     rgba(139, 92, 246, 0.35);
+  --ring-mid:       rgba(196,181,253, 0.28);
+  --ring-dot-track: rgba(139, 92, 246, 0.12);
+  --ring-hud:       #a78bfa;
+  --ring-hud-glow:  rgba(167,139,250, 0.70);
+  --ping-ring:      rgba(167,139,250, 0.55);
+}
+
+/* Dark mode overrides — triggered by .dark class on <html> */
+.dark {
+  --background: #0f172a;
+  --foreground: #f1f5f9;
+
+  --card-bg:              rgba(30, 41, 59, 0.8);
+  --card-bg-solid:        #1e293b;
+  --project-header-bg:    linear-gradient(160deg, #1e293b 0%, #0f172a 100%);
+  --project-details-bg:   #1e293b;
+  --scroll-fade:          linear-gradient(to bottom, transparent, #1e293b);
+
+  /* ── Profile image ring color tokens (dark) ─────────────────────────────── */
+  --ring-outer:     rgba(255, 255, 255, 0.45);
+  --ring-mid:       rgba(255, 255, 255, 0.30);
+  --ring-dot-track: rgba(255, 255, 255, 0.14);
+  --ring-hud:       #ffffff;
+  --ring-hud-glow:  rgba(255, 255, 255, 0.65);
+  --ping-ring:      rgba(255, 255, 255, 0.50);
 }
 
 @theme inline {
@@ -27,13 +65,6 @@ html {
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
@@ -95,6 +126,20 @@ body {
   0%   { transform: translateX(-100%); }
   100% { transform: translateX(300%);  }
 }
+@keyframes scan-line {
+  0%   { transform: translateY(-100%); opacity: 0; }
+  15%  { opacity: 1; }
+  85%  { opacity: 1; }
+  100% { transform: translateY(350%);  opacity: 0; }
+}
+@keyframes ping-glow {
+  0%   { transform: scale(1);   opacity: 0.55; }
+  100% { transform: scale(1.7); opacity: 0;    }
+}
+@keyframes float-simple {
+  0%, 100% { transform: translateY(0px);  }
+  50%       { transform: translateY(-8px); }
+}
 
 /* ── Animation utility classes ───────────────────────────────────────────── */
 .animate-float-slow    { animation: float-slow    15s  ease-in-out infinite; }
@@ -106,12 +151,16 @@ body {
 .animate-pulse-gentle  { animation: pulse-gentle   4s  ease-in-out infinite; }
 .animate-bounce-x      { animation: bounce-x       1.5s ease-in-out infinite; }
 .animate-skill-fade    { animation: skill-fade     2.5s ease-in-out infinite; }
+.animate-scan-line     { animation: scan-line      4s   ease-in-out infinite; }
+.animate-ping-glow     { animation: ping-glow      2.5s ease-out     infinite; }
+.animate-float-simple  { animation: float-simple   3s   ease-in-out  infinite; }
 
 /* ── Accessibility ───────────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .animate-float-slow, .animate-float-reverse, .animate-float,
   .animate-spin-slow,  .animate-spin-reverse,  .animate-pulse-slow,
-  .animate-pulse-gentle, .animate-bounce-x,    .animate-skill-fade {
+  .animate-pulse-gentle, .animate-bounce-x,    .animate-skill-fade,
+  .animate-scan-line,  .animate-ping-glow,     .animate-float-simple {
     animation: none;
   }
 }

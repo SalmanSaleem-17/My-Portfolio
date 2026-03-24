@@ -18,8 +18,8 @@ const ProjectTechStack: React.FC<{ project: Project }> = ({ project }) => {
             key={i}
             className="text-[11.5px] font-medium px-3 py-1.5 rounded-full cursor-default
                        transition-all duration-200 hover:scale-105
-                       text-gray-700 bg-gray-100 border border-gray-200
-                       hover:bg-violet-100 hover:border-violet-300 hover:text-violet-700"
+                       text-gray-700 dark:text-slate-300 bg-gray-100 dark:bg-slate-700 border border-gray-200 dark:border-slate-600
+                       hover:bg-violet-100 dark:hover:bg-violet-900/30 hover:border-violet-300 dark:hover:border-violet-600 hover:text-violet-700 dark:hover:text-violet-300"
           >
             {tech}
           </span>

@@ -27,10 +27,10 @@ const SkillCard = memo(({ skill, index }: SkillCardProps) => {
       onMouseLeave={onLeave}
     >
       <div
-        className="relative h-full bg-white/90 backdrop-blur-sm border border-white/30
+        className="relative h-full bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm border border-white/30 dark:border-slate-700/50
           rounded-2xl sm:rounded-3xl p-4 sm:p-6
           transition-all duration-300 ease-out
-          hover:bg-white/95 hover:-translate-y-2 hover:scale-[1.02]"
+          hover:bg-white/95 dark:hover:bg-slate-800 hover:-translate-y-2 hover:scale-[1.02]"
         style={{
           boxShadow: isHovered
             ? `0 12px 32px ${hexToRgba(skill.color, 0.3)}, 0 4px 16px ${hexToRgba(skill.color, 0.2)}`
@@ -71,8 +71,8 @@ const SkillCard = memo(({ skill, index }: SkillCardProps) => {
         </div>
 
         {/* Name */}
-        <h4 className={`font-bold text-gray-800 text-center mb-3 text-sm sm:text-base leading-tight
-          transition-all duration-300 ${isHovered ? 'text-gray-900 scale-105' : ''}`}>
+        <h4 className={`font-bold text-gray-800 dark:text-slate-200 text-center mb-3 text-sm sm:text-base leading-tight
+          transition-all duration-300 ${isHovered ? 'text-gray-900 dark:text-white scale-105' : ''}`}>
           {skill.name}
         </h4>
 
@@ -92,10 +92,10 @@ const SkillCard = memo(({ skill, index }: SkillCardProps) => {
         {/* Progress bar */}
         <div>
           <div className="flex justify-between items-center mb-1.5">
-            <span className="text-xs font-medium text-gray-500">Expertise</span>
+            <span className="text-xs font-medium text-gray-500 dark:text-slate-400">Expertise</span>
             <span className={`text-xs font-bold ${level.textColor}`}>{level.percentage}%</span>
           </div>
-          <div className="w-full h-1.5 sm:h-2 bg-gray-100 rounded-full overflow-hidden">
+          <div className="w-full h-1.5 sm:h-2 bg-gray-100 dark:bg-slate-700 rounded-full overflow-hidden">
             <div
               className={`h-full ${level.barColor} rounded-full transition-all duration-1000 ease-out relative overflow-hidden`}
               style={{

@@ -33,8 +33,8 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ isMobile = false }) => {
           href={c.href}
           target="_blank"
           rel="noopener noreferrer"
-          className={`flex items-center gap-2 text-gray-700
-            bg-gradient-to-br from-purple-50/80 to-violet-50/80
+          className={`flex items-center gap-2 text-gray-700 dark:text-slate-300
+            bg-gradient-to-br from-purple-50/80 to-violet-50/80 dark:from-slate-700/80 dark:to-slate-700/80
             rounded-full shadow-md backdrop-blur-sm
             transform transition-all duration-300 ease-out
             hover:scale-105 hover:-translate-y-1
@@ -46,7 +46,7 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ isMobile = false }) => {
           ) : (
             <div className="flex flex-col">
               <span className="font-medium">{c.value}</span>
-              <span className="text-xs text-gray-500">{c.description}</span>
+              <span className="text-xs text-gray-500 dark:text-slate-400">{c.description}</span>
             </div>
           )}
         </a>

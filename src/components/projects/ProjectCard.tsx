@@ -18,7 +18,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, itemVariants 
       variants={itemVariants}
       className="group relative rounded-2xl overflow-hidden"
       style={{
-        background: '#ffffff',
+        background: 'var(--card-bg-solid)',
         border:     '1px solid rgba(124,58,237,0.12)',
         boxShadow:  '0 2px 20px rgba(124,58,237,0.07), 0 1px 4px rgba(0,0,0,0.06)',
       }}
@@ -45,7 +45,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, itemVariants 
         </div>
 
         {/* Divider — desktop only */}
-        <div className="hidden lg:block w-px flex-shrink-0 self-stretch bg-violet-100" />
+        <div className="hidden lg:block w-px flex-shrink-0 self-stretch bg-violet-100 dark:bg-slate-700" />
 
         {/* Right panel */}
         <div className="flex-1 min-w-0">

@@ -29,7 +29,7 @@ const CategorySection = memo(({ category, skills, index }: CategorySectionProps)
           <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
         </div>
 
-        <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800 text-center sm:text-left">
+        <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800 dark:text-slate-200 text-center sm:text-left">
           {category.name}
         </h3>
 

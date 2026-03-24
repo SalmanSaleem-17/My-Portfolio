@@ -19,9 +19,9 @@ const ProjectActions: React.FC<{ project: Project }> = ({ project }) => {
         rel="noopener noreferrer"
         className="group flex-1 flex items-center justify-center gap-2 py-3.5 px-5
                    rounded-xl font-semibold text-[13px]
-                   text-gray-700 bg-white border border-gray-200
+                   text-gray-700 dark:text-slate-300 bg-white dark:bg-slate-700 border border-gray-200 dark:border-slate-600
                    transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]
-                   hover:border-violet-300 hover:text-violet-700 hover:bg-violet-50
+                   hover:border-violet-300 dark:hover:border-violet-500 hover:text-violet-700 dark:hover:text-violet-300 hover:bg-violet-50 dark:hover:bg-violet-900/30
                    shadow-sm"
         style={{ minHeight: '48px' }}
       >

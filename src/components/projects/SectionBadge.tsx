@@ -34,12 +34,12 @@ const SectionBadge: React.FC<SectionBadgeProps> = ({ label, title, description, 
         hover:scale-105 hover:from-blue-500/15 hover:to-purple-500/15
         transition-all duration-300 ease-out cursor-pointer">
         <Sparkles className="w-5 h-5 text-blue-500" />
-        <span className="text-sm font-medium text-gray-700">{label}</span>
+        <span className="text-sm font-medium text-gray-700 dark:text-slate-300">{label}</span>
       </div>
 
       {/* Title — matches AboutHeader font size + gradient */}
       <h2 className="text-4xl md:text-5xl font-bold mb-6
-        bg-gradient-to-r from-gray-900 via-blue-800 to-purple-800 bg-clip-text text-transparent">
+        bg-gradient-to-r from-gray-900 via-blue-800 to-purple-800 dark:from-slate-100 dark:via-blue-300 dark:to-purple-300 bg-clip-text text-transparent">
         {title}
       </h2>
 
@@ -61,7 +61,7 @@ const SectionBadge: React.FC<SectionBadgeProps> = ({ label, title, description, 
       </div>
 
       {/* Subtitle */}
-      <p className="text-gray-500 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed font-light px-4">
+      <p className="text-gray-500 dark:text-slate-400 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed font-light px-4">
         {description}
       </p>
 

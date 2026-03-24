@@ -13,16 +13,16 @@ export const SectionLabel: React.FC<{
   title: string;
 }> = ({ icon, title }) => (
   <div className="flex items-center gap-2.5">
-    <div className="p-1.5 rounded-lg flex-shrink-0 bg-violet-100 border border-violet-200">
+    <div className="p-1.5 rounded-lg flex-shrink-0 bg-violet-100 dark:bg-violet-900/30 border border-violet-200 dark:border-violet-700">
       {icon}
     </div>
-    <span className="text-[15px] font-bold text-gray-900 tracking-tight">{title}</span>
+    <span className="text-[15px] font-bold text-gray-900 dark:text-slate-100 tracking-tight">{title}</span>
   </div>
 );
 
 const ProjectDetails: React.FC<{ project: Project }> = ({ project }) => {
   return (
-    <div className="flex flex-col overflow-hidden h-full bg-white">
+    <div className="flex flex-col overflow-hidden h-full" style={{ background: 'var(--project-details-bg)' }}>
 
       {/* ── Scrollable body ── */}
       <div
@@ -31,27 +31,27 @@ const ProjectDetails: React.FC<{ project: Project }> = ({ project }) => {
       >
         {/* Overview — left violet accent bar */}
         <p
-          className="text-[13.5px] text-gray-600 leading-[1.78] pl-4 border-l-2 border-violet-300"
+          className="text-[13.5px] text-gray-600 dark:text-slate-300 leading-[1.78] pl-4 border-l-2 border-violet-300 dark:border-violet-500"
         >
           {project.longDescription}
         </p>
 
         {/* Problem / Solution */}
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-3">
-          <div className="p-4 rounded-xl bg-red-50 border border-red-100">
+          <div className="p-4 rounded-xl bg-red-50 dark:bg-red-950/30 border border-red-100 dark:border-red-800/50">
             <div className="flex items-center gap-2 mb-2.5">
               <Target size={13} className="text-red-700 flex-shrink-0" />
               <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-red-700">Problem</span>
             </div>
-            <p className="text-[12px] text-gray-600 leading-relaxed">{project.problemStatement}</p>
+            <p className="text-[12px] text-gray-600 dark:text-slate-300 leading-relaxed">{project.problemStatement}</p>
           </div>
 
-          <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-100">
+          <div className="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-100 dark:border-emerald-800/50">
             <div className="flex items-center gap-2 mb-2.5">
               <Lightbulb size={13} className="text-emerald-700 flex-shrink-0" />
               <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-emerald-700">Solution</span>
             </div>
-            <p className="text-[12px] text-gray-600 leading-relaxed">{project.solution}</p>
+            <p className="text-[12px] text-gray-600 dark:text-slate-300 leading-relaxed">{project.solution}</p>
           </div>
         </div>
 
@@ -65,10 +65,10 @@ const ProjectDetails: React.FC<{ project: Project }> = ({ project }) => {
             {project.achievements.map((a, i) => (
               <div
                 key={i}
-                className="flex items-start gap-2.5 p-3 rounded-xl bg-violet-50 border border-violet-100"
+                className="flex items-start gap-2.5 p-3 rounded-xl bg-violet-50 dark:bg-violet-950/30 border border-violet-100 dark:border-violet-700/50"
               >
                 <span className="text-[10px] mt-0.5 flex-shrink-0 text-violet-500">◆</span>
-                <span className="text-[12px] text-gray-700 leading-relaxed">{a}</span>
+                <span className="text-[12px] text-gray-700 dark:text-slate-300 leading-relaxed">{a}</span>
               </div>
             ))}
           </div>
@@ -87,11 +87,11 @@ const ProjectDetails: React.FC<{ project: Project }> = ({ project }) => {
       {/* Scroll fade */}
       <div
         className="flex-shrink-0 h-7 pointer-events-none -mt-7"
-        style={{ background: 'linear-gradient(to bottom, transparent, white)' }}
+        style={{ background: 'var(--scroll-fade)' }}
       />
 
       {/* ── Sticky CTA ── */}
-      <div className="flex-shrink-0 px-6 pb-5 pt-3 lg:px-8 lg:pb-6 border-t border-gray-100">
+      <div className="flex-shrink-0 px-6 pb-5 pt-3 lg:px-8 lg:pb-6 border-t border-gray-100 dark:border-slate-700">
         <ProjectActions project={project} />
       </div>
     </div>

@@ -29,10 +29,10 @@ const HeroCTAButtons: React.FC<HeroCTAButtonsProps> = ({ isMobile = false }) => 
       <a
         href="/CV-SALMAN SALEEM.pdf"
         download
-        className={`bg-white text-purple-700 border-2 border-purple-300
+        className={`bg-white dark:bg-slate-800 text-purple-700 dark:text-purple-300 border-2 border-purple-300 dark:border-purple-500
           rounded-2xl font-bold shadow-xl hover:shadow-2xl
           transition-all duration-300 flex items-center justify-center gap-3
-          hover:bg-purple-50
+          hover:bg-purple-50 dark:hover:bg-purple-900/30
           transform hover:scale-105 hover:-translate-y-1 active:scale-95
           ${isMobile ? 'px-6 py-3 text-base' : 'px-8 py-4'}`}
       >

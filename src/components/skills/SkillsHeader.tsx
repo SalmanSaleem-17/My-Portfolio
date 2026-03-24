@@ -20,12 +20,12 @@ const SkillsHeader = memo(() => {
         hover:scale-105 hover:from-blue-500/15 hover:to-purple-500/15
         transition-all duration-300 ease-out cursor-pointer">
         <Sparkles className="w-5 h-5 text-blue-500" />
-        <span className="text-sm font-medium text-gray-700">Technical Expertise</span>
+        <span className="text-sm font-medium text-gray-700 dark:text-slate-300">Technical Expertise</span>
       </div>
 
       {/* Title */}
       <h2 className="text-4xl md:text-5xl font-bold mb-6
-        bg-gradient-to-r from-gray-900 via-blue-800 to-purple-800 bg-clip-text text-transparent">
+        bg-gradient-to-r from-gray-900 via-blue-800 to-purple-800 dark:from-slate-100 dark:via-blue-300 dark:to-purple-300 bg-clip-text text-transparent">
         Skills &amp; Technologies
       </h2>
 
@@ -47,9 +47,9 @@ const SkillsHeader = memo(() => {
       </div>
 
       {/* Subtitle */}
-      <p className="text-gray-500 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed font-light px-4">
+      <p className="text-gray-500 dark:text-slate-400 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed font-light px-4">
         A curated collection of technologies I've mastered through{' '}
-        <span className="text-purple-600 font-semibold">hands-on experience</span>{' '}
+        <span className="text-purple-600 dark:text-purple-400 font-semibold">hands-on experience</span>{' '}
         and continuous learning.
       </p>
     </div>

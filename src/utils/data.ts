@@ -12,13 +12,6 @@ export const projects = [
   platform: 'Web Application (Full-Stack)',
   deviceTargets: ['Desktop', 'Tablet', 'Mobile'],
   image: '/goldify-icon.png',
-  screenshots: [
-    '/goldify-home.jpg',
-    '/goldify-calculator.jpg',
-    '/goldify-converter.jpg',
-    '/goldify-chart.jpg',
-    '/goldify-dashboard.jpg'
-  ],
   mockupType: 'laptop',
 
   // Links & Status
@@ -102,7 +95,6 @@ export const projects = [
     platform: 'Web Application',
     deviceTargets: ['Desktop', 'Tablet', 'Mobile'],
     image: '/heroImage.jpg',
-    screenshots: ['/hero.jpg', '/productDashboard.png', '/OrdersDashboard.png', '/userDashboard.png', '/RateDashboard.png'],
     mockupType: 'laptop',
 
     // ── Image display config ──────────────────────────────────────────────────

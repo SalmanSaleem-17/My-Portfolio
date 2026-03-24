@@ -98,7 +98,7 @@ export default function HeroSection({}: HeroSectionProps) {
 
             {/* Name */}
             <div className={fadeIn(isLoaded, '300ms')} style={{ transitionDelay: '300ms' }}>
-              <h1 className="text-4xl sm:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-purple-800 to-violet-800 bg-clip-text text-transparent whitespace-nowrap">
+              <h1 className="text-4xl sm:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-purple-800 to-violet-800 dark:from-slate-100 dark:via-purple-300 dark:to-violet-300 bg-clip-text text-transparent whitespace-nowrap">
                 Salman Saleem
               </h1>
             </div>
@@ -115,7 +115,7 @@ export default function HeroSection({}: HeroSectionProps) {
 
             {/* Bio */}
             <p
-              className={`text-lg text-gray-700 mb-8 max-w-2xl mx-auto leading-relaxed font-medium ${fadeIn(isLoaded, '600ms')}`}
+              className={`text-lg text-gray-700 dark:text-slate-300 mb-8 max-w-2xl mx-auto leading-relaxed font-medium ${fadeIn(isLoaded, '600ms')}`}
               style={{ transitionDelay: '600ms' }}
             >
               Passionate Computer Science graduate specializing in{' '}
@@ -158,7 +158,7 @@ export default function HeroSection({}: HeroSectionProps) {
             >
               {/* Name */}
               <div className={fadeIn(isLoaded, '400ms')} style={{ transitionDelay: '400ms' }}>
-                <h1 className="text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-purple-800 to-violet-800 bg-clip-text text-transparent whitespace-nowrap">
+                <h1 className="text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-purple-800 to-violet-800 dark:from-slate-100 dark:via-purple-300 dark:to-violet-300 bg-clip-text text-transparent whitespace-nowrap">
                   Salman Saleem
                 </h1>
               </div>
@@ -175,7 +175,7 @@ export default function HeroSection({}: HeroSectionProps) {
 
               {/* Bio */}
               <p
-                className={`text-xl text-gray-700 mb-10 leading-relaxed font-medium ${fadeIn(isLoaded, '700ms')}`}
+                className={`text-xl text-gray-700 dark:text-slate-300 mb-10 leading-relaxed font-medium ${fadeIn(isLoaded, '700ms')}`}
                 style={{ transitionDelay: '700ms' }}
               >
                 Passionate Computer Science graduate specializing in{' '}
