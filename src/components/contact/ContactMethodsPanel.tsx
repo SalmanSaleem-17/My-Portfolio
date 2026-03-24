@@ -11,7 +11,7 @@ const ContactMethodsPanel = memo(() => (
 
     {/* Panel heading */}
     <div className="flex items-center gap-3 mb-6 sm:mb-8">
-      <div className="p-2 sm:p-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl sm:rounded-2xl shadow-lg">
+      <div className="p-2 sm:p-3 bg-linear-to-r from-blue-500 to-purple-500 rounded-xl sm:rounded-2xl shadow-lg">
         <Send className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
       </div>
       <h3 className="text-lg sm:text-2xl font-bold text-slate-900 dark:text-slate-100">

@@ -26,8 +26,8 @@ const QuickStatsCard = memo(({ isVisible }: { isVisible: boolean }) => (
             ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4'}`}
           style={{ transitionDelay: `${i * 100 + 200}ms` }}
         >
-          <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-blue-500 to-purple-500
-            rounded-lg sm:rounded-xl flex items-center justify-center shadow-md flex-shrink-0">
+          <div className="w-8 h-8 sm:w-10 sm:h-10 bg-linear-to-br from-blue-500 to-purple-500
+            rounded-lg sm:rounded-xl flex items-center justify-center shadow-md shrink-0">
             <stat.icon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
           </div>
           <div className="min-w-0">
@@ -49,7 +49,7 @@ const CTACard = memo(({ isVisible }: { isVisible: boolean }) => {
 
   return (
     <div
-      className={`relative bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600
+      className={`relative bg-linear-to-br from-blue-600 via-purple-600 to-pink-600
         p-6 sm:p-8 rounded-xl sm:rounded-2xl shadow-2xl overflow-hidden
         transition-all duration-700 ease-out
         ${isVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-6 scale-95'}`}
@@ -68,7 +68,7 @@ const CTACard = memo(({ isVisible }: { isVisible: boolean }) => {
           <MessageCircle className="w-6 h-6 sm:w-8 sm:h-8" />
         </div>
         <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4
-          bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent">
+          bg-linear-to-r from-white to-blue-100 bg-clip-text text-transparent">
           Ready to Collaborate?
         </h3>
         <p className="text-blue-100 text-sm sm:text-base mb-5 sm:mb-6 leading-relaxed px-2">

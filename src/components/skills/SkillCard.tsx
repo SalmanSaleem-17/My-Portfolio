@@ -38,7 +38,7 @@ const SkillCard = memo(({ skill, index }: SkillCardProps) => {
         }}
       >
         {/* Depth overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent rounded-2xl sm:rounded-3xl pointer-events-none" />
+        <div className="absolute inset-0 bg-linear-to-br from-white/10 to-transparent rounded-2xl sm:rounded-3xl pointer-events-none" />
 
         {/* Icon */}
         <div className="flex justify-center mb-4">
@@ -104,7 +104,7 @@ const SkillCard = memo(({ skill, index }: SkillCardProps) => {
               }}
             >
               {/* Shimmer */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent
+              <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/30 to-transparent
                 -translate-x-full group-hover:animate-[shimmer_1.2s_ease-in-out_infinite]" />
             </div>
           </div>

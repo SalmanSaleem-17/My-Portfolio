@@ -37,15 +37,15 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, itemVariants 
       />
 
       {/* Mobile → stacked | Desktop → side-by-side, fixed 680px */}
-      <div className="flex flex-col lg:flex-row lg:h-[680px]">
+      <div className="flex flex-col lg:flex-row lg:h-170">
 
         {/* Left panel — 38% */}
-        <div className="lg:w-[38%] lg:flex-shrink-0">
+        <div className="lg:w-[38%] lg:shrink-0">
           <ProjectHeader project={project} index={index} />
         </div>
 
         {/* Divider — desktop only */}
-        <div className="hidden lg:block w-px flex-shrink-0 self-stretch bg-violet-100 dark:bg-slate-700" />
+        <div className="hidden lg:block w-px shrink-0 self-stretch bg-violet-100 dark:bg-slate-700" />
 
         {/* Right panel */}
         <div className="flex-1 min-w-0">

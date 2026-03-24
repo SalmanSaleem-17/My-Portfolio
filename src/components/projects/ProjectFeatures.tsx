@@ -20,7 +20,7 @@ const ProjectFeatures: React.FC<{ project: Project }> = ({ project }) => {
                        transition-all duration-200 bg-gray-50 dark:bg-slate-700/50 border border-gray-100 dark:border-slate-600
                        hover:bg-violet-50 dark:hover:bg-violet-900/30 hover:border-violet-200 dark:hover:border-violet-700"
           >
-            <span className="text-lg flex-shrink-0 leading-none mt-0.5 group-hover:scale-110 transition-transform">
+            <span className="text-lg shrink-0 leading-none mt-0.5 group-hover:scale-110 transition-transform">
               {feature.icon}
             </span>
             <div>

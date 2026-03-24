@@ -15,7 +15,7 @@ const SkillsHeader = memo(() => {
     >
       {/* Badge — identical to AboutHeader */}
       <div className="inline-flex items-center gap-2 px-6 py-3
-        bg-gradient-to-r from-blue-500/10 to-purple-500/10
+        bg-linear-to-r from-blue-500/10 to-purple-500/10
         rounded-full border border-blue-200/30 mb-6
         hover:scale-105 hover:from-blue-500/15 hover:to-purple-500/15
         transition-all duration-300 ease-out cursor-pointer">
@@ -25,14 +25,14 @@ const SkillsHeader = memo(() => {
 
       {/* Title */}
       <h2 className="text-4xl md:text-5xl font-bold mb-6
-        bg-gradient-to-r from-gray-900 via-blue-800 to-purple-800 dark:from-slate-100 dark:via-blue-300 dark:to-purple-300 bg-clip-text text-transparent">
+        bg-linear-to-r from-gray-900 via-blue-800 to-purple-800 dark:from-slate-100 dark:via-blue-300 dark:to-purple-300 bg-clip-text text-transparent">
         Skills &amp; Technologies
       </h2>
 
       {/* Animated expanding lines + spinning star — same as AboutHeader */}
       <div className="flex justify-center items-center gap-2 mb-6">
         <div
-          className={`h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full
+          className={`h-1 bg-linear-to-r from-blue-500 to-purple-500 rounded-full
             transition-all duration-700 ease-out ${isVisible ? 'w-16' : 'w-0'}`}
           style={{ transitionDelay: '300ms' }}
         />
@@ -40,7 +40,7 @@ const SkillsHeader = memo(() => {
           <Star className="w-6 h-6 text-yellow-500 fill-current" />
         </div>
         <div
-          className={`h-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full
+          className={`h-1 bg-linear-to-r from-purple-500 to-pink-500 rounded-full
             transition-all duration-700 ease-out ${isVisible ? 'w-16' : 'w-0'}`}
           style={{ transitionDelay: '500ms' }}
         />

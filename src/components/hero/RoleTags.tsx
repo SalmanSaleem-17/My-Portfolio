@@ -14,7 +14,7 @@ const RoleTags: React.FC<RoleTagsProps> = ({ isMobile = false }) => {
       {ROLE_TAGS.map((tag, i) => (
         <span
           key={i}
-          className={`bg-gradient-to-r ${tag.color} dark:from-slate-700 dark:to-slate-700 dark:text-slate-200 dark:border-slate-500 rounded-full font-semibold shadow-md
+          className={`bg-linear-to-r ${tag.color} dark:from-slate-700 dark:to-slate-700 dark:text-slate-200 dark:border-slate-500 rounded-full font-semibold shadow-md
             whitespace-nowrap transform transition-all duration-300 ease-out
             hover:scale-105 hover:-translate-y-1 cursor-default border
             ${isMobile ? 'px-4 py-2 text-sm' : 'px-6 py-3 text-sm'}`}

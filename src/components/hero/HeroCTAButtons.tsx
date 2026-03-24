@@ -13,7 +13,7 @@ const HeroCTAButtons: React.FC<HeroCTAButtonsProps> = ({ isMobile = false }) => 
       {/* Primary — Get In Touch */}
       <a
         href="mailto:shanisaleem17@gmail.com"
-        className={`bg-gradient-to-r from-purple-600 to-violet-600 text-white
+        className={`bg-linear-to-r from-purple-600 to-violet-600 text-white
           rounded-2xl font-bold shadow-xl hover:shadow-2xl
           transition-all duration-300 flex items-center justify-center gap-3
           border border-purple-400

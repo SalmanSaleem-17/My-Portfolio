@@ -34,13 +34,13 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ isMobile = false }) => {
           target="_blank"
           rel="noopener noreferrer"
           className={`flex items-center gap-2 text-gray-700 dark:text-slate-300
-            bg-gradient-to-br from-purple-50/80 to-violet-50/80 dark:from-slate-700/80 dark:to-slate-700/80
+            bg-linear-to-br from-purple-50/80 to-violet-50/80 dark:from-slate-700/80 dark:to-slate-700/80
             rounded-full shadow-md backdrop-blur-sm
             transform transition-all duration-300 ease-out
             hover:scale-105 hover:-translate-y-1
             ${isMobile ? 'px-3 py-2 text-sm' : 'px-4 py-2'}`}
         >
-          <c.icon className="w-4 h-4 text-purple-600 flex-shrink-0" />
+          <c.icon className="w-4 h-4 text-purple-600 shrink-0" />
           {isMobile ? (
             <span className="font-medium">{c.mobileValue}</span>
           ) : (

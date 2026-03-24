@@ -111,8 +111,8 @@ export default function Navbar() {
               className="flex items-center space-x-3 cursor-pointer group"
               onClick={() => handleNavClick('home')}
             >
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pink-100 via-purple-50 to-blue-100 dark:from-pink-900/40 dark:via-purple-900/40 dark:to-blue-900/40 flex items-center justify-center shadow-md transition-all duration-300 ease-out group-hover:shadow-xl group-hover:scale-105 group-hover:rotate-2">
-                <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-100 to-purple-200 dark:from-blue-900/50 dark:to-purple-900/50 flex items-center justify-center text-blue-600 text-xs font-bold">
+              <div className="w-10 h-10 rounded-full bg-linear-to-br from-pink-100 via-purple-50 to-blue-100 dark:from-pink-900/40 dark:via-purple-900/40 dark:to-blue-900/40 flex items-center justify-center shadow-md transition-all duration-300 ease-out group-hover:shadow-xl group-hover:scale-105 group-hover:rotate-2">
+                <div className="w-6 h-6 rounded-full bg-linear-to-br from-blue-100 to-purple-200 dark:from-blue-900/50 dark:to-purple-900/50 flex items-center justify-center text-blue-600 text-xs font-bold">
                   <Image src="/projects/SS-logo.png" alt="Logo" width={24} height={24} />
                 </div>
               </div>
@@ -137,7 +137,7 @@ export default function Navbar() {
                             : 'text-gray-600 dark:text-slate-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-slate-700'
                         }`}
                       >
-                        <div className={`absolute inset-0 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-slate-700 dark:to-slate-700 opacity-0 transition-opacity duration-300 ${!isActive ? 'group-hover:opacity-100' : ''}`}></div>
+                        <div className={`absolute inset-0 bg-linear-to-r from-blue-50 to-purple-50 dark:from-slate-700 dark:to-slate-700 opacity-0 transition-opacity duration-300 ${!isActive ? 'group-hover:opacity-100' : ''}`}></div>
                         <Icon size={16} className={`transition-all duration-300 relative z-10 ${
                           isActive
                             ? 'text-blue-500 dark:text-blue-400'
@@ -186,7 +186,7 @@ export default function Navbar() {
 
                 <button
                   onClick={() => handleNavClick('contact')}
-                  className="px-5 py-2.5 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl text-sm font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/25 hover:scale-105 hover:-translate-y-1 active:scale-95"
+                  className="px-5 py-2.5 bg-linear-to-r from-blue-500 to-purple-600 text-white rounded-xl text-sm font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/25 hover:scale-105 hover:-translate-y-1 active:scale-95"
                 >
                   <span>Hire Me</span>
                 </button>
@@ -246,7 +246,7 @@ export default function Navbar() {
                       opacity: isOpen ? 1 : 0
                     }}
                   >
-                    <div className={`absolute inset-0 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-slate-700 dark:to-slate-700 rounded-xl opacity-0 transition-opacity duration-300 ${!isActive ? 'group-hover:opacity-100' : ''}`}></div>
+                    <div className={`absolute inset-0 bg-linear-to-r from-blue-50 to-purple-50 dark:from-slate-700 dark:to-slate-700 rounded-xl opacity-0 transition-opacity duration-300 ${!isActive ? 'group-hover:opacity-100' : ''}`}></div>
                     <Icon size={20} className={`transition-all duration-300 relative z-10 ${
                       isActive ? 'text-blue-500 dark:text-blue-400' : 'text-gray-500 dark:text-slate-400 group-hover:text-blue-500 dark:group-hover:text-blue-400 group-hover:scale-110'
                     }`} />
@@ -278,7 +278,7 @@ export default function Navbar() {
               </div>
               <button
                 onClick={() => handleNavClick('contact')}
-                className="w-full flex items-center justify-center px-6 py-3.5 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/25 hover:scale-105 active:scale-95"
+                className="w-full flex items-center justify-center px-6 py-3.5 bg-linear-to-r from-blue-500 to-purple-600 text-white rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/25 hover:scale-105 active:scale-95"
               >
                 Hire Me
               </button>

@@ -5,7 +5,7 @@ import { GraduationCap } from 'lucide-react';
 
 const EducationCard = memo(() => (
   <div
-    className="relative bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-slate-800 dark:via-slate-800 dark:to-slate-800 p-8 rounded-3xl
+    className="relative bg-linear-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-slate-800 dark:via-slate-800 dark:to-slate-800 p-8 rounded-3xl
       border border-blue-200/50 dark:border-blue-700/50 shadow-xl overflow-hidden
       transition-shadow duration-500 ease-out cursor-pointer group"
     style={{ willChange: 'transform' }}
@@ -13,7 +13,7 @@ const EducationCard = memo(() => (
     onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')}
   >
     {/* Ambient orb — contained by overflow-hidden on parent */}
-    <div className="absolute top-4 right-4 w-20 h-20 bg-gradient-to-br from-blue-400/15 to-purple-400/15
+    <div className="absolute top-4 right-4 w-20 h-20 bg-linear-to-br from-blue-400/15 to-purple-400/15
       rounded-full blur-xl group-hover:w-24 group-hover:h-24 transition-all duration-500" />
 
     {/* Header */}

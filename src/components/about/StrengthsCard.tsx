@@ -27,7 +27,7 @@ const StrengthItem = memo(({ item, index }: { item: typeof STRENGTHS[0]; index: 
       onMouseEnter={e => (e.currentTarget.style.transform = 'translateX(4px)')}
       onMouseLeave={e => (e.currentTarget.style.transform = isVisible ? 'translateX(0)' : 'translateX(-16px)')}
     >
-      <div className={`p-2 bg-gradient-to-r ${item.color} rounded-lg transition-transform duration-200 hover:scale-110`}>
+      <div className={`p-2 bg-linear-to-r ${item.color} rounded-lg transition-transform duration-200 hover:scale-110`}>
         <item.icon className="w-4 h-4 text-white" />
       </div>
       <span className="text-gray-700 dark:text-slate-300 font-medium">{item.text}</span>
@@ -38,7 +38,7 @@ StrengthItem.displayName = 'StrengthItem';
 
 const StrengthsCard = memo(() => (
   <div
-    className="relative bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50 dark:from-slate-800 dark:via-slate-800 dark:to-slate-800 p-8 rounded-3xl
+    className="relative bg-linear-to-br from-emerald-50 via-green-50 to-teal-50 dark:from-slate-800 dark:via-slate-800 dark:to-slate-800 p-8 rounded-3xl
       border border-green-200/50 dark:border-green-700/50 shadow-xl overflow-hidden
       transition-shadow duration-500 ease-out cursor-pointer group"
     style={{ willChange: 'transform' }}
@@ -46,7 +46,7 @@ const StrengthsCard = memo(() => (
     onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')}
   >
     {/* Ambient orb — contained by overflow-hidden on parent */}
-    <div className="absolute top-4 right-4 w-24 h-24 bg-gradient-to-br from-green-400/15 to-emerald-400/15
+    <div className="absolute top-4 right-4 w-24 h-24 bg-linear-to-br from-green-400/15 to-emerald-400/15
       rounded-full blur-xl group-hover:w-28 group-hover:h-28 transition-all duration-500" />
 
     {/* Header */}

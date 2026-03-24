@@ -62,7 +62,7 @@ const ProjectHeader: React.FC<{ project: Project; index: number }> = ({ project,
       <div className="relative z-10 flex flex-col h-full p-6 lg:p-7 xl:p-8 gap-4">
 
         {/* ── Badges ── */}
-        <div className="flex flex-wrap gap-2 flex-shrink-0">
+        <div className="flex flex-wrap gap-2 shrink-0">
           <span className="text-[10px] font-bold tracking-[0.14em] uppercase px-3 py-1.5 rounded-full
                            text-violet-700 dark:text-violet-300 bg-violet-100 dark:bg-violet-900/30 border border-violet-200 dark:border-violet-700">
             {project.category}
@@ -85,7 +85,7 @@ const ProjectHeader: React.FC<{ project: Project; index: number }> = ({ project,
 
         {/* ── Image ── grows to fill available vertical space on desktop ── */}
         <div className="flex-1 flex items-center justify-center min-h-0">
-          <div className={`${containerClass[shape]} flex-shrink-0`}>
+          <div className={`${containerClass[shape]} shrink-0`}>
             <div
               className="relative w-full rounded-2xl overflow-hidden"
               style={{
@@ -113,7 +113,7 @@ const ProjectHeader: React.FC<{ project: Project; index: number }> = ({ project,
         </div>
 
         {/* ── Title + subtitle ── */}
-        <div className="flex-shrink-0">
+        <div className="shrink-0">
           <h3 className="text-2xl xl:text-[1.75rem] font-black text-gray-900 dark:text-slate-100 leading-tight tracking-tight">
             {project.title}
           </h3>
@@ -123,7 +123,7 @@ const ProjectHeader: React.FC<{ project: Project; index: number }> = ({ project,
         </div>
 
         {/* ── Stat pills ── */}
-        <div className="grid grid-cols-3 gap-2 flex-shrink-0">
+        <div className="grid grid-cols-3 gap-2 shrink-0">
           {stats.map(({ icon: Icon, label, value }) => (
             <div
               key={label}
