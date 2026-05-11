@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.scale-recipe.com)",
+      "Bash(curl -fsSL -o public/scale-recipe-icon.png https://www.scale-recipe.com/icon.png)",
+      "WebFetch(domain:www.smart-unit-converters.com)",
+      "Bash(curl -fsSL -o public/smart-unit-converters-icon.png https://www.smart-unit-converters.com/favicon.png)"
+    ]
+  }
+}

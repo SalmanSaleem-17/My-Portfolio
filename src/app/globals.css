@@ -42,7 +42,8 @@ html {
 
 /* Dark mode overrides — triggered by .dark class on <html> */
 .dark {
-  --background: #0f172a;
+  /* Transparent so the fixed <ThreeBackground> canvas shows through body. */
+  --background: transparent;
   --foreground: #f1f5f9;
 
   --card-bg:              rgba(30, 41, 59, 0.8);
@@ -81,6 +82,21 @@ body {
 ───────────────────────────────────────────────────────────────────────────── */
 .clip-x {
   overflow-x: clip; /* clips without creating scroll container */
+}
+
+/* ── Registered property for animating conic-gradient angle ─────────────────
+   Without @property, CSS can't interpolate the angle, so the conic gradient
+   would "jump" instead of rotating. Widely supported (Chrome 85+, FF 128+,
+   Safari 16.4+). Used by .aurora-border / .conic-border on cards.
+───────────────────────────────────────────────────────────────────────────── */
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes rotate-angle {
+  to { --angle: 360deg; }
 }
 
 /* ── Keyframes ───────────────────────────────────────────────────────────── */
@@ -140,6 +156,26 @@ body {
   0%, 100% { transform: translateY(0px);  }
   50%       { transform: translateY(-8px); }
 }
+@keyframes marquee-left {
+  from { transform: translate3d(0, 0, 0);     }
+  to   { transform: translate3d(-50%, 0, 0);  }
+}
+@keyframes marquee-right {
+  from { transform: translate3d(-50%, 0, 0);  }
+  to   { transform: translate3d(0, 0, 0);     }
+}
+
+.marquee-track {
+  /* Promote to its own GPU layer so transform animation stays off the main thread */
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+}
+
+/* Pause row while cursor is over it — child .marquee-track keeps flowing otherwise. */
+.marquee-row:hover .marquee-track {
+  animation-play-state: paused;
+}
 
 /* ── Animation utility classes ───────────────────────────────────────────── */
 .animate-float-slow    { animation: float-slow    15s  ease-in-out infinite; }
@@ -160,7 +196,9 @@ body {
   .animate-float-slow, .animate-float-reverse, .animate-float,
   .animate-spin-slow,  .animate-spin-reverse,  .animate-pulse-slow,
   .animate-pulse-gentle, .animate-bounce-x,    .animate-skill-fade,
-  .animate-scan-line,  .animate-ping-glow,     .animate-float-simple {
-    animation: none;
+  .animate-scan-line,  .animate-ping-glow,     .animate-float-simple,
+  .marquee-track,
+  [style*="rotate-angle"] {
+    animation: none !important;
   }
 }

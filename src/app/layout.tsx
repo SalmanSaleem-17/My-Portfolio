@@ -1,5 +1,6 @@
 import './globals.css'
 import Navbar from '@/components/Navbar'
+import ThreeBackground from '@/components/ThreeBackground'
 import { ThemeProvider } from '@/context/ThemeContext'
 import type { Metadata } from 'next'
 
@@ -26,8 +27,9 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="bg-white dark:bg-slate-900 text-gray-900 dark:text-slate-100 scroll-smooth transition-colors duration-300">
+      <body className="bg-white dark:bg-transparent text-gray-900 dark:text-slate-100 scroll-smooth transition-colors duration-300">
         <ThemeProvider>
+          <ThreeBackground />
           {/*
             clip-x uses overflow-x: clip (NOT hidden).
             "clip" prevents horizontal overflow WITHOUT creating a scroll container,
