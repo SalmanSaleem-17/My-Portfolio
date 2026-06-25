@@ -3,6 +3,14 @@
 import React from 'react';
 import { PARTICLE_POSITIONS } from './types';
 
+// Pre-computed position/timing classes for each particle (avoids inline styles).
+// Indices must stay in sync with PARTICLE_POSITIONS order.
+const PARTICLE_CLASSES = [
+  'left-[22.6%] top-[70.2%] [animation-delay:0s]  [animation-duration:7.8s] delay-0',
+  'left-[37.7%] top-[59.8%] [animation-delay:2s]  [animation-duration:8.6s] delay-200',
+  'left-[32.5%] top-[39.4%] [animation-delay:4s]  [animation-duration:7.2s] delay-[400ms]',
+] as const;
+
 interface HeroBackgroundProps {
   isVisible: boolean;
   isMounted: boolean;
@@ -39,19 +47,13 @@ const HeroBackground: React.FC<HeroBackgroundProps> = ({ isVisible, isMounted })
       />
 
       {/* Floating particles — client-only to avoid hydration mismatch */}
-      {isMounted && PARTICLE_POSITIONS.map((p, i) => (
+      {isMounted && PARTICLE_POSITIONS.map((_p, i) => (
         <div
           key={i}
           className={`absolute w-2 h-2 bg-linear-to-r from-purple-400 to-pink-400
             rounded-full animate-float transform transition-all duration-500 ease-out
+            ${PARTICLE_CLASSES[i]}
             ${isVisible ? 'opacity-40' : 'opacity-0'}`}
-          style={{
-            left:              `${p.left}%`,
-            top:               `${p.top}%`,
-            animationDelay:    `${p.delay}s`,
-            animationDuration: `${p.duration}s`,
-            transitionDelay:   `${i * 200}ms`,
-          }}
         />
       ))}
     </div>

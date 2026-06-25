@@ -41,7 +41,7 @@ export default function AboutSection({}: AboutSectionProps) {
       horizontally WITHOUT creating a scroll container (safe for scrollbar-gutter).
       overflow-y is left untouched so vertical layout flows naturally.
     */
-    <div className="relative py-8" style={{ overflowX: 'clip' }}>
+    <div className="relative py-8 overflow-x-clip">
       <AboutBackground />
 
       <section

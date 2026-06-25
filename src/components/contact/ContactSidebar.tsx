@@ -4,12 +4,14 @@ import { memo, useRef, useState, useEffect, useCallback } from 'react';
 import { Sparkles, MessageCircle, Send } from 'lucide-react';
 import { QUICK_STATS, SOCIAL_LINKS } from './types';
 
+const STAT_DELAYS   = ['delay-200', 'delay-300', 'delay-400', 'delay-500']   as const;
+const SOCIAL_DELAYS = ['delay-600', 'delay-700', 'delay-800', 'delay-900']   as const;
+
 // ── Quick Stats ───────────────────────────────────────────────────────────────
 const QuickStatsCard = memo(({ isVisible }: { isVisible: boolean }) => (
-  <div className={`backdrop-blur-sm p-4 sm:p-6 rounded-xl sm:rounded-2xl
+  <div className={`bg-(--card-bg) backdrop-blur-sm p-4 sm:p-6 rounded-xl sm:rounded-2xl
     shadow-lg border border-white/40 dark:border-slate-700/40 transition-all duration-700 ease-out
-    ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
-    style={{ background: 'var(--card-bg)' }}>
+    ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
 
     <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 mb-4 sm:mb-6 flex items-center gap-2">
       <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-amber-500" />
@@ -21,10 +23,9 @@ const QuickStatsCard = memo(({ isVisible }: { isVisible: boolean }) => (
         <div
           key={stat.label}
           className={`flex items-center gap-3 p-3 sm:p-4 bg-slate-50/80 dark:bg-slate-700/80 rounded-lg sm:rounded-xl
-            backdrop-blur-sm transition-all duration-500 ease-out
+            backdrop-blur-sm transition-all duration-500 ease-out ${STAT_DELAYS[i]}
             hover:bg-slate-100/80 dark:hover:bg-slate-600/80 hover:scale-105
             ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4'}`}
-          style={{ transitionDelay: `${i * 100 + 200}ms` }}
         >
           <div className="w-8 h-8 sm:w-10 sm:h-10 bg-linear-to-br from-blue-500 to-purple-500
             rounded-lg sm:rounded-xl flex items-center justify-center shadow-md shrink-0">
@@ -44,22 +45,20 @@ QuickStatsCard.displayName = 'QuickStatsCard';
 // ── CTA Card ──────────────────────────────────────────────────────────────────
 const CTACard = memo(({ isVisible }: { isVisible: boolean }) => {
   const handleClick = useCallback(() => {
-    window.open('mailto:shanisaleem17@gmail.com', '_blank');
+    window.open('mailto:contact@salmansaleem.dev', '_blank');
   }, []);
 
   return (
     <div
       className={`relative bg-linear-to-br from-blue-600 via-purple-600 to-pink-600
         p-6 sm:p-8 rounded-xl sm:rounded-2xl shadow-2xl overflow-hidden
-        transition-all duration-700 ease-out
+        transition-all duration-700 ease-out delay-300
         ${isVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-6 scale-95'}`}
-      style={{ transitionDelay: '300ms' }}
     >
       {/* Background glows */}
       <div className="absolute inset-0 opacity-20 pointer-events-none">
         <div className="absolute top-0 right-0 w-20 h-20 sm:w-32 sm:h-32 bg-white rounded-full blur-2xl animate-pulse" />
-        <div className="absolute bottom-0 left-0 w-16 h-16 sm:w-24 sm:h-24 bg-white rounded-full blur-xl animate-pulse"
-          style={{ animationDelay: '1s' }} />
+        <div className="absolute bottom-0 left-0 w-16 h-16 sm:w-24 sm:h-24 bg-white rounded-full blur-xl animate-pulse [animation-delay:1s]" />
       </div>
 
       <div className="relative text-center text-white">
@@ -75,6 +74,7 @@ const CTACard = memo(({ isVisible }: { isVisible: boolean }) => {
           Whether you have a project in mind or just want to say hello, I'd love to hear from you!
         </p>
         <button
+          type="button"
           onClick={handleClick}
           className="w-full bg-white/95 backdrop-blur-sm text-purple-700 py-3 sm:py-4 px-4 sm:px-6
             rounded-lg sm:rounded-xl font-bold shadow-lg text-sm sm:text-base
@@ -93,10 +93,9 @@ CTACard.displayName = 'CTACard';
 // ── Social Links ──────────────────────────────────────────────────────────────
 const SocialLinks = memo(({ isVisible }: { isVisible: boolean }) => (
   <div
-    className={`backdrop-blur-sm p-4 sm:p-6 rounded-xl sm:rounded-2xl
-      shadow-lg border border-white/40 dark:border-slate-700/40 transition-all duration-700 ease-out
+    className={`bg-(--card-bg) backdrop-blur-sm p-4 sm:p-6 rounded-xl sm:rounded-2xl
+      shadow-lg border border-white/40 dark:border-slate-700/40 transition-all duration-700 ease-out delay-400
       ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
-    style={{ background: 'var(--card-bg)', transitionDelay: '400ms' }}
   >
     <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100 mb-4 sm:mb-6 text-center">
       Find Me Online
@@ -108,11 +107,12 @@ const SocialLinks = memo(({ isVisible }: { isVisible: boolean }) => (
           href={social.href}
           target="_blank"
           rel="noopener noreferrer"
+          aria-label={social.label}
+          title={social.label}
           className={`w-10 h-10 sm:w-12 sm:h-12 bg-slate-50 dark:bg-slate-700 rounded-lg sm:rounded-xl
-            flex items-center justify-center
+            flex items-center justify-center ${SOCIAL_DELAYS[i]}
             transition-all duration-300 hover:scale-110 hover:shadow-lg ${social.color}
             ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}`}
-          style={{ transitionDelay: `${i * 100 + 600}ms` }}
         >
           <social.icon className="w-5 h-5 sm:w-6 sm:h-6 text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-colors duration-300" />
         </a>

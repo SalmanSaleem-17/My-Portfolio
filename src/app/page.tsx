@@ -15,24 +15,19 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-linear-to-br from-slate-50 via-white to-blue-50 dark:from-transparent dark:via-transparent dark:to-transparent">
 
-      {/* ── Hero — full bleed ── */}
-      <section id="home">
-        <HeroSection
-          containerVariants={containerVariants}
-          itemVariants={itemVariants}
-        />
-      </section>
+      {/* ── Hero — full bleed; id lives on HeroSection's own <section> ── */}
+      <HeroSection />
 
       <div className="container mx-auto px-6 pb-20 space-y-24">
 
-        <section id="about">
+        <section id="about" aria-label="About">
           <AboutSection
             containerVariants={containerVariants}
             itemVariants={itemVariants}
           />
         </section>
 
-        <section id="skills">
+        <section id="skills" aria-label="Skills">
           <SkillsSection
             containerVariants={containerVariants}
             itemVariants={itemVariants}
@@ -41,7 +36,7 @@ export default function HomePage() {
           />
         </section>
 
-        <section id="projects">
+        <section id="projects" aria-label="Projects">
           <ProjectsSection
             containerVariants={containerVariants}
             itemVariants={itemVariants}
@@ -49,7 +44,7 @@ export default function HomePage() {
           />
         </section>
 
-        <section id="contact">
+        <section id="contact" aria-label="Contact">
           <ContactSection
             containerVariants={containerVariants}
             itemVariants={itemVariants}

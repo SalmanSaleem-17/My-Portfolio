@@ -46,17 +46,15 @@ const SectionBadge: React.FC<SectionBadgeProps> = ({ label, title, description, 
       {/* Animated expanding lines + spinning star — identical to AboutHeader */}
       <div className="flex justify-center items-center gap-2 mb-6">
         <div
-          className={`h-1 bg-linear-to-r from-blue-500 to-purple-500 rounded-full transition-all duration-700 ease-out
+          className={`h-1 bg-linear-to-r from-blue-500 to-purple-500 rounded-full transition-all duration-700 ease-out delay-300
             ${isVisible ? 'w-16' : 'w-0'}`}
-          style={{ transitionDelay: '300ms' }}
         />
-        <div className="animate-spin" style={{ animationDuration: '15s' }}>
+        <div className="animate-spin [animation-duration:15s]">
           <Star className="w-6 h-6 text-yellow-500 fill-current" />
         </div>
         <div
-          className={`h-1 bg-linear-to-r from-purple-500 to-pink-500 rounded-full transition-all duration-700 ease-out
+          className={`h-1 bg-linear-to-r from-purple-500 to-pink-500 rounded-full transition-all duration-700 ease-out delay-500
             ${isVisible ? 'w-16' : 'w-0'}`}
-          style={{ transitionDelay: '500ms' }}
         />
       </div>
 

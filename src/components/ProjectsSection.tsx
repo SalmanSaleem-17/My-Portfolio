@@ -1,13 +1,11 @@
 'use client'
 
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
+import Link from 'next/link';
 import Image from 'next/image';
-import { motion, AnimatePresence, Variants } from 'framer-motion';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
-
-import SectionBadge   from '@/components/projects/SectionBadge';
-import ProjectHeader  from '@/components/projects/ProjectHeader';
-import ProjectDetails from '@/components/projects/ProjectDetails';
+import { motion, Variants } from 'framer-motion';
+import { ArrowRight, ArrowUpRight, ExternalLink, Zap, CheckCircle } from 'lucide-react';
+import SectionBadge from '@/components/projects/SectionBadge';
 import type { Project } from '@/components/projects/types';
 
 interface ProjectsSectionProps {
@@ -16,42 +14,170 @@ interface ProjectsSectionProps {
   projects:          Project[];
 }
 
+function getSlug(title: string) {
+  return title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+}
+
+function ProjectCard({ project, index }: { project: Project; index: number }) {
+  const slug     = getSlug(project.title);
+  const isLive   = project.status === 'Live Production';
+  const featured = index % 4 === 0 || index % 4 === 3;
+  const num      = String(index + 1).padStart(2, '0');
+
+  return (
+    <div className={`proj-${slug} group relative${featured ? ' sm:col-span-2 lg:col-span-2' : ''}`}>
+
+      {/* Ambient bloom — colour-matched to project */}
+      <div className="absolute -inset-4 rounded-3xl opacity-0 group-hover:opacity-[0.13] transition-all duration-700 [background:var(--proj-gradient)] blur-3xl -z-10 pointer-events-none" />
+
+      <motion.article
+        initial={{ opacity: 0, y: 32 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-30px' }}
+        transition={{ duration: 0.55, delay: index * 0.09, ease: [0.22, 1, 0.36, 1] }}
+        className={[
+          'relative overflow-hidden rounded-2xl h-full flex flex-col',
+          '[background:var(--card-bg)] backdrop-blur-sm',
+          'border border-slate-200/70 dark:border-slate-600/30',
+          'group-hover:border-slate-300 dark:group-hover:border-slate-700/80',
+          'shadow-sm group-hover:shadow-2xl dark:group-hover:shadow-[0_20px_56px_rgba(0,0,0,0.65)]',
+          'group-hover:-translate-y-2 transition-all duration-300 ease-out',
+        ].join(' ')}
+      >
+        {/* Gradient accent bar — top edge */}
+        <div className="absolute top-0 left-0 right-0 h-0.5 [background:var(--proj-gradient)] z-30 opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
+
+        {/* ── Visual panel ──────────────────────────────────────────── */}
+        {/* Featured cards get a wide panoramic crop; regular cards get 16:9 */}
+        <div className={[
+          'relative overflow-hidden shrink-0',
+          featured ? 'aspect-16/7' : 'aspect-video',
+        ].join(' ')}>
+
+          {/* Full-bleed screenshot */}
+          <Image
+            src={project.image}
+            alt={project.title}
+            fill
+            sizes={featured
+              ? '(max-width:640px) 100vw, (max-width:1024px) 100vw, 66vw'
+              : '(max-width:640px) 100vw, (max-width:1024px) 50vw, 33vw'}
+            className="object-cover object-top group-hover:scale-[1.04] transition-transform duration-700 ease-out"
+          />
+
+          {/* Bottom bleed — screenshot fades into card background */}
+          <div className="absolute inset-x-0 bottom-0 h-20 bg-linear-to-t from-white dark:from-slate-800 to-transparent pointer-events-none z-1" />
+
+          {/* Top scrim for badge legibility */}
+          <div className="absolute inset-x-0 top-0 h-16 bg-linear-to-b from-black/45 to-transparent pointer-events-none z-1" />
+
+          {/* Status + category badges */}
+          <div className="absolute top-3 left-3 right-3 flex items-center justify-between z-10">
+            {isLive ? (
+              <span className="inline-flex items-center gap-1.5 text-[9px] font-black uppercase tracking-[0.13em] px-2.5 py-1 rounded-full backdrop-blur-sm bg-emerald-500/20 text-emerald-200 border border-emerald-400/30">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                Live
+              </span>
+            ) : (
+              <span className="text-[9px] font-black uppercase tracking-[0.13em] px-2.5 py-1 rounded-full backdrop-blur-sm bg-black/30 text-white/60 border border-white/15">
+                {project.status}
+              </span>
+            )}
+            <span className="text-[9px] font-black uppercase tracking-[0.13em] px-2.5 py-1 rounded-full backdrop-blur-sm bg-black/30 text-white/60 border border-white/15">
+              {project.category}
+            </span>
+          </div>
+
+          {/* Hover view overlay */}
+          <div className="absolute inset-0 flex items-center justify-center z-20 bg-black/52 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-all duration-300">
+            <Link
+              href={`/projects/${slug}`}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white text-slate-900 font-black text-xs shadow-2xl hover:bg-white/95 transition-all duration-300 translate-y-3 group-hover:translate-y-0"
+            >
+              View Project <ArrowUpRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+        </div>
+
+        {/* ── Content panel ─────────────────────────────────────────── */}
+        <div className="flex flex-col flex-1 min-w-0 p-5">
+
+          {/* Title + index watermark */}
+          <div className="flex items-start justify-between gap-2 mb-1">
+            <h3 className={[
+              'font-extrabold text-slate-900 dark:text-white leading-tight',
+              featured ? 'text-lg sm:text-[1.25rem]' : 'text-[1.05rem]',
+            ].join(' ')}>
+              {project.title}
+            </h3>
+            <span className="shrink-0 font-mono text-[10px] font-bold text-slate-200 dark:text-slate-800 tabular-nums mt-0.5">
+              {num}
+            </span>
+          </div>
+
+          {/* Subtitle */}
+          <p className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 mb-3 leading-snug line-clamp-1">
+            {project.subtitle}
+          </p>
+
+          {/* Description */}
+          <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed flex-1 mb-4 line-clamp-2">
+            {project.description}
+          </p>
+
+          {/* Tech chips */}
+          <div className="flex flex-wrap gap-1.5 mb-4">
+            {project.technologies.slice(0, featured ? 5 : 4).map((tech) => (
+              <span key={tech}
+                className="text-[10px] px-2.5 py-0.5 rounded-full font-semibold bg-slate-100 dark:bg-slate-800/70 text-slate-500 dark:text-slate-400 border border-slate-200/70 dark:border-slate-700/50">
+                {tech}
+              </span>
+            ))}
+            {project.technologies.length > (featured ? 5 : 4) && (
+              <span className="text-[10px] px-2.5 py-0.5 rounded-full font-semibold bg-slate-100 dark:bg-slate-800/50 text-slate-400 dark:text-slate-600 border border-slate-200/50 dark:border-slate-700/30">
+                +{project.technologies.length - (featured ? 5 : 4)}
+              </span>
+            )}
+          </div>
+
+          {/* Footer */}
+          <div className="flex items-center justify-between pt-3.5 border-t border-slate-100 dark:border-slate-800/60">
+            <div className="flex items-center gap-1.5 text-xs font-medium text-slate-400 dark:text-slate-500">
+              {isLive
+                ? <Zap className="w-3 h-3 text-emerald-500" />
+                : <CheckCircle className="w-3 h-3 text-blue-400" />
+              }
+              {project.year}
+              <span className="opacity-30 mx-0.5">·</span>
+              {project.duration}
+            </div>
+            <div className="flex items-center gap-2">
+              {project.demoLink && (
+                <a href={project.demoLink} target="_blank" rel="noopener noreferrer"
+                  title="Live Demo"
+                  className="p-1.5 rounded-lg text-slate-400 dark:text-slate-600 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+              )}
+              <Link href={`/projects/${slug}`}
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-[11px] font-black text-white [background:var(--proj-gradient)] hover:opacity-90 hover:scale-105 transition-all duration-200 shadow-sm">
+                Case Study <ArrowRight className="w-3 h-3" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </motion.article>
+    </div>
+  );
+}
+
 const ProjectsSection: React.FC<ProjectsSectionProps> = ({
   containerVariants,
   itemVariants,
   projects,
 }) => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [direction,   setDirection]   = useState<1 | -1>(1);
-  const total  = projects.length;
-  const active = projects[activeIndex];
-
-  const go = useCallback((target: number, dir: 1 | -1) => {
-    setDirection(dir);
-    setActiveIndex(((target % total) + total) % total);
-  }, [total]);
-
-  const next = useCallback(() => go(activeIndex + 1,  1), [activeIndex, go]);
-  const prev = useCallback(() => go(activeIndex - 1, -1), [activeIndex, go]);
-
-  // Keyboard ← / →
-  useEffect(() => {
-    const h = (e: KeyboardEvent) => {
-      const tag = (e.target as HTMLElement | null)?.tagName;
-      if (tag === 'INPUT' || tag === 'TEXTAREA') return;
-      if (e.key === 'ArrowRight') next();
-      else if (e.key === 'ArrowLeft') prev();
-    };
-    window.addEventListener('keydown', h);
-    return () => window.removeEventListener('keydown', h);
-  }, [next, prev]);
-
-  // Entry / exit for the active card — 3D spring with directional x-offset
-  const cardVariants: Variants = {
-    enter:  (d: 1 | -1) => ({ opacity: 0, y: 40, scale: 0.95, x: d > 0 ?  80 : -80, rotateX: 6 }),
-    center:                  { opacity: 1, y: 0,  scale: 1,    x: 0,                rotateX: 0 },
-    exit:   (d: 1 | -1) => ({ opacity: 0, y: -20, scale: 0.95, x: d > 0 ? -80 : 80, rotateX: -6 }),
-  };
+  const liveCount      = projects.filter(p => p.status === 'Live Production').length;
+  const completedCount = projects.length - liveCount;
 
   return (
     <div className="relative w-full">
@@ -60,7 +186,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: '-80px' }}
-        className="space-y-8 lg:space-y-10"
+        className="space-y-12"
       >
         <SectionBadge
           label="Featured Projects"
@@ -69,349 +195,40 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({
           itemVariants={itemVariants}
         />
 
-        {/* ── Counter + arrow navigation ──────────────────────────────── */}
-        <motion.div variants={itemVariants} className="space-y-4">
-          <div className="flex items-end justify-between gap-4 px-1">
-            <div className="flex items-baseline gap-3 leading-none">
-              <span
-                className="font-mono font-black tabular-nums bg-gradient-to-br from-violet-600 via-fuchsia-500 to-pink-500 bg-clip-text text-transparent text-6xl md:text-8xl"
-                style={{ filter: 'drop-shadow(0 8px 24px rgba(139,92,246,0.3))' }}
-              >
-                {String(activeIndex + 1).padStart(2, '0')}
-              </span>
-              <span className="font-mono text-xl md:text-3xl text-slate-400 dark:text-slate-500 tabular-nums font-medium">
-                / {String(total).padStart(2, '0')}
-              </span>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <div className="hidden md:flex flex-col items-end leading-tight">
-                <div className="font-mono text-[11px] uppercase tracking-[0.25em] text-slate-500 dark:text-slate-400">
-                  {active?.category}
+        {/* Stats pill */}
+        <motion.div variants={itemVariants} className="flex justify-center">
+          <div className="inline-flex items-stretch rounded-2xl overflow-hidden border border-slate-200/70 dark:border-slate-800/60 bg-white/60 dark:bg-slate-900/40 backdrop-blur-sm shadow-sm">
+            {[
+              { value: projects.length, label: 'Projects' },
+              { value: liveCount,       label: 'Live' },
+              { value: completedCount,  label: 'Completed' },
+            ].map(({ value, label }, i) => (
+              <div key={label}
+                className={[
+                  'px-8 py-4 text-center',
+                  i < 2 ? 'border-r border-slate-200/70 dark:border-slate-800/60' : '',
+                ].join(' ')}>
+                <div className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tabular-nums leading-none">
+                  {value}
                 </div>
-                <div className="font-mono text-[10px] text-slate-400 dark:text-slate-500 mt-1">
-                  ← → to navigate
+                <div className="text-[10px] font-bold uppercase tracking-[0.15em] text-slate-400 dark:text-slate-500 mt-1.5">
+                  {label}
                 </div>
               </div>
-              <NavButton onClick={prev} aria-label="Previous project">
-                <ArrowLeft className="w-4 h-4" />
-              </NavButton>
-              <NavButton onClick={next} aria-label="Next project">
-                <ArrowRight className="w-4 h-4" />
-              </NavButton>
-            </div>
-          </div>
-
-          {/* Segmented progress rail */}
-          <div className="flex gap-1.5 px-1">
-            {projects.map((_, i) => {
-              const isActive  = i === activeIndex;
-              const isVisited = i < activeIndex;
-              return (
-                <button
-                  key={i}
-                  aria-label={`Jump to project ${i + 1}`}
-                  onClick={() => go(i, i >= activeIndex ? 1 : -1)}
-                  className={`flex-1 h-1 rounded-full transition-all duration-500
-                    ${isActive
-                      ? 'bg-gradient-to-r from-violet-500 via-fuchsia-500 to-pink-500 h-1.5'
-                      : isVisited
-                        ? 'bg-violet-500/40 hover:bg-violet-500/60'
-                        : 'bg-slate-200 dark:bg-slate-700/60 hover:bg-slate-300 dark:hover:bg-slate-600'}`}
-                />
-              );
-            })}
+            ))}
           </div>
         </motion.div>
 
-        {/* ── Active card with mesh backdrop ─────────────────────────── */}
-        <motion.div
-          variants={itemVariants}
-          className="relative"
-          style={{ perspective: '1600px' }}
-        >
-          <AnimatePresence mode="sync">
-            <MeshBackdrop key={active.id} project={active} />
-          </AnimatePresence>
-
-          <AnimatePresence mode="wait" custom={direction} initial={false}>
-            <motion.div
-              key={active.id}
-              custom={direction}
-              variants={cardVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{
-                type: 'spring',
-                stiffness: 180,
-                damping: 24,
-                mass: 0.9,
-                opacity: { duration: 0.3 },
-              }}
-              className="relative"
-              style={{ transformStyle: 'preserve-3d' }}
-            >
-              <ActiveCard project={active} index={activeIndex} />
-            </motion.div>
-          </AnimatePresence>
-        </motion.div>
-
-        {/* ── Filmstrip thumbnail navigator ──────────────────────────── */}
-        <motion.div variants={itemVariants}>
-          <Filmstrip
-            projects={projects}
-            activeIndex={activeIndex}
-            onSelect={(i) => go(i, i >= activeIndex ? 1 : -1)}
-          />
+        {/* Bento grid — every 4th cycle: positions 0,3 are featured (col-span-2 in 3-col) */}
+        <motion.div variants={itemVariants}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
+          {projects.map((p, i) => (
+            <ProjectCard key={p.id} project={p} index={i} />
+          ))}
         </motion.div>
       </motion.div>
     </div>
   );
 };
-
-
-// ─── Active card (IDE window chrome + rich content) ────────────────────────
-function ActiveCard({ project, index }: { project: Project; index: number }) {
-  const fileSlug = project.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-  const isLive   = project.status === 'Live Production';
-
-  return (
-    <div
-      className="relative w-full rounded-2xl overflow-hidden"
-      style={{
-        background: 'var(--card-bg-solid)',
-        boxShadow: '0 30px 80px rgba(124,58,237,0.18), 0 2px 8px rgba(0,0,0,0.08)',
-      }}
-    >
-      {/* Aurora rotating border */}
-      <div
-        aria-hidden="true"
-        className="absolute -inset-[1.5px] rounded-2xl pointer-events-none z-0"
-        style={{
-          background:
-            'conic-gradient(from var(--angle), rgba(124,58,237,0.55), rgba(236,72,153,0.55), rgba(59,130,246,0.55), rgba(124,58,237,0.55))',
-          WebkitMask:
-            'linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)',
-          WebkitMaskComposite: 'xor',
-          maskComposite: 'exclude',
-          padding: '1.5px',
-          animation: 'rotate-angle 10s linear infinite',
-        } as React.CSSProperties}
-      />
-
-      {/* ── IDE window chrome — title bar ─────────────────────────────── */}
-      <div className="relative z-20 flex items-center justify-between gap-3 px-4 sm:px-5 py-2.5
-        border-b border-violet-100 dark:border-slate-700/60
-        bg-white/70 dark:bg-slate-900/70 backdrop-blur-md">
-        {/* Traffic-light dots */}
-        <div className="flex items-center gap-1.5 shrink-0">
-          <span className="w-3 h-3 rounded-full bg-red-400/90 shadow-inner" />
-          <span className="w-3 h-3 rounded-full bg-amber-400/90 shadow-inner" />
-          <span className="w-3 h-3 rounded-full bg-emerald-400/90 shadow-inner" />
-        </div>
-
-        {/* File breadcrumb (center) */}
-        <div className="hidden sm:flex items-center gap-0 min-w-0 font-mono text-[11px] tabular-nums">
-          <span className="text-violet-500 dark:text-violet-400">~/projects/</span>
-          <span className="text-slate-500 dark:text-slate-400">{String(index + 1).padStart(2, '0')}</span>
-          <span className="text-slate-400 dark:text-slate-500">-</span>
-          <span className="text-slate-900 dark:text-slate-100 truncate font-semibold">{fileSlug}</span>
-          <span className="text-violet-500 dark:text-violet-400">.tsx</span>
-        </div>
-
-        {/* Status indicator */}
-        <div className="flex items-center gap-2 shrink-0">
-          {isLive && (
-            <span className="relative flex w-2 h-2">
-              <span className="absolute inline-flex w-full h-full rounded-full bg-emerald-400 opacity-60 animate-ping" />
-              <span className="relative inline-flex rounded-full w-2 h-2 bg-emerald-500" />
-            </span>
-          )}
-          <span className={`font-mono text-[10px] uppercase tracking-[0.25em]
-            ${isLive
-              ? 'text-emerald-600 dark:text-emerald-400'
-              : 'text-slate-500 dark:text-slate-400'}`}>
-            {isLive ? 'Live' : project.status}
-          </span>
-        </div>
-      </div>
-
-      {/* ── Main content ────────────────────────────────────────────── */}
-      <div className="relative flex flex-col lg:flex-row lg:h-170">
-        <div className="lg:w-[38%] lg:shrink-0">
-          <ProjectHeader project={project} index={index} />
-        </div>
-        <div className="hidden lg:block w-px shrink-0 self-stretch bg-violet-100 dark:bg-slate-700" />
-        <div className="flex-1 min-w-0">
-          <ProjectDetails project={project} />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-
-// ─── Filmstrip thumbnail navigator ─────────────────────────────────────────
-function Filmstrip({
-  projects,
-  activeIndex,
-  onSelect,
-}: {
-  projects: Project[];
-  activeIndex: number;
-  onSelect: (i: number) => void;
-}) {
-  return (
-    <div className="relative">
-      {/* Edge fade masks */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-y-0 left-0 w-6 sm:w-8 z-10 bg-gradient-to-r from-[var(--background,transparent)] to-transparent"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-y-0 right-0 w-6 sm:w-8 z-10 bg-gradient-to-l from-[var(--background,transparent)] to-transparent"
-      />
-
-      <div
-        className="flex gap-3 sm:gap-4 overflow-x-auto snap-x snap-mandatory pb-2 px-1"
-        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-      >
-        {projects.map((p, i) => {
-          const isActive = i === activeIndex;
-          return (
-            <motion.button
-              key={p.id}
-              onClick={() => onSelect(i)}
-              animate={{ scale: isActive ? 1.03 : 1 }}
-              whileHover={{ scale: isActive ? 1.03 : 1.02, y: -2 }}
-              transition={{ type: 'spring', stiffness: 320, damping: 24 }}
-              className={`relative shrink-0 w-44 sm:w-52 md:w-60 rounded-xl overflow-hidden snap-start
-                text-left transition-opacity duration-300
-                ${isActive ? 'opacity-100' : 'opacity-60 hover:opacity-90'}`}
-              style={{
-                boxShadow: isActive
-                  ? '0 20px 40px rgba(124,58,237,0.35)'
-                  : '0 4px 12px rgba(0,0,0,0.1)',
-              }}
-            >
-              {/* Aurora border (active only) */}
-              {isActive && (
-                <div
-                  aria-hidden="true"
-                  className="absolute -inset-[1px] rounded-xl pointer-events-none z-20"
-                  style={{
-                    background:
-                      'conic-gradient(from var(--angle), rgba(124,58,237,0.9), rgba(236,72,153,0.9), rgba(59,130,246,0.9), rgba(124,58,237,0.9))',
-                    WebkitMask:
-                      'linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)',
-                    WebkitMaskComposite: 'xor',
-                    maskComposite: 'exclude',
-                    padding: '1.5px',
-                    animation: 'rotate-angle 6s linear infinite',
-                  } as React.CSSProperties}
-                />
-              )}
-
-              {/* Image backdrop */}
-              <div className="relative aspect-[16/10] bg-slate-900 overflow-hidden">
-                <Image
-                  src={p.image}
-                  alt={p.title}
-                  fill
-                  className="object-cover transition-transform duration-500"
-                  sizes="(max-width: 640px) 176px, (max-width: 1024px) 208px, 240px"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/50 to-transparent" />
-                <div className="absolute inset-0 bg-gradient-to-br from-violet-600/10 to-transparent" />
-
-                {/* Active index badge */}
-                {isActive && (
-                  <div className="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-violet-500/90 backdrop-blur-sm">
-                    <span className="font-mono text-[10px] font-bold text-white tracking-widest">
-                      NOW PLAYING
-                    </span>
-                  </div>
-                )}
-              </div>
-
-              {/* Meta */}
-              <div className="relative px-3 py-2.5 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-t border-violet-100/50 dark:border-slate-700/60">
-                <div className="flex items-baseline gap-2 mb-0.5">
-                  <span className="font-mono text-[10px] text-violet-500 dark:text-violet-400 tabular-nums">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400 truncate">
-                    {p.category}
-                  </span>
-                </div>
-                <div className="font-bold text-sm text-gray-900 dark:text-slate-100 truncate leading-tight">
-                  {p.title}
-                </div>
-              </div>
-            </motion.button>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
-
-
-// ─── Mesh backdrop ─────────────────────────────────────────────────────────
-// 2 static blobs (no float animations) at blur-2xl — was 3 floating blobs at
-// blur-3xl, which forced expensive paint every frame. The starfield + aurora
-// border already give the section atmosphere.
-function MeshBackdrop({ project }: { project: Project }) {
-  const primary = project.colors?.primary ?? '#7c3aed';
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.6 }}
-      aria-hidden="true"
-      className="absolute inset-0 pointer-events-none overflow-hidden -z-10"
-    >
-      <div
-        className="absolute top-10 left-1/4 w-96 h-96 rounded-full blur-2xl"
-        style={{ background: `${primary}3a` }}
-      />
-      <div
-        className="absolute bottom-10 right-1/4 w-96 h-96 rounded-full blur-2xl"
-        style={{ background: 'rgba(236,72,153,0.22)' }}
-      />
-    </motion.div>
-  );
-}
-
-
-// ─── Circular navigation button ────────────────────────────────────────────
-function NavButton({
-  children,
-  onClick,
-  ...rest
-}: React.ButtonHTMLAttributes<HTMLButtonElement>) {
-  return (
-    <button
-      onClick={onClick}
-      {...rest}
-      className="group relative w-11 h-11 rounded-full grid place-items-center
-        bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm
-        border border-violet-200/60 dark:border-slate-700/60
-        text-violet-600 dark:text-violet-300
-        hover:text-white hover:border-transparent
-        transition-colors duration-200
-        active:scale-95"
-    >
-      <span
-        aria-hidden="true"
-        className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-gradient-to-br from-violet-600 to-fuchsia-600"
-      />
-      <span className="relative">{children}</span>
-    </button>
-  );
-}
 
 export default ProjectsSection;

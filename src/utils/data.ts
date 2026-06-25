@@ -2,15 +2,15 @@
 export const projects = [
   {
     id: 1,
-    title: 'Goldify',
+    title: 'Goldify Pro',
     subtitle: 'Production-Grade FinTech Platform for Real-Time Gold Pricing & Advanced Valuation',
     description: 'A scalable full-stack FinTech platform delivering real-time gold pricing, multi-karat valuation logic, unit & currency conversions, and interactive analytics for jewelers, traders, and investors.',
-    longDescription: 'Goldify is a production-ready full-stack FinTech application engineered to solve complex gold valuation workflows. The platform integrates third-party gold price APIs, real-time exchange rates, and custom-built purity algorithms (10K–24K) to provide instant and accurate gold calculations. Built with a modular backend architecture and optimized frontend performance, Goldify ensures precision, scalability, and a seamless cross-device experience for professionals in the precious metals industry.',
+    longDescription: 'Goldify Pro is a production-ready full-stack FinTech application engineered to solve complex gold valuation workflows. The platform integrates third-party gold price APIs, real-time exchange rates, and custom-built purity algorithms (10K–24K) to provide instant and accurate gold calculations. Built with a modular backend architecture and optimized frontend performance, Goldify Pro ensures precision, scalability, and a seamless cross-device experience for professionals in the precious metals industry.',
 
     // Basic Info
     platform: 'Web Application (Full-Stack)',
     deviceTargets: ['Desktop', 'Tablet', 'Mobile'],
-    image: '/goldify-icon.png',
+    image: 'https://res.cloudinary.com/dw6svuzvy/image/upload/v1782426247/goldify_pro_ulswtd.jpg',
     screenshots: [],
     mockupType: 'laptop',
 
@@ -84,15 +84,9 @@ export const projects = [
     // Basic Info
     platform: 'Web Application',
     deviceTargets: ['Desktop', 'Tablet', 'Mobile'],
-    image: '/scale-recipe-icon.png',
+    image: 'https://res.cloudinary.com/dw6svuzvy/image/upload/v1782426247/scaleRecipe_qzhedf.jpg',
     screenshots: [],
     mockupType: 'laptop',
-
-    imageConfig: {
-      shape:   'square' as const,
-      bgColor: '#FEF7ED',
-      padding: '14%',
-    },
 
     // Links & Status
     link:     'https://www.scale-recipe.com',
@@ -164,15 +158,9 @@ export const projects = [
     // Basic Info
     platform: 'Web Application',
     deviceTargets: ['Desktop', 'Tablet', 'Mobile'],
-    image: '/smart-unit-converters-icon.png',
+    image: 'https://res.cloudinary.com/dw6svuzvy/image/upload/v1782426247/premium_converters_svjshq.jpg',
     screenshots: [],
     mockupType: 'laptop',
-
-    imageConfig: {
-      shape:   'square' as const,
-      bgColor: '#F0F9FF',
-      padding: '14%',
-    },
 
     // Links & Status
     link:     'https://www.smart-unit-converters.com',
@@ -236,6 +224,80 @@ export const projects = [
   },
   {
     id: 4,
+    title: 'GoldPrice Converter',
+    subtitle: 'Live Precious Metals Tracker & Smart Conversion Hub for 100+ Countries',
+    description: 'A professional-grade precious metals platform delivering real-time gold, silver, platinum, and palladium spot prices across 100+ countries — with multi-unit conversions, interactive historical charts, investment analytics, and a built-in Zakat calculator. Free, no sign-up.',
+    longDescription: 'GoldPrice Converter is a free, professional-grade web platform for real-time precious metals tracking and in-depth analysis. It provides live spot prices for gold, silver, platinum, and palladium across 100+ countries with live exchange rates, interactive candlestick charts spanning back to 1980, a powerful converter supporting 20+ weight units and all major karats (10K–24K), a backtested investment analyzer for any custom date range, and a built-in Zakat calculator. Trusted by millions of users worldwide, the platform is built with zero account requirements, no ads, and no paywalls.',
+
+    // Basic Info
+    platform: 'Web Application',
+    deviceTargets: ['Desktop', 'Tablet', 'Mobile'],
+    image: 'https://res.cloudinary.com/dw6svuzvy/image/upload/v1782426247/GoldPrice_Converter_zixiku.jpg',
+    screenshots: [],
+    mockupType: 'laptop',
+
+    // Links & Status
+    link:     'http://goldpriceconverter.com/',
+    demoLink: 'http://goldpriceconverter.com/',
+    category: 'FinTech',
+    status:   'Live Production',
+    year:     '2025',
+    duration: '2 months',
+
+    // Tech Stack
+    technologies: [
+      'React.js', 'Next.js', 'TypeScript', 'Tailwind CSS',
+      'Chart.js', 'ExchangeRate-API', 'Live Metals Price APIs',
+      'Multi-Currency Engine', 'Server-Side Rendering', 'Vercel Deployment',
+    ],
+
+    // Core Features
+    features: [
+      { icon: '📊', title: 'Live Metals Tracker',     description: 'Real-time spot prices for gold, silver, platinum, and palladium refreshed from global markets' },
+      { icon: '🌍', title: '100+ Country Prices',      description: 'Live gold prices converted into local currencies across more than 100 countries' },
+      { icon: '📈', title: 'Interactive Charts',       description: 'Candlestick and line charts with time ranges from 1D to MAX, spanning history back to 1980' },
+      { icon: '⚖️', title: '20+ Unit Converter',       description: 'Convert between grams, tola, ounce, kilogram, and 20+ other weight units instantly' },
+      { icon: '💎', title: 'Multi-Karat Calculator',   description: 'Support for 10K through 24K with live purity-adjusted pricing per karat' },
+      { icon: '📉', title: 'Investment Analyzer',      description: 'Backtest any gold investment over a custom date range to analyze historical returns and gains' },
+      { icon: '🕌', title: 'Zakat Calculator',         description: 'Built-in Islamic Zakat calculator using live nisab thresholds and current gold prices' },
+      { icon: '🆓', title: 'Free & No Sign-Up',        description: 'Fully free professional toolset with no registration, no ads, and no paywalls' },
+    ],
+
+    // Problem & Solution
+    problemStatement: 'Investors, traders, and jewelers need accurate real-time precious metals data across multiple countries, units, and karats — but most tools are fragmented, ad-heavy, or require paid subscriptions.',
+    solution: 'GoldPrice Converter consolidates live spot prices, multi-unit conversion, historical chart analysis, investment backtesting, and Zakat calculation into a single free platform — covering 100+ countries with live exchange rates and zero barriers to access.',
+
+    // Achievements
+    achievements: [
+      'Trusted by millions of users worldwide',
+      'Real-time precious metals data across 100+ countries',
+      'Interactive price history charts spanning back to 1980',
+      '20+ weight unit conversions with full multi-karat support',
+      'Investment analyzer with custom date range backtesting',
+      'Zero sign-up, zero ads — fully free professional toolset',
+    ],
+
+    // Architecture Overview
+    architecture: {
+      frontend:       'React with Next.js for SSR and SEO-optimized metals pricing pages',
+      backend:        'Next.js API routes for live metals aggregation and exchange rate normalization',
+      database:       'Browser-side caching for performance — no server-side user data stored',
+      authentication: 'No accounts required — fully anonymous, privacy-first sessions',
+      deployment:     'Vercel edge deployment with global CDN distribution',
+      apiIntegration: 'ExchangeRate-API for live multi-currency rates + metals spot price feeds',
+    },
+
+    // Color Theme — amber/gold distinct from Goldify
+    colors: {
+      primary:    '#FBBF24',
+      secondary:  '#1C1917',
+      accent:     '#F59E0B',
+      background: '#FFFBEB',
+      gradient:   'linear-gradient(135deg, #B45309 0%, #FBBF24 100%)',
+    },
+  },
+  {
+    id: 5,
     title: 'Jewel Heaven',
     subtitle: 'Premium E-commerce Jewelry Platform',
     description: 'A comprehensive digital marketplace revolutionizing the jewelry shopping experience with real-time consultations, custom design capabilities, and seamless user experience.',
@@ -244,15 +306,9 @@ export const projects = [
     // Basic Info
     platform: 'Web Application',
     deviceTargets: ['Desktop', 'Tablet', 'Mobile'],
-    image: '/heroImage.jpg',
+    image: 'https://res.cloudinary.com/dw6svuzvy/image/upload/v1782426248/Jewel_Heaven_x9b2jv.png',
     screenshots: [],
     mockupType: 'laptop',
-
-    imageConfig: {
-      shape:   'square' as const,
-      bgColor: '#1A1A1A',
-      padding: '14%',
-    },
 
     // Links & Status
     link:     'https://github.com/SalmanSaleem-17/Jewel-Heaven',

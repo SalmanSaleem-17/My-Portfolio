@@ -1,5 +1,5 @@
 import { Mail, Phone, Clock, MapPin, Heart, Sparkles } from 'lucide-react';
-import { FaWhatsapp, FaGithub, FaDiscord, FaTelegram, FaLinkedin } from 'react-icons/fa6';
+import { FaWhatsapp, FaGithub, FaDiscord, FaTelegram, FaLinkedin, FaInstagram } from 'react-icons/fa6';
 
 export interface ContactMethod {
   icon:        any;
@@ -22,17 +22,27 @@ export interface SocialLink {
   icon:  any;
   href:  string;
   color: string;
+  label: string;
 }
 
 export const CONTACT_METHODS: ContactMethod[] = [
   {
     icon:        Mail,
     label:       'Email',
-    value:       'shanisaleem17@gmail.com',
-    href:        'mailto:shanisaleem17@gmail.com',
+    value:       'contact@salmansaleem.dev',
+    href:        'mailto:contact@salmansaleem.dev',
     color:       'bg-gradient-to-br from-red-500 to-pink-500',
     bgColor:     'bg-gradient-to-br from-red-50/80 to-pink-50/80',
     description: 'Drop me a line anytime',
+  },
+  {
+    icon:        Mail,
+    label:       'Gmail',
+    value:       'salmansaleem1771@gmail.com',
+    href:        'mailto:salmansaleem1771@gmail.com',
+    color:       'bg-gradient-to-br from-orange-500 to-red-500',
+    bgColor:     'bg-gradient-to-br from-orange-50/80 to-red-50/80',
+    description: 'Reach me on Gmail',
   },
   {
     icon:        FaLinkedin,
@@ -73,7 +83,8 @@ export const QUICK_STATS: QuickStat[] = [
 ];
 
 export const SOCIAL_LINKS: SocialLink[] = [
-  { icon: FaGithub,   href: 'https://github.com/salmansaleem-17',                              color: 'hover:bg-slate-200'  },
-  { icon: FaDiscord,  href: '#',                                                                color: 'hover:bg-indigo-100' },
-  { icon: FaTelegram, href: '#',                                                                color: 'hover:bg-blue-100'   },
+  { icon: FaGithub,    href: 'https://github.com/salmansaleem-17',           color: 'hover:bg-slate-200',  label: 'GitHub'    },
+  { icon: FaInstagram, href: 'https://www.instagram.com/salmansaleem.17',    color: 'hover:bg-pink-100',   label: 'Instagram' },
+  { icon: FaDiscord,   href: '#',                                             color: 'hover:bg-indigo-100', label: 'Discord'   },
+  { icon: FaTelegram,  href: '#',                                             color: 'hover:bg-blue-100',   label: 'Telegram'  },
 ];

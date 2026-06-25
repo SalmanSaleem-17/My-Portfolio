@@ -7,8 +7,7 @@ const EducationCard = memo(() => (
   <div
     className="relative bg-linear-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-slate-800 dark:via-slate-800 dark:to-slate-800 p-8 rounded-3xl
       border border-blue-200/50 dark:border-blue-700/50 shadow-xl overflow-hidden
-      transition-shadow duration-500 ease-out cursor-pointer group"
-    style={{ willChange: 'transform' }}
+      transition-shadow duration-500 ease-out cursor-pointer group will-change-transform"
     onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.02)')}
     onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')}
   >
@@ -18,7 +17,7 @@ const EducationCard = memo(() => (
 
     {/* Header */}
     <div className="flex items-center gap-4 mb-6 relative z-10">
-      <div className="animate-bounce p-3 bg-white dark:bg-slate-700 rounded-2xl shadow-lg" style={{ animationDuration: '4s' }}>
+      <div className="animate-bounce [animation-duration:4s] p-3 bg-white dark:bg-slate-700 rounded-2xl shadow-lg">
         <GraduationCap className="w-8 h-8 text-blue-600" />
       </div>
       <h3 className="font-bold text-xl text-gray-900 dark:text-slate-100 flex items-center gap-2 group-hover:text-blue-800 dark:group-hover:text-blue-300 transition-colors duration-300">

@@ -30,31 +30,24 @@ const ProjectHeader: React.FC<{ project: Project; index: number }> = ({ project,
     portrait:  'w-[55%] sm:w-[50%] lg:w-[60%] mx-auto',
   };
 
-  const ratioMap: Record<string, string> = {
-    landscape: '16 / 10',
-    square:    '1 / 1',
-    portrait:  '3 / 4',
+  const ratioClass: Record<string, string> = {
+    landscape: 'aspect-[16/10]',
+    square:    'aspect-square',
+    portrait:  'aspect-[3/4]',
   };
 
   return (
-    <div
-      className="relative flex flex-col overflow-hidden h-full"
-      style={{ background: 'var(--project-header-bg)' }}
-    >
+    <div className="relative flex flex-col overflow-hidden h-full [background:var(--project-header-bg)]">
       {/* Ambient glow */}
       <div
-        className="absolute top-0 inset-x-0 h-56 pointer-events-none"
+        className="absolute top-0 inset-x-0 h-56 pointer-events-none proj-header-glow"
         aria-hidden="true"
-        style={{
-          background: 'radial-gradient(ellipse 80% 55% at 50% -10%, rgba(167,139,250,0.18) 0%, transparent 100%)',
-        }}
       />
 
       {/* Watermark */}
       <span
-        className="absolute bottom-3 right-4 text-[6.5rem] font-black leading-none select-none pointer-events-none"
+        className="absolute bottom-3 right-4 text-[6.5rem] font-black leading-none select-none pointer-events-none text-violet-700 opacity-[0.05]"
         aria-hidden="true"
-        style={{ color: '#7c3aed', opacity: 0.05 }}
       >
         {String(index + 1).padStart(2, '0')}
       </span>
@@ -87,13 +80,11 @@ const ProjectHeader: React.FC<{ project: Project; index: number }> = ({ project,
         <div className="flex-1 flex items-center justify-center min-h-0">
           <div className={`${containerClass[shape]} shrink-0`}>
             <div
-              className="relative w-full rounded-2xl overflow-hidden"
+              className={`relative w-full rounded-2xl overflow-hidden proj-img-shadow ${ratioClass[shape]} [background:var(--img-bg)] p-(--img-pad)`}
               style={{
-                aspectRatio: ratioMap[shape],
-                background:  project.imageConfig?.bgColor ?? 'transparent',
-                padding:     project.imageConfig?.padding  ?? '0px',
-                boxShadow:   '0 12px 36px rgba(124,58,237,0.14), 0 0 0 1px rgba(124,58,237,0.09)',
-              }}
+                '--img-bg':  project.imageConfig?.bgColor ?? 'transparent',
+                '--img-pad': project.imageConfig?.padding  ?? '0px',
+              } as React.CSSProperties}
             >
               <Image
                 src={project.image}
@@ -104,10 +95,7 @@ const ProjectHeader: React.FC<{ project: Project; index: number }> = ({ project,
                 sizes="(max-width:640px) 60vw, (max-width:1024px) 50vw, 25vw"
               />
               {/* Violet wash */}
-              <div
-                className="absolute inset-0 pointer-events-none rounded-2xl"
-                style={{ background: 'linear-gradient(130deg, rgba(124,58,237,0.06) 0%, transparent 55%)' }}
-              />
+              <div className="absolute inset-0 pointer-events-none rounded-2xl proj-img-wash" />
             </div>
           </div>
         </div>

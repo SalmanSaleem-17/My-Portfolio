@@ -22,13 +22,10 @@ export const SectionLabel: React.FC<{
 
 const ProjectDetails: React.FC<{ project: Project }> = ({ project }) => {
   return (
-    <div className="flex flex-col overflow-hidden h-full" style={{ background: 'var(--project-details-bg)' }}>
+    <div className="flex flex-col overflow-hidden h-full [background:var(--project-details-bg)]">
 
       {/* ── Scrollable body ── */}
-      <div
-        className="flex-1 min-h-0 overflow-y-scroll px-6 py-6 lg:px-8 lg:py-7 xl:px-10 xl:py-8 space-y-7"
-        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch' }}
-      >
+      <div className="flex-1 min-h-0 overflow-y-scroll px-6 py-6 lg:px-8 lg:py-7 xl:px-10 xl:py-8 space-y-7 no-scrollbar">
         {/* Overview — left violet accent bar */}
         <p
           className="text-[13.5px] text-gray-600 dark:text-slate-300 leading-[1.78] pl-4 border-l-2 border-violet-300 dark:border-violet-500"
@@ -85,10 +82,7 @@ const ProjectDetails: React.FC<{ project: Project }> = ({ project }) => {
       </div>
 
       {/* Scroll fade */}
-      <div
-        className="shrink-0 h-7 pointer-events-none -mt-7"
-        style={{ background: 'var(--scroll-fade)' }}
-      />
+      <div className="shrink-0 h-7 pointer-events-none -mt-7 [background:var(--scroll-fade)]" />
 
       {/* ── Sticky CTA ── */}
       <div className="shrink-0 px-6 pb-5 pt-3 lg:px-8 lg:pb-6 border-t border-gray-100 dark:border-slate-700">

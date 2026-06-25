@@ -55,4 +55,5 @@ export interface Project {
     version: string;
   };
   roadmap?: string[];
+  architecture?: Record<string, string>;
 }
