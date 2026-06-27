@@ -71,8 +71,8 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           {/* Top scrim for badge legibility */}
           <div className="absolute inset-x-0 top-0 h-16 bg-linear-to-b from-black/45 to-transparent pointer-events-none z-1" />
 
-          {/* Status + category badges */}
-          <div className="absolute top-3 left-3 right-3 flex items-center justify-between z-10">
+          {/* Status badge — top-left */}
+          <div className="absolute top-3 left-3 z-10">
             {isLive ? (
               <span className="inline-flex items-center gap-1.5 text-[9px] font-black uppercase tracking-[0.13em] px-2.5 py-1 rounded-full backdrop-blur-sm bg-emerald-500/20 text-emerald-200 border border-emerald-400/30">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
@@ -83,20 +83,15 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                 {project.status}
               </span>
             )}
-            <span className="text-[9px] font-black uppercase tracking-[0.13em] px-2.5 py-1 rounded-full backdrop-blur-sm bg-black/30 text-white/60 border border-white/15">
-              {project.category}
-            </span>
           </div>
 
-          {/* Hover view overlay */}
-          <div className="absolute inset-0 flex items-center justify-center z-20 bg-black/52 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-all duration-300">
-            <Link
-              href={`/projects/${slug}`}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white text-slate-900 font-black text-xs shadow-2xl hover:bg-white/95 transition-all duration-300 translate-y-3 group-hover:translate-y-0"
-            >
-              View Project <ArrowUpRight className="w-3.5 h-3.5" />
-            </Link>
-          </div>
+          {/* View button — top-right, appears on hover */}
+          <Link
+            href={`/projects/${slug}`}
+            className="absolute top-3 right-3 z-10 opacity-0 group-hover:opacity-100 translate-x-1 group-hover:translate-x-0 transition-all duration-300 inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/95 text-slate-900 font-black text-[9px] shadow-md"
+          >
+            View <ArrowUpRight className="w-3 h-3" />
+          </Link>
         </div>
 
         {/* ── Content panel ─────────────────────────────────────────── */}
@@ -180,7 +175,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({
   const completedCount = projects.length - liveCount;
 
   return (
-    <div className="relative w-full">
+    <div className="relative w-full max-w-7xl mx-auto">
       <motion.div
         variants={containerVariants}
         initial="hidden"
