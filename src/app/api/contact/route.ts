@@ -23,6 +23,83 @@ const escapeHtml = (s: string) =>
     ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c] as string),
   )
 
+// Cardless, editorial email-client-safe HTML (tables + inline styles) — a clean
+// full-width surface, avatar with the sender's initial, and the message as an
+// accent-bar blockquote instead of a boxed card.
+function contactEmailHtml(p: { name: string; email: string; subject: string; message: string }) {
+  const name = escapeHtml(p.name)
+  const email = escapeHtml(p.email)
+  const subject = escapeHtml(p.subject)
+  const message = escapeHtml(p.message).replace(/\n/g, '<br>')
+  const firstName = name.split(' ')[0] || 'them'
+  const initial = escapeHtml((p.name.trim()[0] || '?').toUpperCase())
+  const replySubject = encodeURIComponent(`Re: ${p.subject || 'Your message'}`)
+  const kicker =
+    'font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#7c3aed;'
+  const rule = 'height:1px;line-height:1px;font-size:1px;background:#eef2f7;'
+
+  return `<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#ffffff;-webkit-font-smoothing:antialiased;">
+  <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;">New message from ${name}${p.subject ? ' — ' + subject : ''}</div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#ffffff;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+    <tr><td align="center">
+      <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="width:100%;max-width:600px;">
+
+        <!-- accent hairline -->
+        <tr><td style="height:5px;line-height:5px;font-size:5px;background:linear-gradient(90deg,#7c3aed 0%,#6d28d9 50%,#4f46e5 100%);">&nbsp;</td></tr>
+
+        <!-- header: avatar + name -->
+        <tr><td style="padding:46px 44px 0;">
+          <table role="presentation" cellpadding="0" cellspacing="0"><tr>
+            <td valign="top" style="width:56px;">
+              <div style="width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#4f46e5);color:#ffffff;font-size:23px;font-weight:800;text-align:center;line-height:54px;">${initial}</div>
+            </td>
+            <td valign="middle" style="padding-left:18px;">
+              <div style="${kicker}">New Message</div>
+              <div style="font-size:26px;font-weight:800;color:#0f172a;line-height:1.15;margin-top:5px;">${name}</div>
+            </td>
+          </tr></table>
+        </td></tr>
+
+        <!-- meta: email + subject -->
+        <tr><td style="padding:16px 44px 0;font-size:15px;">
+          <a href="mailto:${email}" style="color:#7c3aed;font-weight:600;text-decoration:none;">${email}</a>${
+            subject
+              ? `<span style="color:#cbd5e1;padding:0 10px;">&bull;</span><span style="color:#475569;">${subject}</span>`
+              : ''
+          }
+        </td></tr>
+
+        <!-- divider -->
+        <tr><td style="padding:30px 44px 0;"><div style="${rule}">&nbsp;</div></td></tr>
+
+        <!-- message as blockquote -->
+        <tr><td style="padding:30px 44px 0;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#94a3b8;margin-bottom:16px;">Message</div>
+          <div style="border-left:3px solid #7c3aed;padding-left:22px;font-size:17px;line-height:1.8;color:#1e293b;">${message}</div>
+        </td></tr>
+
+        <!-- reply button -->
+        <tr><td style="padding:38px 44px 0;">
+          <a href="mailto:${email}?subject=${replySubject}" style="display:inline-block;background:#7c3aed;color:#ffffff;font-size:15px;font-weight:600;text-decoration:none;padding:14px 30px;border-radius:10px;">Reply to ${firstName} &rarr;</a>
+        </td></tr>
+
+        <!-- footer -->
+        <tr><td style="padding:40px 44px 48px;">
+          <div style="${rule}margin-bottom:22px;">&nbsp;</div>
+          <div style="color:#94a3b8;font-size:12px;line-height:1.7;">
+            Reply directly to this email to respond to ${firstName}.<br>
+            Sent from your portfolio contact form &middot; <a href="https://salmansaleem.dev" style="color:#7c3aed;text-decoration:none;">salmansaleem.dev</a>
+          </div>
+        </td></tr>
+
+      </table>
+    </td></tr>
+  </table>
+</body></html>`
+}
+
 export async function POST(req: Request) {
   try {
     if (!process.env.RESEND_API_KEY) {
@@ -81,18 +158,7 @@ export async function POST(req: Request) {
       replyTo: email,
       subject: cleanSubject,
       text: `New message from your portfolio contact form\n\nName: ${name}\nEmail: ${email}\nSubject: ${subject || '(none)'}\n\n${message}`,
-      html: `
-        <div style="font-family:system-ui,Segoe UI,Arial,sans-serif;max-width:560px;margin:auto">
-          <h2 style="margin:0 0 4px">📬 New portfolio message</h2>
-          <p style="color:#64748b;margin:0 0 16px">via salmansaleem.dev contact form</p>
-          <table style="width:100%;border-collapse:collapse;font-size:14px">
-            <tr><td style="padding:6px 0;color:#64748b;width:90px">Name</td><td style="padding:6px 0"><strong>${escapeHtml(name)}</strong></td></tr>
-            <tr><td style="padding:6px 0;color:#64748b">Email</td><td style="padding:6px 0"><a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></td></tr>
-            <tr><td style="padding:6px 0;color:#64748b">Subject</td><td style="padding:6px 0">${escapeHtml(subject) || '<em>(none)</em>'}</td></tr>
-          </table>
-          <div style="margin-top:16px;padding:16px;background:#f8fafc;border-radius:12px;white-space:pre-wrap;font-size:15px;line-height:1.6;color:#0f172a">${escapeHtml(message)}</div>
-        </div>
-      `,
+      html: contactEmailHtml({ name, email, subject, message }),
     })
 
     if (error) {

@@ -36,6 +36,7 @@ export const SITE = {
   sameAs: [
     'https://github.com/SalmanSaleem-17',
     'https://www.linkedin.com/in/muhammad-salman-saleem-8a9a96266',
+    'https://www.upwork.com/freelancers/salmansaleem17',
     'https://x.com/salmansaleem_17',
     'https://stackoverflow.com/users/32903478/muhammad-salman-saleem',
     'https://dev.to/salmansaleem17',

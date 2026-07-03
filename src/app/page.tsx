@@ -6,12 +6,18 @@ import { skills } from "@/utils/skillsData";
 import { containerVariants, itemVariants, skillVariants } from "@/utils/animations";
 import { homePageGraph } from "@/utils/seo";
 
-import JsonLd          from "@/components/JsonLd";
-import HeroSection     from "@/components/HeroSection";
-import AboutSection    from "@/components/AboutSection";
-import SkillsSection   from "@/components/SkillsSection";
-import ProjectsSection from "@/components/ProjectsSection";
-import ContactSection  from "@/components/ContactSection";
+import JsonLd            from "@/components/JsonLd";
+import HeroSection       from "@/components/HeroSection";
+import StatsSection      from "@/components/StatsSection";
+import AboutSection      from "@/components/AboutSection";
+import ServicesSection   from "@/components/ServicesSection";
+import SkillsSection     from "@/components/SkillsSection";
+import TimelineSection   from "@/components/TimelineSection";
+import FeaturedCaseStudy from "@/components/FeaturedCaseStudy";
+import ProjectsSection   from "@/components/ProjectsSection";
+import GithubSection     from "@/components/GithubSection";
+import FaqSection        from "@/components/FaqSection";
+import ContactSection    from "@/components/ContactSection";
 
 export default function HomePage() {
   return (
@@ -32,6 +38,10 @@ export default function HomePage() {
           />
         </section>
 
+        <section id="services" aria-label="Services">
+          <ServicesSection />
+        </section>
+
         <section id="skills" aria-label="Skills">
           <SkillsSection
             containerVariants={containerVariants}
@@ -41,12 +51,30 @@ export default function HomePage() {
           />
         </section>
 
-        <section id="projects" aria-label="Projects">
+        <section id="experience" aria-label="Experience and Education">
+          <TimelineSection />
+        </section>
+
+        {/* ── Impact stats — credibility lead-in right before the work ── */}
+        <section aria-label="Impact by the numbers">
+          <StatsSection />
+        </section>
+
+        <section id="projects" aria-label="Projects" className="space-y-16">
+          <FeaturedCaseStudy />
           <ProjectsSection
             containerVariants={containerVariants}
             itemVariants={itemVariants}
             projects={projects}
           />
+        </section>
+
+        <section id="github" aria-label="Open Source">
+          <GithubSection />
+        </section>
+
+        <section id="faq" aria-label="Frequently Asked Questions">
+          <FaqSection />
         </section>
 
         <section id="contact" aria-label="Contact">
