@@ -79,6 +79,7 @@ export function personSchema() {
     name: SITE.legalName,
     alternateName: SITE.shortName,
     url: SITE.url,
+    mainEntityOfPage: SITE.url,
     image: {
       '@type': 'ImageObject',
       url: SITE.image,
@@ -86,6 +87,8 @@ export function personSchema() {
     },
     jobTitle: SITE.jobTitle,
     description: SITE.description,
+    disambiguatingDescription:
+      'MERN-stack web developer specializing in React.js and Next.js, based in Lahore, Pakistan.',
     email: `mailto:${SITE.email}`,
     telephone: SITE.telephone,
     gender: 'Male',
@@ -175,6 +178,12 @@ export function homePageGraph() {
         isPartOf: { '@id': WEBSITE_ID },
         about: { '@id': PERSON_ID },
         mainEntity: { '@id': PERSON_ID },
+        primaryImageOfPage: { '@type': 'ImageObject', url: SITE.image },
+        // Answer-engine / voice: which parts are worth reading aloud / extracting.
+        speakable: {
+          '@type': 'SpeakableSpecification',
+          cssSelector: ['h1', 'h2'],
+        },
       },
       personSchema(),
       organizationSchema(),

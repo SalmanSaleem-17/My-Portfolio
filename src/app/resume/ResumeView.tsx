@@ -29,7 +29,7 @@ const EXPERIENCE_POINTS = [
   'Shipped responsive, accessible UIs using React, Next.js 15, TypeScript, and Tailwind CSS',
 ];
 
-const SKILL_CATEGORIES = ['Frontend', 'Backend', 'Cloud & DevOps', 'Tools'] as const;
+const SKILL_CATEGORIES = ['Frontend', 'Backend', 'Mobile', 'Cloud & DevOps', 'Analytics & SEO', 'Tools', 'AI Tools'] as const;
 
 const BAR: Record<string, { bg: string; label: string; width: string }> = {
   Expert:       { bg: 'bg-emerald-500', label: 'text-emerald-600 dark:text-emerald-400', width: 'w-[95%]' },

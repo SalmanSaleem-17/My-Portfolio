@@ -130,6 +130,35 @@ export async function POST(req: Request) {
       return NextResponse.json({ ok: true })
     }
 
+    // 3. Cloudflare Turnstile — verify the challenge token server-side (only when
+    //    a secret is configured, so local/dev without keys still works).
+    if (process.env.TURNSTILE_SECRET_KEY) {
+      const token = String(body.turnstileToken ?? '')
+      if (!token) {
+        return NextResponse.json({ error: 'Please complete the verification.' }, { status: 400 })
+      }
+      const verify = await fetch(
+        'https://challenges.cloudflare.com/turnstile/v0/siteverify',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams({
+            secret: process.env.TURNSTILE_SECRET_KEY,
+            response: token,
+          }),
+        },
+      )
+        .then((r) => r.json())
+        .catch(() => null)
+
+      if (!verify?.success) {
+        return NextResponse.json(
+          { error: 'Verification failed. Please try again.' },
+          { status: 400 },
+        )
+      }
+    }
+
     // ── Validation ──
     if (!name || name.length > 100) {
       return NextResponse.json({ error: 'Please enter a valid name.' }, { status: 400 })

@@ -1,19 +1,26 @@
 'use client'
 import { useState, useEffect, useCallback } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
-import { Home, User, Code, Briefcase, Mail, Github, Linkedin, Menu, X, Sun, Moon } from 'lucide-react'
+import { Home, User, Layers, Code, GraduationCap, Briefcase, Github, HelpCircle, Mail, Linkedin, Menu, X, Sun, Moon } from 'lucide-react'
 import Image from 'next/image'
 import { useTheme } from '@/context/ThemeContext'
 
 const navLinks = [
-  { id: 'home',     label: 'Home',     icon: Home },
-  { id: 'about',    label: 'About',    icon: User },
-  { id: 'skills',   label: 'Skills',   icon: Code },
-  { id: 'projects', label: 'Projects', icon: Briefcase },
-  { id: 'contact',  label: 'Contact',  icon: Mail }
+  { id: 'home',       label: 'Home',       icon: Home },
+  { id: 'about',      label: 'About',      icon: User },
+  { id: 'services',   label: 'Services',   icon: Layers },
+  { id: 'skills',     label: 'Skills',     icon: Code },
+  { id: 'experience', label: 'Experience', icon: GraduationCap },
+  { id: 'projects',   label: 'Projects',   icon: Briefcase },
+  { id: 'github',     label: 'GitHub',     icon: Github },
+  { id: 'faq',        label: 'FAQ',        icon: HelpCircle },
+  { id: 'contact',    label: 'Contact',    icon: Mail },
 ]
 
-const MOBILE_NAV_DELAYS = ['delay-0', 'delay-[50ms]', 'delay-100', 'delay-150', 'delay-200'] as const;
+const MOBILE_NAV_DELAYS = [
+  'delay-0', 'delay-[50ms]', 'delay-100', 'delay-150', 'delay-200',
+  'delay-[250ms]', 'delay-300', 'delay-[350ms]', 'delay-[400ms]',
+] as const;
 
 interface Section {
   id: string;
@@ -128,8 +135,8 @@ export default function Navbar() {
             </div>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-3 xl:space-x-8">
-              <ul className="flex items-center space-x-2">
+            <div className="hidden md:flex items-center space-x-2 xl:space-x-5">
+              <ul className="flex items-center space-x-0.5 lg:space-x-1">
                 {navLinks.map((link) => {
                   const Icon = link.icon
                   const isActive = activeSection === link.id
@@ -138,19 +145,21 @@ export default function Navbar() {
                       <button
                         type="button"
                         onClick={() => handleNavClick(link.id)}
-                        className={`flex items-center space-x-1.5 px-2.5 py-1.5 xl:px-4 xl:py-2.5 rounded-xl font-medium text-sm transition-all duration-300 ease-out relative overflow-hidden group ${
+                        title={link.label}
+                        aria-label={link.label}
+                        className={`flex items-center gap-1.5 px-2.5 py-2 xl:px-3 xl:py-2.5 rounded-xl font-medium text-sm transition-all duration-300 ease-out relative overflow-hidden group ${
                           isActive
                             ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-slate-700 shadow-sm'
                             : 'text-gray-600 dark:text-slate-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-slate-700'
                         }`}
                       >
                         <div className={`absolute inset-0 bg-linear-to-r from-blue-50 to-purple-50 dark:from-slate-700 dark:to-slate-700 opacity-0 transition-opacity duration-300 ${!isActive ? 'group-hover:opacity-100' : ''}`}></div>
-                        <Icon size={16} className={`transition-all duration-300 relative z-10 ${
+                        <Icon size={16} className={`transition-all duration-300 relative z-10 shrink-0 ${
                           isActive
                             ? 'text-blue-500 dark:text-blue-400'
                             : 'text-gray-500 dark:text-slate-400 group-hover:text-blue-500 dark:group-hover:text-blue-400 group-hover:scale-110'
                         }`} />
-                        <span className="relative z-10">{link.label}</span>
+                        <span className="relative z-10 hidden xl:inline">{link.label}</span>
                         {isActive && (
                           <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-blue-500 dark:bg-blue-400 rounded-full"></div>
                         )}
@@ -161,14 +170,14 @@ export default function Navbar() {
               </ul>
 
               {/* Social Links + Theme Toggle */}
-              <div className="flex items-center space-x-1.5 xl:space-x-3 ml-3 pl-3 xl:ml-6 xl:pl-6 border-l border-gray-200 dark:border-slate-600">
+              <div className="flex items-center space-x-1.5 xl:space-x-2 ml-2 pl-2 xl:ml-4 xl:pl-4 border-l border-gray-200 dark:border-slate-600">
                 <a
-                  href="https://github.com/salmansaleem-17"
+                  href="https://github.com/SalmanSaleem-17"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="GitHub"
                   title="GitHub"
-                  className="hidden xl:flex p-2.5 rounded-full text-gray-600 dark:text-slate-300 hover:text-gray-900 dark:hover:text-white transition-all duration-300 hover:bg-gray-100 dark:hover:bg-slate-700 hover:scale-110 hover:-translate-y-1"
+                  className="hidden 2xl:flex p-2.5 rounded-full text-gray-600 dark:text-slate-300 hover:text-gray-900 dark:hover:text-white transition-all duration-300 hover:bg-gray-100 dark:hover:bg-slate-700 hover:scale-110 hover:-translate-y-1"
                 >
                   <Github size={18} />
                 </a>
@@ -178,7 +187,7 @@ export default function Navbar() {
                   rel="noopener noreferrer"
                   aria-label="LinkedIn"
                   title="LinkedIn"
-                  className="hidden xl:flex p-2.5 rounded-full text-gray-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 hover:bg-blue-50 dark:hover:bg-blue-900/30 hover:scale-110 hover:-translate-y-1"
+                  className="hidden 2xl:flex p-2.5 rounded-full text-gray-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 hover:bg-blue-50 dark:hover:bg-blue-900/30 hover:scale-110 hover:-translate-y-1"
                 >
                   <Linkedin size={18} />
                 </a>

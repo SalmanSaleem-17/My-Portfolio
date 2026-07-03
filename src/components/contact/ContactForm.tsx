@@ -1,9 +1,22 @@
 'use client'
 
-import { memo, useState, useRef, useEffect } from 'react';
+import { memo, useState, useRef, useEffect, useCallback } from 'react';
+import Script from 'next/script';
 import { Send, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
 
 type Status = 'idle' | 'submitting' | 'success' | 'error';
+
+const SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+
+declare global {
+  interface Window {
+    turnstile?: {
+      render: (el: HTMLElement, opts: Record<string, unknown>) => string;
+      reset: (id?: string) => void;
+      remove: (id?: string) => void;
+    };
+  }
+}
 
 const inputBase =
   'w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-800/60 ' +
@@ -13,11 +26,30 @@ const inputBase =
 const ContactForm = memo(() => {
   const [status, setStatus]     = useState<Status>('idle');
   const [errorMsg, setErrorMsg] = useState('');
+  const [token, setToken]       = useState('');
 
   // Timestamp of when the form became interactive — used server-side to reject
   // near-instant (bot) submissions. Set after mount so it's never in the SSR HTML.
   const loadedAt = useRef<number | null>(null);
   useEffect(() => { loadedAt.current = Date.now(); }, []);
+
+  // ── Cloudflare Turnstile ──
+  const tsRef    = useRef<HTMLDivElement>(null);
+  const widgetId = useRef<string | null>(null);
+
+  const renderTurnstile = useCallback(() => {
+    if (!SITE_KEY || !tsRef.current || !window.turnstile || widgetId.current) return;
+    widgetId.current = window.turnstile.render(tsRef.current, {
+      sitekey: SITE_KEY,
+      theme: 'auto',
+      callback: (t: string) => setToken(t),
+      'expired-callback': () => setToken(''),
+      'error-callback': () => setToken(''),
+    });
+  }, []);
+
+  // Render on mount if the script is already loaded (e.g. client-side navigation).
+  useEffect(() => { renderTurnstile(); }, [renderTurnstile]);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -26,18 +58,27 @@ const ContactForm = memo(() => {
     // Real users take seconds to fill the form; direct-POST bots send nothing here.
     const elapsedMs = loadedAt.current ? Date.now() - loadedAt.current : 9999;
 
+    if (SITE_KEY && !token) {
+      setErrorMsg('Please complete the verification below.');
+      setStatus('error');
+      return;
+    }
+
     setStatus('submitting');
     setErrorMsg('');
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...data, elapsedMs }),
+        body: JSON.stringify({ ...data, elapsedMs, turnstileToken: token }),
       });
       const json = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(json.error || 'Something went wrong. Please try again.');
       setStatus('success');
       form.reset();
+      // Turnstile tokens are single-use — reset for a potential next message.
+      if (widgetId.current) window.turnstile?.reset(widgetId.current);
+      setToken('');
     } catch (err) {
       setErrorMsg(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
       setStatus('error');
@@ -121,6 +162,18 @@ const ContactForm = memo(() => {
             <AlertCircle className="w-4 h-4 shrink-0" />
             {errorMsg}
           </div>
+        )}
+
+        {/* Cloudflare Turnstile — bot verification (renders only when configured) */}
+        {SITE_KEY && (
+          <>
+            <Script
+              src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+              strategy="afterInteractive"
+              onLoad={renderTurnstile}
+            />
+            <div ref={tsRef} />
+          </>
         )}
 
         <button

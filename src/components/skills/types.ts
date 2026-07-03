@@ -1,4 +1,4 @@
-import { Code2, Zap, Target, Wrench } from 'lucide-react';
+import { Code2, Zap, Target, Wrench, Smartphone, LineChart, Bot } from 'lucide-react';
 
 export interface Skill {
   name: string;
@@ -46,10 +46,13 @@ export const SKILL_LEVELS = {
 
 // Matches every category present in skillsData.ts
 export const CATEGORIES: CategoryDef[] = [
-  { name: 'Frontend Development', color: 'from-blue-500 to-cyan-500',     icon: Code2,   filter: 'Frontend'       },
-  { name: 'Backend Development',  color: 'from-emerald-500 to-teal-500',  icon: Zap,     filter: 'Backend'        },
-  { name: 'Cloud & DevOps',       color: 'from-violet-500 to-indigo-500', icon: Target,  filter: 'Cloud & DevOps' },
-  { name: 'Tools',                color: 'from-purple-500 to-pink-500',   icon: Wrench,  filter: 'Tools'          },
+  { name: 'Frontend Development', color: 'from-blue-500 to-cyan-500',      icon: Code2,      filter: 'Frontend'        },
+  { name: 'Backend Development',  color: 'from-emerald-500 to-teal-500',   icon: Zap,        filter: 'Backend'         },
+  { name: 'Mobile Development',   color: 'from-cyan-500 to-blue-500',      icon: Smartphone, filter: 'Mobile'          },
+  { name: 'Cloud & DevOps',       color: 'from-violet-500 to-indigo-500',  icon: Target,     filter: 'Cloud & DevOps'  },
+  { name: 'Analytics & SEO',      color: 'from-orange-500 to-amber-500',   icon: LineChart,  filter: 'Analytics & SEO' },
+  { name: 'Tools',                color: 'from-purple-500 to-pink-500',    icon: Wrench,     filter: 'Tools'           },
+  { name: 'AI Tools',             color: 'from-fuchsia-500 to-purple-600', icon: Bot,        filter: 'AI Tools'        },
 ];
 
 // Utility: hex → rgba

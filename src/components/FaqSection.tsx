@@ -11,8 +11,16 @@ import JsonLd from '@/components/JsonLd';
 // the structured-data text to match what users see.
 const FAQS = [
   {
+    q: 'Who is Salman Saleem?',
+    a: 'Salman Saleem (Muhammad Salman Saleem) is a full-stack MERN developer based in Lahore, Pakistan. He specializes in React.js, Next.js, Node.js and TypeScript, and has shipped 5+ production-grade FinTech, e-commerce and SaaS applications used across 100+ countries. He is a Computer Science graduate of COMSATS University Islamabad.',
+  },
+  {
     q: 'Are you available for freelance or contract work?',
     a: "Yes — I'm available for freelance and contract projects, remote worldwide. You can reach me through the contact form on this site or at contact@salmansaleem.dev.",
+  },
+  {
+    q: 'Where is Salman Saleem based, and do you work internationally?',
+    a: 'I am based in Lahore, Punjab, Pakistan, and work fully remotely with clients across 100+ countries, adapting to your timezone and preferred tools.',
   },
   {
     q: "What's your tech stack?",
