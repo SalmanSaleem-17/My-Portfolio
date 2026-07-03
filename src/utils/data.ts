@@ -11,6 +11,7 @@ export const projects = [
     platform: 'Web Application (Full-Stack)',
     deviceTargets: ['Desktop', 'Tablet', 'Mobile'],
     image: 'https://res.cloudinary.com/dw6svuzvy/image/upload/v1782426247/goldify_pro_ulswtd.jpg',
+    imageAlt: 'Goldify Pro dashboard — real-time gold pricing and multi-karat valuation FinTech platform built with React and Node.js',
     screenshots: [],
     mockupType: 'laptop',
 
@@ -85,6 +86,7 @@ export const projects = [
     platform: 'Web Application',
     deviceTargets: ['Desktop', 'Tablet', 'Mobile'],
     image: 'https://res.cloudinary.com/dw6svuzvy/image/upload/v1782426247/scaleRecipe_qzhedf.jpg',
+    imageAlt: 'ScaleRecipe interface — smart recipe scaler and kitchen conversion toolkit with culinary fractions, built with Next.js and TypeScript',
     screenshots: [],
     mockupType: 'laptop',
 
@@ -159,6 +161,7 @@ export const projects = [
     platform: 'Web Application',
     deviceTargets: ['Desktop', 'Tablet', 'Mobile'],
     image: 'https://res.cloudinary.com/dw6svuzvy/image/upload/v1782426247/premium_converters_svjshq.jpg',
+    imageAlt: 'Smart Unit Converters homepage — all-in-one calculator hub with 159+ free finance, health, and unit conversion tools',
     screenshots: [],
     mockupType: 'laptop',
 
@@ -233,6 +236,7 @@ export const projects = [
     platform: 'Web Application',
     deviceTargets: ['Desktop', 'Tablet', 'Mobile'],
     image: 'https://res.cloudinary.com/dw6svuzvy/image/upload/v1782426247/GoldPrice_Converter_zixiku.jpg',
+    imageAlt: 'GoldPrice Converter dashboard — live gold, silver, platinum and palladium price tracker with interactive charts across 100+ countries',
     screenshots: [],
     mockupType: 'laptop',
 
@@ -307,6 +311,7 @@ export const projects = [
     platform: 'Web Application',
     deviceTargets: ['Desktop', 'Tablet', 'Mobile'],
     image: 'https://res.cloudinary.com/dw6svuzvy/image/upload/v1782426248/Jewel_Heaven_x9b2jv.png',
+    imageAlt: 'Jewel Heaven storefront — premium e-commerce jewelry platform with custom design and real-time consultation features',
     screenshots: [],
     mockupType: 'laptop',
 

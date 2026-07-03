@@ -3,6 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { Calendar, Globe, Clock } from 'lucide-react';
+import cloudinaryLoader from '@/utils/imageLoader';
 import { Project } from './types';
 
 const ProjectHeader: React.FC<{ project: Project; index: number }> = ({ project, index }) => {
@@ -88,7 +89,8 @@ const ProjectHeader: React.FC<{ project: Project; index: number }> = ({ project,
             >
               <Image
                 src={project.image}
-                alt={project.title}
+                alt={project.imageAlt ?? project.title}
+                loader={cloudinaryLoader}
                 fill
                 className="object-contain"
                 priority

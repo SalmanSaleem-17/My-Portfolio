@@ -5,11 +5,10 @@ import Image from 'next/image';
 import { MapPin, Phone, Mail } from 'lucide-react';
 
 interface ProfileImageProps {
-  isLoaded: boolean;
   isMobile?: boolean;
 }
 
-const ProfileImage: React.FC<ProfileImageProps> = ({ isLoaded, isMobile = false }) => {
+const ProfileImage: React.FC<ProfileImageProps> = ({ isMobile = false }) => {
   const wrapCls = isMobile
     ? 'w-[240px] h-[240px] sm:w-[280px] sm:h-[280px]'
     : 'w-[320px] h-[320px] xl:w-[380px] xl:h-[380px]';
@@ -21,11 +20,7 @@ const ProfileImage: React.FC<ProfileImageProps> = ({ isLoaded, isMobile = false 
       <div className="absolute inset-0 pf-glow opacity-60 pointer-events-none" />
 
       {/* ── Organic blob frame ─────────────────────────────────────────── */}
-      <div
-        className={`relative w-full h-full overflow-hidden pf-frame border border-purple-400/60
-          transition-all duration-700 ease-out
-          ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
-      >
+      <div className="relative w-full h-full overflow-hidden pf-frame border border-purple-400/60">
         <Image
           src="/images/profile.jpg"
           alt="Muhammad Salman Saleem"

@@ -1,23 +1,95 @@
 import './globals.css'
+import { Sora, Manrope } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import Navbar from '@/components/Navbar'
 import ThreeBackground from '@/components/ThreeBackground'
+import JsonLd from '@/components/JsonLd'
 import { ThemeProvider } from '@/context/ThemeContext'
+import { SITE, personSchema, websiteSchema, organizationSchema } from '@/utils/seo'
 import type { Metadata } from 'next'
 
+// Self-hosted, render-blocking-free fonts. Exposed as CSS variables consumed by
+// globals.css (--font-sora on headings, --font-manrope on body).
+const sora = Sora({
+  subsets: ['latin'],
+  weight: ['400', '600', '700', '800'],
+  variable: '--font-sora',
+  display: 'swap',
+})
+const manrope = Manrope({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-manrope',
+  display: 'swap',
+})
+
 export const metadata: Metadata = {
-  metadataBase: new URL('https://salmansaleem.dev'),
-  title: 'Salman Saleem | MERN Developer',
-  description: 'Portfolio website showcasing projects and skills of Salman Saleem.',
+  metadataBase: new URL(SITE.url),
+  title: {
+    default: 'Salman Saleem | Full-Stack MERN Developer (React & Next.js)',
+    template: '%s | Salman Saleem',
+  },
+  description: SITE.description,
+  applicationName: `${SITE.name} — Portfolio`,
+  authors: [{ name: SITE.legalName, url: SITE.url }],
+  creator: SITE.legalName,
+  publisher: SITE.legalName,
+  keywords: [
+    'Salman Saleem',
+    'Muhammad Salman Saleem',
+    'MERN Developer',
+    'Full-Stack Developer',
+    'React.js Developer',
+    'Next.js Developer',
+    'Node.js Developer',
+    'TypeScript Developer',
+    'Web Developer Pakistan',
+    'Web Developer Lahore',
+    'Frontend Developer',
+    'Portfolio',
+  ],
+  category: 'technology',
   icons: {
-    icon: "/projects/SS-logo.png",
+    icon: '/projects/SS-logo.png',
+    shortcut: '/projects/SS-logo.png',
+    apple: '/projects/SS-logo.png',
   },
   openGraph: {
-    url: 'https://salmansaleem.dev',
-    siteName: 'Salman Saleem',
+    title: 'Salman Saleem | Full-Stack MERN Developer',
+    description: SITE.description,
+    url: SITE.url,
+    siteName: SITE.name,
+    locale: SITE.locale,
     type: 'website',
+    // OG image supplied by the dynamic app/opengraph-image.tsx (1200×630).
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Salman Saleem | Full-Stack MERN Developer',
+    description: SITE.description,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
   },
   alternates: {
-    canonical: 'https://salmansaleem.dev',
+    canonical: SITE.url,
+  },
+  // Google Search Console verification (meta-tag method).
+  verification: {
+    google: 'JwCJAp7qu-PcdigS515lihzw6ConKWHXqwrb_VHDEDg',
+  },
+  // Pinterest domain verification.
+  other: {
+    'p:domain_verify': '53c5ed9dfe508ee1632e9fa4adabf627',
   },
 }
 
@@ -27,7 +99,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={`${sora.variable} ${manrope.variable}`} suppressHydrationWarning>
       <head>
         {/* Anti-FOUC: reads localStorage before first paint to avoid flash */}
         <script
@@ -35,12 +107,12 @@ export default function RootLayout({
             __html: `(function(){try{var t=localStorage.getItem('theme');var d=window.matchMedia('(prefers-color-scheme: dark)').matches;if(t==='dark'||(t===null&&d)){document.documentElement.classList.add('dark');}}catch(e){}})();`,
           }}
         />
-        {/* Google Fonts — loaded by the browser at runtime (no server-side download) */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Manrope:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
+        {/* Sitewide identity graph — Person (developer), Organization & WebSite */}
+        <JsonLd
+          data={{
+            '@context': 'https://schema.org',
+            '@graph': [personSchema(), organizationSchema(), websiteSchema()],
+          }}
         />
       </head>
       <body className="bg-white dark:bg-transparent text-gray-900 dark:text-slate-100 scroll-smooth transition-colors duration-300">
@@ -58,6 +130,8 @@ export default function RootLayout({
             </main>
           </div>
         </ThemeProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )

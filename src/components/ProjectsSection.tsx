@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion, Variants } from 'framer-motion';
 import { ArrowRight, ArrowUpRight, ExternalLink, Zap, CheckCircle } from 'lucide-react';
+import cloudinaryLoader from '@/utils/imageLoader';
 import SectionBadge from '@/components/projects/SectionBadge';
 import type { Project } from '@/components/projects/types';
 
@@ -57,7 +58,8 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           {/* Full-bleed screenshot */}
           <Image
             src={project.image}
-            alt={project.title}
+            alt={project.imageAlt ?? project.title}
+            loader={cloudinaryLoader}
             fill
             sizes={featured
               ? '(max-width:640px) 100vw, (max-width:1024px) 100vw, 66vw'

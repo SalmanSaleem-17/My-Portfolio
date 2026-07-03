@@ -1,5 +1,5 @@
 import { Mail, Phone, Clock, MapPin, Heart, Sparkles } from 'lucide-react';
-import { FaWhatsapp, FaGithub, FaDiscord, FaTelegram, FaLinkedin, FaInstagram } from 'react-icons/fa6';
+import { FaWhatsapp, FaGithub, FaLinkedin, FaInstagram, FaXTwitter, FaStackOverflow, FaDev, FaProductHunt } from 'react-icons/fa6';
 
 export interface ContactMethod {
   icon:        any;
@@ -83,8 +83,11 @@ export const QUICK_STATS: QuickStat[] = [
 ];
 
 export const SOCIAL_LINKS: SocialLink[] = [
-  { icon: FaGithub,    href: 'https://github.com/salmansaleem-17',           color: 'hover:bg-slate-200',  label: 'GitHub'    },
-  { icon: FaInstagram, href: 'https://www.instagram.com/salmansaleem.17',    color: 'hover:bg-pink-100',   label: 'Instagram' },
-  { icon: FaDiscord,   href: '#',                                             color: 'hover:bg-indigo-100', label: 'Discord'   },
-  { icon: FaTelegram,  href: '#',                                             color: 'hover:bg-blue-100',   label: 'Telegram'  },
+  { icon: FaGithub,        href: 'https://github.com/SalmanSaleem-17',                                     color: 'hover:bg-slate-200',  label: 'GitHub'         },
+  { icon: FaLinkedin,      href: 'https://www.linkedin.com/in/muhammad-salman-saleem-8a9a96266',           color: 'hover:bg-blue-100',   label: 'LinkedIn'       },
+  { icon: FaXTwitter,      href: 'https://x.com/salmansaleem_17',                                          color: 'hover:bg-slate-200',  label: 'X (Twitter)'    },
+  { icon: FaStackOverflow, href: 'https://stackoverflow.com/users/32903478/muhammad-salman-saleem',       color: 'hover:bg-orange-100', label: 'Stack Overflow' },
+  { icon: FaDev,           href: 'https://dev.to/salmansaleem17',                                          color: 'hover:bg-slate-200',  label: 'dev.to'         },
+  { icon: FaProductHunt,   href: 'https://www.producthunt.com/@salmansaleem17',                            color: 'hover:bg-orange-100', label: 'Product Hunt'   },
+  { icon: FaInstagram,     href: 'https://www.instagram.com/salmansaleem.17',                              color: 'hover:bg-pink-100',   label: 'Instagram'      },
 ];

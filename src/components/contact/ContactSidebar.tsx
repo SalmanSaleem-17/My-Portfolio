@@ -110,7 +110,7 @@ const SocialLinks = memo(({ isVisible }: { isVisible: boolean }) => (
           aria-label={social.label}
           title={social.label}
           className={`w-10 h-10 sm:w-12 sm:h-12 bg-slate-50 dark:bg-slate-700 rounded-lg sm:rounded-xl
-            flex items-center justify-center ${SOCIAL_DELAYS[i]}
+            flex items-center justify-center ${SOCIAL_DELAYS[i] ?? 'delay-900'}
             transition-all duration-300 hover:scale-110 hover:shadow-lg ${social.color}
             ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}`}
         >

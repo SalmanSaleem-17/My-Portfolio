@@ -7,6 +7,7 @@ export interface Project {
   platform: string;
   deviceTargets: string[];
   image: string;
+  imageAlt?: string;   // descriptive alt text for SEO / accessibility (falls back to title)
   screenshots: string[];
   mockupType: string;
 

@@ -1,13 +1,11 @@
 @import "tailwindcss";
 
-/* ── Typography ──────────────────────────────────────────────────────────────*/
-:root {
-  --font-sora:    'Sora', sans-serif;
-  --font-manrope: 'Manrope', sans-serif;
-}
-
+/* ── Typography ──────────────────────────────────────────────────────────────
+   --font-sora / --font-manrope are provided by next/font/google (see layout.tsx),
+   applied as CSS variables on <html>. No runtime font <link> needed.
+──────────────────────────────────────────────────────────────────────────────*/
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-sora);
+  font-family: var(--font-sora), sans-serif;
 }
 
 body, p, span, a, li, button, input, textarea {
@@ -147,6 +145,12 @@ html {
 
 /* Dark mode overrides — triggered by .dark class on <html> */
 .dark {
+  /* Solid dark base on the <html> root itself (behind the -z-10 canvas), matching
+     the ThreeBackground clear colour. This paints instantly via the anti-FOUC
+     script, so there's NO white flash on refresh before the canvas mounts — and
+     dark-mode text stays readable even if WebGL is slow or unavailable. */
+  background-color: #050814;
+
   /* Transparent so the fixed <ThreeBackground> canvas shows through body. */
   --background: transparent;
   --foreground: #f1f5f9;
@@ -176,7 +180,7 @@ html {
 body {
   background:  var(--background);
   color:       var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-manrope), Arial, Helvetica, sans-serif;
   /* NO overflow-x: hidden here — it would cancel scrollbar-gutter on html */
 }
 
@@ -202,6 +206,18 @@ body {
 
 @keyframes rotate-angle {
   to { --angle: 360deg; }
+}
+
+/* ── Hero entrance ────────────────────────────────────────────────────────────
+   Pure-CSS fade+rise so hero content and the profile image are ALWAYS visible
+   (even before JS hydrates or if JS fails). Stagger with inline animation-delay.
+──────────────────────────────────────────────────────────────────────────────*/
+@keyframes hero-rise {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+.hero-rise {
+  animation: hero-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 /* ── Keyframes ───────────────────────────────────────────────────────────── */
@@ -302,7 +318,7 @@ body {
   .animate-spin-slow,  .animate-spin-reverse,  .animate-pulse-slow,
   .animate-pulse-gentle, .animate-bounce-x,    .animate-skill-fade,
   .animate-scan-line,  .animate-ping-glow,     .animate-float-simple,
-  .marquee-track,
+  .marquee-track,      .hero-rise,
   [style*="rotate-angle"] {
     animation: none !important;
   }

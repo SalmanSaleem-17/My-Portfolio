@@ -4,7 +4,9 @@
 import { projects } from "@/utils/data";
 import { skills } from "@/utils/skillsData";
 import { containerVariants, itemVariants, skillVariants } from "@/utils/animations";
+import { homePageGraph } from "@/utils/seo";
 
+import JsonLd          from "@/components/JsonLd";
 import HeroSection     from "@/components/HeroSection";
 import AboutSection    from "@/components/AboutSection";
 import SkillsSection   from "@/components/SkillsSection";
@@ -14,6 +16,9 @@ import ContactSection  from "@/components/ContactSection";
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-linear-to-br from-slate-50 via-white to-blue-50 dark:from-transparent dark:via-transparent dark:to-transparent">
+
+      {/* ProfilePage structured data — Person as the page's main entity */}
+      <JsonLd data={homePageGraph()} />
 
       {/* ── Hero — full bleed; id lives on HeroSection's own <section> ── */}
       <HeroSection />
