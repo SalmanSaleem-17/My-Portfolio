@@ -46,7 +46,7 @@ body, p, span, a, li, button, input, textarea {
   --proj-primary:  #EA580C;
   --proj-gradient: linear-gradient(135deg, #EA580C 0%, #F59E0B 100%);
 }
-.proj-smart-unit-converters {
+.proj-premium-converters {
   --proj-primary:  #0EA5E9;
   --proj-gradient: linear-gradient(135deg, #0EA5E9 0%, #06B6D4 100%);
 }

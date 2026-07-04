@@ -4,7 +4,7 @@ import { memo, useEffect, useRef, useState } from 'react';
 import { Rocket, Globe, Wrench, Users } from 'lucide-react';
 
 // Impact metrics — all sourced from real project data (5 apps, 100+ countries,
-// 159+ tools in Smart Unit Converters, millions of users on GoldPrice Converter).
+// 159+ tools in Premium Converters, millions of users on GoldPrice Converter).
 const STATS = [
   { target: 5,   suffix: '+',  label: 'Projects Shipped',  icon: Rocket },
   { target: 100, suffix: '+',  label: 'Countries Reached', icon: Globe  },

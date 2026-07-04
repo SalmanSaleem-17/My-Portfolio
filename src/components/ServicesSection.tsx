@@ -7,7 +7,7 @@ import { containerVariants, itemVariants } from '@/utils/animations';
 import SectionBadge from '@/components/projects/SectionBadge';
 
 // Positioned from real project categories: FinTech (Goldify, GoldPrice),
-// E-commerce (Jewel Heaven), SaaS tools (Smart Unit Converters, ScaleRecipe).
+// E-commerce (Jewel Heaven), SaaS tools (Premium Converters, ScaleRecipe).
 const SERVICES = [
   {
     icon: LineChart,

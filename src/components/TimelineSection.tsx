@@ -17,7 +17,7 @@ const TIMELINE = [
   { period: '2023 – Present', title: 'Freelance Full-Stack Developer',                   org: 'Self-employed · Remote',                                type: 'Experience', icon: Briefcase },
   { period: '2024',          title: 'Shipped Jewel Heaven',                             org: 'Premium e-commerce jewelry platform',                  type: 'Milestone',  icon: Rocket },
   { period: '2025',          title: 'Launched Goldify Pro & GoldPrice Converter',       org: 'Production FinTech platforms serving 100+ countries',   type: 'Milestone',  icon: Rocket },
-  { period: '2026',          title: 'Released ScaleRecipe & Smart Unit Converters',     org: '159+ tools across finance, health & everyday utilities', type: 'Milestone', icon: Rocket },
+  { period: '2026',          title: 'Released ScaleRecipe & Premium Converters',        org: '159+ tools across finance, health & everyday utilities', type: 'Milestone', icon: Rocket },
 ] as const;
 
 const TimelineSection = memo(() => (

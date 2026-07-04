@@ -152,22 +152,22 @@ export const projects = [
   },
   {
     id: 3,
-    title: 'Smart Unit Converters',
+    title: 'Premium Converters',
     subtitle: 'All-in-One Smart Calculator Hub with 159+ Free Tools',
     description: 'A privacy-first calculator and conversion hub bundling 159+ free tools across finance, health, precious metals, construction, Islamic calculations, math, and date/time — all running entirely in-browser with zero tracking.',
-    longDescription: 'Smart Unit Converters is a comprehensive browser-based calculator platform engineered to replace the dozens of single-purpose calculator websites users typically juggle. It consolidates 159+ specialized tools across 10 categories — Islamic financial calculators (Zakat, Mahr, inheritance), full financial planning (loans, EMI, currency), live precious-metals pricing, health & fitness trackers (BMI, TDEE, body fat), 19+ unit conversion categories, construction estimators, date/time utilities, math tools, and everyday helpers — all running locally without sign-ups, ads, or surveillance trackers.',
+    longDescription: 'Premium Converters is a comprehensive browser-based calculator platform engineered to replace the dozens of single-purpose calculator websites users typically juggle. It consolidates 159+ specialized tools across 10 categories — Islamic financial calculators (Zakat, Mahr, inheritance), full financial planning (loans, EMI, currency), live precious-metals pricing, health & fitness trackers (BMI, TDEE, body fat), 19+ unit conversion categories, construction estimators, date/time utilities, math tools, and everyday helpers — all running locally without sign-ups, ads, or surveillance trackers.',
 
     // Basic Info
     platform: 'Web Application',
     deviceTargets: ['Desktop', 'Tablet', 'Mobile'],
     image: 'https://res.cloudinary.com/dw6svuzvy/image/upload/v1782426247/premium_converters_svjshq.jpg',
-    imageAlt: 'Smart Unit Converters homepage — all-in-one calculator hub with 159+ free finance, health, and unit conversion tools',
+    imageAlt: 'Premium Converters homepage — all-in-one calculator hub with 159+ free finance, health, and unit conversion tools',
     screenshots: [],
     mockupType: 'laptop',
 
     // Links & Status
-    link:     'https://www.smart-unit-converters.com',
-    demoLink: 'https://www.smart-unit-converters.com',
+    link:     'https://premiumconverters.com',
+    demoLink: 'https://premiumconverters.com',
     category: 'Productivity',
     status:   'Live Production',
     year:     '2026',
@@ -194,7 +194,7 @@ export const projects = [
 
     // Problem & Solution
     problemStatement: 'Quick calculations are scattered across dozens of single-purpose websites — each plagued with ads, account walls, or surveillance trackers. Users wanting reliable converters for finance, health, construction, or religious calculations either juggle multiple tabs or pay for bundled apps.',
-    solution: 'Smart Unit Converters consolidates 159+ specialized tools into a single browser-based hub spanning 10 categories — from Zakat distribution and EMI planning to BMI tracking and concrete estimation — all running entirely client-side with live precious-metals data and zero user tracking.',
+    solution: 'Premium Converters consolidates 159+ specialized tools into a single browser-based hub spanning 10 categories — from Zakat distribution and EMI planning to BMI tracking and concrete estimation — all running entirely client-side with live precious-metals data and zero user tracking.',
 
     // Achievements
     achievements: [
