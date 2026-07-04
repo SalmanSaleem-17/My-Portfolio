@@ -37,7 +37,7 @@ const TimelineSection = memo(() => (
 
     <div className="relative">
       {/* Vertical spine */}
-      <div className="absolute left-[11px] top-2 bottom-2 w-0.5 bg-linear-to-b from-purple-400 via-violet-400 to-transparent dark:from-purple-500 dark:via-violet-500 dark:to-transparent" />
+      <div className="absolute left-2.75 top-2 bottom-2 w-0.5 bg-linear-to-b from-purple-400 via-violet-400 to-transparent dark:from-purple-500 dark:via-violet-500 dark:to-transparent" />
 
       <div className="space-y-6">
         {TIMELINE.map(({ period, title, org, type, icon: Icon }) => (
