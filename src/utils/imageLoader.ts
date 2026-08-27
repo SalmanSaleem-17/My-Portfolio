@@ -21,3 +21,10 @@ export default function cloudinaryLoader({ src, width, quality }: LoaderArgs): s
   // Fallback (non-Cloudinary src) — return unchanged.
   return src
 }
+
+// Cloudinary sources are the only ones this loader can actually resize. Local
+// /public assets pass through untouched, and next/image warns when a custom
+// loader ignores `width` — so those <Image>s must opt out with `unoptimized`.
+export function isCloudinary(src: string): boolean {
+  return src.includes('res.cloudinary.com') && src.includes('/upload/')
+}

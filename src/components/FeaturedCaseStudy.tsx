@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 import { Star, ArrowUpRight, Globe, Sparkles } from 'lucide-react';
 import { projects } from '@/utils/data';
 import { getSlug } from '@/utils/seo';
-import cloudinaryLoader from '@/utils/imageLoader';
+import cloudinaryLoader, { isCloudinary } from '@/utils/imageLoader';
 
 // Spotlight the strongest project (Goldify Pro). Metrics come straight from its
 // documented achievements.
@@ -102,6 +102,7 @@ const FeaturedCaseStudy = memo(() => {
                   src={project.image}
                   alt={project.imageAlt ?? project.title}
                   loader={cloudinaryLoader}
+                  unoptimized={!isCloudinary(project.image)}
                   fill
                   sizes="(max-width:1024px) 100vw, 45vw"
                   className="object-cover object-top"

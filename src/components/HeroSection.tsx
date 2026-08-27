@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Sparkles, MapPin, Phone, Mail } from 'lucide-react';
+import { Sparkles, MapPin, Phone, Mail, Smartphone, ExternalLink } from 'lucide-react';
 
 import HeroBackground  from '@/components/hero/HeroBackground';
 import ProfileImage    from '@/components/hero/ProfileImage';
@@ -103,18 +103,38 @@ export default function HeroSection() {
           </div>
 
           {/* Role */}
-          <div className="flex items-center justify-center gap-2 mb-4 hero-rise" style={delay(400)}>
+          <div className="flex items-center justify-center gap-2 mb-3 hero-rise" style={delay(400)}>
             <span className="text-gray-400 font-mono">&lt;&gt;</span>
-            <span className="text-lg font-semibold text-gray-800 dark:text-white">React.js Developer</span>
+            <span className="text-lg font-semibold text-gray-800 dark:text-white">Web &amp; Mobile App Developer</span>
             <Sparkles className="w-4 h-4 text-purple-400" />
+          </div>
+
+          {/* Google Play badge */}
+          <div className="mb-4 hero-rise" style={delay(450)}>
+            <a
+              href="https://play.google.com/store/apps/details?id=com.goldify.pro"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Goldify on Google Play — Gold Rate &amp; Converter Android app"
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full
+                bg-white/80 dark:bg-slate-800/60
+                border border-emerald-200 dark:border-emerald-500/40
+                text-slate-700 dark:text-white/90 shadow-sm text-xs font-medium
+                hover:border-emerald-400 dark:hover:border-emerald-400/70 transition-colors"
+            >
+              <Smartphone className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+              <span>Goldify — live on Google Play</span>
+              <ExternalLink className="w-3 h-3 opacity-60 shrink-0" />
+            </a>
           </div>
 
           {/* Bio */}
           <p className="text-base text-gray-600 dark:text-slate-400 mb-6 max-w-sm mx-auto leading-relaxed hero-rise" style={delay(500)}>
-            Passionate CS graduate specializing in{' '}
-            <span className="text-purple-600 dark:text-purple-400 font-medium">MERN Stack development</span>.
-            Expertise in{' '}
-            <span className="text-blue-600 dark:text-blue-400 font-medium">React.js, Node.js &amp; MongoDB</span>.
+            Passionate CS graduate building{' '}
+            <span className="text-purple-600 dark:text-purple-400 font-medium">MERN Stack web apps</span>{' '}
+            and{' '}
+            <span className="text-emerald-600 dark:text-emerald-400 font-medium">Android apps</span>{' '}
+            shipped to the Play Store.
           </p>
 
           {/* CTA buttons */}
@@ -150,19 +170,40 @@ export default function HeroSection() {
             </div>
 
             {/* Role */}
-            <div className="flex items-center gap-3 mb-6 hero-rise" style={delay(300)}>
+            <div className="flex items-center gap-3 mb-4 hero-rise" style={delay(300)}>
               <span className="text-gray-400 font-mono text-xl">&lt;&gt;</span>
-              <span className="text-xl font-bold text-gray-800 dark:text-white">React.js Developer</span>
+              <span className="text-xl font-bold text-gray-800 dark:text-white">Web &amp; Mobile App Developer</span>
               <Sparkles className="w-5 h-5 text-purple-400" />
+            </div>
+
+            {/* Google Play badge */}
+            <div className="mb-6 hero-rise" style={delay(350)}>
+              <a
+                href="https://play.google.com/store/apps/details?id=com.goldify.pro"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Goldify on Google Play — Gold Rate &amp; Converter Android app"
+                className="inline-flex items-center gap-2 px-5 py-2 rounded-full
+                  bg-white/80 dark:bg-slate-800/60
+                  border border-emerald-200 dark:border-emerald-500/40
+                  text-slate-700 dark:text-white/90 shadow-sm text-sm font-medium
+                  hover:border-emerald-400 dark:hover:border-emerald-400/70 transition-colors"
+              >
+                <Smartphone className="w-4 h-4 text-emerald-500 shrink-0" />
+                <span>Goldify — live on Google Play</span>
+                <ExternalLink className="w-3.5 h-3.5 opacity-60 shrink-0" />
+              </a>
             </div>
 
             {/* Bio */}
             <p className="text-base lg:text-lg xl:text-xl text-gray-600 dark:text-slate-400 mb-8 leading-relaxed max-w-lg hero-rise" style={delay(400)}>
               Passionate Computer Science graduate specializing in{' '}
-              <span className="text-purple-600 dark:text-purple-400 font-medium">MERN Stack development</span>.
-              I create elegant, scalable solutions with expertise in{' '}
-              <span className="text-blue-600 dark:text-blue-400 font-medium">React.js, Node.js, and MongoDB</span>.
-              Successfully built production-grade applications including e-commerce platforms.
+              <span className="text-purple-600 dark:text-purple-400 font-medium">MERN Stack development</span>{' '}
+              and{' '}
+              <span className="text-emerald-600 dark:text-emerald-400 font-medium">Android app development</span>.
+              I create elegant, scalable solutions with{' '}
+              <span className="text-blue-600 dark:text-blue-400 font-medium">React.js, Node.js, and MongoDB</span>{' '}
+              — from production e-commerce platforms to published Play Store apps.
             </p>
 
             {/* CTA */}

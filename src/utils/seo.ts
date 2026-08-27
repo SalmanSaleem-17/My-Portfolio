@@ -14,10 +14,10 @@ export const SITE = {
   name: 'Salman Saleem',
   legalName: 'Muhammad Salman Saleem',
   shortName: 'Salman Saleem',
-  jobTitle: 'Full-Stack MERN Developer',
-  headline: 'Full-Stack MERN Developer · React.js & Next.js Specialist',
+  jobTitle: 'Full-Stack Web & Android App Developer',
+  headline: 'Full-Stack Web & Android App Developer · React.js, Next.js & React Native',
   description:
-    'Muhammad Salman Saleem — Full-Stack MERN developer specializing in React.js, Next.js, Node.js and TypeScript. Building production-grade FinTech and e-commerce web applications.',
+    'Muhammad Salman Saleem — Full-Stack web and Android app developer specializing in React.js, Next.js, Node.js, TypeScript and React Native. Building production-grade FinTech and e-commerce web applications, and Android apps published on Google Play.',
   email: 'shanisaleem17@gmail.com',
   telephone: '+92-345-6501771',
   // A real head-shot ranks better for Person rich results than a logo.
@@ -35,6 +35,8 @@ export const SITE = {
   // Google uses to resolve and rank "Muhammad Salman Saleem" as one person.
   sameAs: [
     'https://github.com/SalmanSaleem-17',
+    // Google Play developer page — anchors the "app developer" half of the entity.
+    'https://play.google.com/store/apps/dev?id=4945636568810127963',
     'https://www.linkedin.com/in/muhammad-salman-saleem-8a9a96266',
     'https://www.upwork.com/freelancers/salmansaleem17',
     'https://x.com/salmansaleem_17',
@@ -68,6 +70,10 @@ const knowsAbout = Array.from(
     'Web Performance Optimization',
     'FinTech Applications',
     'E-commerce Development',
+    'Android App Development',
+    'Mobile App Development',
+    'React Native Development',
+    'Google Play Store Publishing',
   ]),
 )
 
@@ -88,7 +94,7 @@ export function personSchema() {
     jobTitle: SITE.jobTitle,
     description: SITE.description,
     disambiguatingDescription:
-      'MERN-stack web developer specializing in React.js and Next.js, based in Lahore, Pakistan.',
+      'MERN-stack web developer and Android app developer specializing in React.js, Next.js and React Native, based in Lahore, Pakistan. Publishes Android apps on Google Play as Muhammad Salman Saleem.',
     email: `mailto:${SITE.email}`,
     telephone: SITE.telephone,
     gender: 'Male',
@@ -107,12 +113,20 @@ export function personSchema() {
       name: 'COMSATS University Islamabad',
       sameAs: 'https://www.comsats.edu.pk/',
     },
-    hasOccupation: {
-      '@type': 'Occupation',
-      name: 'Full-Stack Web Developer',
-      occupationalCategory: '15-1254.00', // O*NET: Web Developers
-      skills: knowsAbout.join(', '),
-    },
+    hasOccupation: [
+      {
+        '@type': 'Occupation',
+        name: 'Full-Stack Web Developer',
+        occupationalCategory: '15-1254.00', // O*NET: Web Developers
+        skills: knowsAbout.join(', '),
+      },
+      {
+        '@type': 'Occupation',
+        name: 'Mobile Application Developer',
+        occupationalCategory: '15-1252.00', // O*NET: Software Developers
+        skills: 'React Native, Expo, Android, Google Play Console, Mobile UI',
+      },
+    ],
     knowsAbout,
     knowsLanguage: ['English', 'Urdu'],
     worksFor: { '@id': ORG_ID },
@@ -203,16 +217,21 @@ export function projectGraph(project: Project) {
   const pageUrl = `${SITE.url}/projects/${slug}`
   const datePublished = `${project.year}-01-01`
 
+  // Android builds get MobileApplication + an installUrl so Google can tie the
+  // case study to the actual Play Store listing.
+  const play = 'playStoreLink' in project ? (project.playStoreLink as string) : undefined
+
   const softwareApp = {
     '@type': 'SoftwareApplication',
     '@id': `${pageUrl}#software`,
     name: project.title,
     alternateName: project.subtitle,
     description: project.description,
-    applicationCategory: 'WebApplication',
+    applicationCategory: play ? 'MobileApplication' : 'WebApplication',
     applicationSubCategory: project.category,
-    operatingSystem: 'Web Browser (Cross-platform)',
-    url: project.demoLink || project.link,
+    operatingSystem: play ? 'Android' : 'Web Browser (Cross-platform)',
+    url: play || project.demoLink || project.link,
+    ...(play ? { installUrl: play, downloadUrl: play } : {}),
     image: project.image,
     screenshot: project.image,
     softwareVersion: project.year,

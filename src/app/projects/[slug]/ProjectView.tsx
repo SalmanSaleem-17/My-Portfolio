@@ -9,9 +9,10 @@ import {
   ArrowLeft, ExternalLink, Github, CheckCircle2,
   Calendar, Clock, Monitor, Layers, Globe,
   Code2, Cpu, Database, Shield, Puzzle, ArrowUpRight, Sparkles,
+  Smartphone, Play, Wifi, BatteryFull, Signal,
 } from 'lucide-react';
 import { projects } from '@/utils/data';
-import cloudinaryLoader from '@/utils/imageLoader';
+import cloudinaryLoader, { isCloudinary } from '@/utils/imageLoader';
 
 function getSlug(title: string) {
   return title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -40,6 +41,16 @@ export default function ProjectView({ slug }: { slug: string }) {
   const isGithub  = project.link?.includes('github');
   const arch      = project.architecture;
   const urlLabel  = (project.demoLink || project.link || '').replace(/https?:\/\//, '').replace(/\/$/, '');
+
+  // Android builds get a Play Store CTA and a phone frame instead of a browser
+  // window. `link` doubles as the store URL for app projects, so the generic
+  // "Learn More" button is suppressed when it points at that same listing.
+  const shots     = project.screenshots ?? [];
+  const heroImage = shots[0]?.src ?? project.image;
+  const playLink  = 'playStoreLink' in project ? (project.playStoreLink as string) : undefined;
+  const isApp     = !!playLink;
+  const showLearnMore = !isGithub && project.link
+    && project.link !== project.demoLink && project.link !== playLink;
 
   return (
     <div className={`proj-${slug} min-h-screen bg-slate-50 dark:bg-transparent`}>
@@ -115,6 +126,18 @@ export default function ProjectView({ slug }: { slug: string }) {
 
               {/* CTA buttons */}
               <motion.div {...fadeUp(0.22)} className="flex flex-wrap gap-3 mb-8">
+                {playLink && (
+                  <a
+                    href={playLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex items-center gap-2.5 px-7 py-3.5 rounded-2xl text-white font-bold text-sm [background:var(--proj-gradient)] hover:opacity-95 transition-all hover:scale-[1.03] hover:-translate-y-0.5 shadow-xl ring-1 ring-white/20"
+                  >
+                    <Play className="w-4 h-4 fill-current" />
+                    Get it on Google Play
+                    <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </a>
+                )}
                 {project.demoLink && (
                   <a
                     href={project.demoLink}
@@ -138,7 +161,7 @@ export default function ProjectView({ slug }: { slug: string }) {
                     Source Code
                   </a>
                 )}
-                {!isGithub && project.link && project.link !== project.demoLink && (
+                {showLearnMore && (
                   <a
                     href={project.link}
                     target="_blank"
@@ -156,7 +179,7 @@ export default function ProjectView({ slug }: { slug: string }) {
                 {([
                   { icon: Calendar, label: 'Year',     value: project.year },
                   { icon: Clock,    label: 'Duration', value: project.duration },
-                  { icon: Monitor,  label: 'Platform', value: project.platform.split('(')[0].trim() },
+                  { icon: isApp ? Smartphone : Monitor, label: 'Platform', value: project.platform.split('(')[0].trim() },
                   { icon: Layers,   label: 'Devices',  value: project.deviceTargets.join(' · ') },
                 ] as const).map(({ icon: Icon, label, value }) => (
                   <div
@@ -181,7 +204,52 @@ export default function ProjectView({ slug }: { slug: string }) {
               {/* Glow halo */}
               <div className="absolute -inset-10 [background:var(--proj-gradient)] opacity-[0.18] dark:opacity-[0.22] blur-3xl rounded-3xl pointer-events-none" />
 
-              {/* Browser chrome + screenshot */}
+              {/* Phone frame — Android app builds */}
+              {isApp ? (
+                <div className="relative mx-auto w-full max-w-[320px] rounded-[2.5rem] p-3 bg-slate-900 dark:bg-slate-950 shadow-2xl border border-slate-700/60 ring-1 ring-black/10 dark:ring-white/5">
+                  <div className="relative rounded-[1.9rem] overflow-hidden bg-black">
+
+                    {/* Android status bar */}
+                    <div className="flex items-center justify-between px-5 pt-2.5 pb-1.5 text-[9px] font-mono text-white/70">
+                      <span>9:41</span>
+                      <div className="flex items-center gap-1.5">
+                        <Signal className="w-2.5 h-2.5" />
+                        <Wifi className="w-2.5 h-2.5" />
+                        <BatteryFull className="w-3 h-3" />
+                      </div>
+                    </div>
+
+                    {/* App screenshot */}
+                    <div className="relative aspect-[738/1600] bg-black">
+                      <Image
+                        src={heroImage}
+                        alt={project.imageAlt ?? project.title}
+                        loader={cloudinaryLoader}
+                        unoptimized={!isCloudinary(heroImage)}
+                        fill
+                        priority
+                        sizes="(max-width:1024px) 80vw, 320px"
+                        className="object-cover"
+                      />
+                    </div>
+
+                    {/* Gesture pill */}
+                    <div className="flex justify-center py-2 bg-black">
+                      <div className="h-1 w-24 rounded-full bg-white/25" />
+                    </div>
+                  </div>
+
+                  {/* Store caption */}
+                  <div className="flex items-center justify-center gap-2 pt-3 pb-1">
+                    <Smartphone className="w-3 h-3 text-(--proj-primary)" />
+                    <span className="text-[10px] font-mono text-slate-400">
+                      Android · Google Play
+                    </span>
+                  </div>
+                </div>
+              ) : (
+
+              /* Browser chrome + screenshot */
               <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-200/50 dark:border-white/8 ring-1 ring-black/5 dark:ring-white/5">
 
                 {/* Top chrome bar */}
@@ -203,6 +271,7 @@ export default function ProjectView({ slug }: { slug: string }) {
                     src={project.image}
                     alt={project.imageAlt ?? project.title}
                     loader={cloudinaryLoader}
+                    unoptimized={!isCloudinary(project.image)}
                     fill
                     priority
                     sizes="(max-width:1024px) 100vw, 55vw"
@@ -218,6 +287,7 @@ export default function ProjectView({ slug }: { slug: string }) {
                   <span className="text-[9px] font-mono text-slate-400 dark:text-slate-600">{project.year}</span>
                 </div>
               </div>
+              )}
             </motion.div>
           </div>
         </div>
@@ -283,6 +353,41 @@ export default function ProjectView({ slug }: { slug: string }) {
             ))}
           </div>
         </Section>
+
+        {/* ── Screens ── */}
+        {shots.length > 0 && (
+          <Section title="Inside the App" emoji="📱">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+              {shots.map((shot, i) => (
+                <motion.figure
+                  key={shot.src}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.45, delay: i * 0.05, ease: [0.22, 1, 0.36, 1] }}
+                  className="group"
+                >
+                  <div className="relative aspect-[738/1600] rounded-2xl overflow-hidden bg-slate-900
+                    border border-slate-200/70 dark:border-slate-800/60 shadow-sm
+                    group-hover:shadow-xl group-hover:-translate-y-1 transition-all duration-300">
+                    <Image
+                      src={shot.src}
+                      alt={shot.alt}
+                      loader={cloudinaryLoader}
+                      unoptimized={!isCloudinary(shot.src)}
+                      fill
+                      sizes="(max-width:640px) 45vw, (max-width:1024px) 30vw, 18vw"
+                      className="object-cover object-top"
+                    />
+                  </div>
+                  <figcaption className="mt-2 text-[11px] font-semibold text-center text-slate-500 dark:text-slate-400 leading-snug">
+                    {shot.caption}
+                  </figcaption>
+                </motion.figure>
+              ))}
+            </div>
+          </Section>
+        )}
 
         {/* ── Achievements ── */}
         <Section title="Key Achievements" emoji="🏆">
@@ -358,6 +463,18 @@ export default function ProjectView({ slug }: { slug: string }) {
           >
             <ArrowLeft className="w-4 h-4" /> All Projects
           </Link>
+          {playLink && (
+            <a
+              href={playLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-2.5 px-7 py-3.5 rounded-2xl text-white font-bold text-sm hover:opacity-95 transition-all hover:scale-[1.03] hover:-translate-y-0.5 shadow-xl ring-1 ring-white/20 [background:var(--proj-gradient)]"
+            >
+              <Play className="w-4 h-4 fill-current" />
+              Get it on Google Play
+              <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </a>
+          )}
           {project.demoLink && (
             <a
               href={project.demoLink}

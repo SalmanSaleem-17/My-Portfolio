@@ -226,6 +226,112 @@ export const projects = [
     },
   },
   {
+    id: 6,
+    title: 'Goldify Android App',
+    subtitle: 'Gold Rate & Converter — Live Rates, Universal Converters & Shop Records on Google Play',
+    description: 'A published Android app for jewelers and gold traders: live country-aware gold rates, karat rate tables, universal any-unit-to-any-unit converters, purity and weight calculators, and a built-in shop record book — built with React Native and Expo.',
+    longDescription: 'Goldify is the native Android companion to the Goldify Pro web platform, published on Google Play under developer Muhammad Salman Saleem. Built with React Native and Expo, it auto-detects the user’s country to surface local gold rates, then layers on the full professional toolkit: per-tola and per-gram karat rate tables, a universal converter that maps any unit to any other (grams, tola, masha, ratti, ounce, troy ounce, pennyweight, grain, kilogram), purity and average-rate calculators, a gold analyzer, and a shop record module for jewelry sales, gate history and gold books. Google Sign-In keeps records tied to the user, and the app ships monetized through Google AdMob with a verified app-ads.txt on this domain.',
+
+    // Basic Info
+    platform: 'Android Application (React Native)',
+    deviceTargets: ['Android Phone', 'Android Tablet'],
+    // TODO: swap for the real Play Store screenshot / feature graphic once uploaded.
+    image: '/projects/goldify-app.svg',
+    imageAlt: 'Goldify Android app — live gold rate and converter app for jewelers, published on Google Play',
+    // Real in-app screens (same Cloudinary account as the rest of the site).
+    // screenshots[0] also fills the phone mockup on the case-study page.
+    screenshots: [
+      { src: 'https://res.cloudinary.com/dw6svuzvy/image/upload/v1785765403/home_xuzcqf.jpg',
+        alt: 'Goldify app home screen showing live gold rate per tola and per gram',
+        caption: 'Live gold rate home screen' },
+      { src: 'https://res.cloudinary.com/dw6svuzvy/image/upload/v1785765404/home_custom_rate_vrryok.jpg',
+        alt: 'Goldify app home screen with a custom gold rate entered instead of the live rate',
+        caption: 'Custom rate mode' },
+      { src: 'https://res.cloudinary.com/dw6svuzvy/image/upload/v1785765402/converters_jqjyid.jpg',
+        alt: 'Gold converters list in the Goldify app including karat purity and polish calculators',
+        caption: 'Gold converters' },
+      { src: 'https://res.cloudinary.com/dw6svuzvy/image/upload/v1785765399/money_to_gold_waprre.jpg',
+        alt: 'Money to gold calculator converting an amount into gold weight',
+        caption: 'Money to gold' },
+      { src: 'https://res.cloudinary.com/dw6svuzvy/image/upload/v1785765403/gold_calculator_zkd8ih.jpg',
+        alt: 'Gold weight calculator adding and subtracting tola, masha and ratti weights',
+        caption: 'Gold weight calculator' },
+      { src: 'https://res.cloudinary.com/dw6svuzvy/image/upload/v1785765403/quick_rates_grams_xhsioh.jpg',
+        alt: 'Quick gold rate tables by gram in the Goldify app',
+        caption: 'Quick rate tables' },
+      { src: 'https://res.cloudinary.com/dw6svuzvy/image/upload/v1785765400/shop_record_t4xh1d.jpg',
+        alt: 'Shop record dashboard showing gold jewellery store stock and balance',
+        caption: 'Shop record' },
+      { src: 'https://res.cloudinary.com/dw6svuzvy/image/upload/v1785765399/gold_guide_hspeio.jpg',
+        alt: 'Gold guide reference screen with weight units, karat purity and glossary tabs',
+        caption: 'Gold guide' },
+      { src: 'https://res.cloudinary.com/dw6svuzvy/image/upload/v1785765400/blog_open_screen_zsklm7.jpg',
+        alt: 'A Goldify Pro article opened inside the Android app',
+        caption: 'Articles in app' },
+    ],
+    mockupType: 'mobile',
+
+    // Links & Status
+    link: 'https://play.google.com/store/apps/details?id=com.goldify.pro',
+    playStoreLink: 'https://play.google.com/store/apps/details?id=com.goldify.pro',
+    category: 'Mobile App',
+    status: 'Live Production',
+    year: '2026',
+    duration: 'Ongoing',
+
+    // Tech Stack
+    technologies: [
+      'React Native', 'Expo', 'TypeScript', 'Google Sign-In (OAuth 2.0)',
+      'Google AdMob', 'RESTful API Architecture', 'Live Gold Price APIs',
+      'Currency Exchange APIs', 'On-Device Storage', 'Google Play Console',
+    ],
+
+    // Core Features
+    features: [
+      { icon: '📍', title: 'Auto Country Detection',    description: 'Detects the user’s country on launch and loads local gold rates and currency automatically' },
+      { icon: '📈', title: 'Live Gold Rates',            description: 'Real-time per-tola and per-gram pricing with a live/custom rate toggle' },
+      { icon: '🔄', title: 'Universal Converter',        description: 'Any unit to any unit — grams, tola, masha, ratti, ounce, troy ounce, pennyweight, grain and kilogram' },
+      { icon: '💱', title: 'Money ↔ Gold Converter',     description: 'Convert a cash amount into gold weight, or any weight into its live market value' },
+      { icon: '💎', title: 'Purity & Karat Tools',       description: 'Purity calculator, rate-purity mapping and a gold analyzer across 18K–24K' },
+      { icon: '📊', title: 'Quick Rate Tables',          description: 'Ready-reckoner tables from 1 gram to 11 tola across every karat, in one screen' },
+      { icon: '🏪', title: 'Shop Record Book',           description: 'Jewelry store records — sales, gate history and gold book kept on-device' },
+      { icon: '🔐', title: 'Google Sign-In',             description: 'OAuth 2.0 sign-in so a jeweler’s records stay tied to their account' },
+    ],
+
+    // Problem & Solution
+    problemStatement: 'Jewelers and gold traders work off the phone at the counter, but the tools they need are split across websites, calculator apps and paper registers — and almost none of them handle local rates, South Asian units like tola, masha and ratti, or day-to-day shop records.',
+    solution: 'Goldify puts the whole counter workflow in one Android app: country-aware live rates, a universal converter covering both metric and traditional units, karat and purity calculators, and an on-device shop record book — installable free from Google Play.',
+
+    // Achievements
+    achievements: [
+      'Published to Google Play production track under developer Muhammad Salman Saleem',
+      'Ships the full Goldify toolkit natively on Android via React Native and Expo',
+      'Country auto-detection so local gold rates load without any setup',
+      'Universal any-unit-to-any-unit converter covering metric and traditional gold units',
+      'Built-in shop record module for jewelry sales, gate history and gold books',
+      'AdMob monetization with a verified app-ads.txt served from salmansaleem.dev',
+    ],
+
+    // Architecture Overview
+    architecture: {
+      frontend:       'React Native with Expo — modular converter screens and a shared rate-engine layer',
+      backend:        'REST services supplying live gold prices and currency rates to the app',
+      database:       'On-device storage for shop records, saved rates and user preferences',
+      authentication: 'Google Sign-In (OAuth 2.0)',
+      deployment:     'Google Play Console — production track, package com.goldify.pro',
+      apiIntegration: 'Live gold price and currency exchange APIs with country auto-detection and fallback handling',
+    },
+
+    // Color Theme — Android/Play green, distinct from the gold web projects
+    colors: {
+      primary:    '#3DDC84',
+      secondary:  '#0A0A0A',
+      accent:     '#0F9D58',
+      background: '#F0FDF4',
+      gradient:   'linear-gradient(135deg, #0F9D58 0%, #3DDC84 100%)',
+    },
+  },
+  {
     id: 4,
     title: 'GoldPrice Converter',
     subtitle: 'Live Precious Metals Tracker & Smart Conversion Hub for 100+ Countries',

@@ -36,7 +36,7 @@ export function GET() {
 - Role: ${SITE.headline}
 - Location: ${SITE.location.city}, ${SITE.location.region}, ${SITE.location.country} — available remotely worldwide
 - Education: BS Computer Science, COMSATS University Islamabad (2020–2025)
-- Experience: 2+ years as a freelance full-stack developer; shipped 5+ production apps used across 100+ countries
+- Experience: 2+ years as a freelance full-stack developer; shipped 6+ production web platforms and Android apps used across 100+ countries
 - Availability: Open to freelance, contract, and remote work
 - Website: ${SITE.url}
 - Email: ${SITE.email}
@@ -46,7 +46,7 @@ export function GET() {
 - E-commerce solutions — storefronts, carts, secure checkout, admin dashboards
 - SaaS tools & calculators — multi-tool platforms, converters, i18n, privacy-first architecture
 - REST APIs & backends — authentication, database modeling, cloud deployment
-- Mobile apps — React Native and Expo
+- Android app development — React Native and Expo apps built and published to Google Play
 
 ## Skills
 ${skillsByCategory}
@@ -56,6 +56,10 @@ ${projectList}
 
 ## Case studies
 ${caseStudies}
+
+## Apps on Google Play
+- Goldify: Gold Rate & Converter — Android app (React Native + Expo) by Muhammad Salman Saleem: https://play.google.com/store/apps/details?id=com.goldify.pro
+- Google Play developer page: https://play.google.com/store/apps/dev?id=4945636568810127963
 
 ## Profiles & links
 ${SITE.sameAs.map((u) => `- ${u}`).join('\n')}

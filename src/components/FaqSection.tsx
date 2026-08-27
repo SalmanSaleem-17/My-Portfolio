@@ -12,7 +12,7 @@ import JsonLd from '@/components/JsonLd';
 const FAQS = [
   {
     q: 'Who is Salman Saleem?',
-    a: 'Salman Saleem (Muhammad Salman Saleem) is a full-stack MERN developer based in Lahore, Pakistan. He specializes in React.js, Next.js, Node.js and TypeScript, and has shipped 5+ production-grade FinTech, e-commerce and SaaS applications used across 100+ countries. He is a Computer Science graduate of COMSATS University Islamabad.',
+    a: 'Salman Saleem (Muhammad Salman Saleem) is a full-stack web and Android app developer based in Lahore, Pakistan. He specializes in React.js, Next.js, Node.js and TypeScript on the web and React Native on mobile, and has shipped 6+ production-grade FinTech, e-commerce and SaaS products used across 100+ countries — including Goldify: Gold Rate & Converter, published on Google Play. He is a Computer Science graduate of COMSATS University Islamabad.',
   },
   {
     q: 'Are you available for freelance or contract work?',
@@ -24,7 +24,7 @@ const FAQS = [
   },
   {
     q: "What's your tech stack?",
-    a: 'I specialize in the MERN stack — React.js, Next.js, Node.js, Express and MongoDB — with TypeScript and Tailwind CSS. I build full-stack applications end to end, from API and database to a polished UI.',
+    a: 'I specialize in the MERN stack — React.js, Next.js, Node.js, Express and MongoDB — with TypeScript and Tailwind CSS, and React Native with Expo for Android. I build full-stack applications end to end, from API and database to a polished UI or a published Play Store listing.',
   },
   {
     q: 'Do you work remotely with international clients?',
@@ -32,7 +32,11 @@ const FAQS = [
   },
   {
     q: 'What kinds of projects do you build?',
-    a: 'Production-grade web applications — FinTech platforms, e-commerce stores, SaaS tools and calculators, and scalable REST APIs and backends.',
+    a: 'Production-grade web applications — FinTech platforms, e-commerce stores, SaaS tools and calculators, and scalable REST APIs and backends — plus Android apps built with React Native.',
+  },
+  {
+    q: 'Do you build mobile apps as well as websites?',
+    a: 'Yes — I build and publish Android apps as well as web applications. Goldify: Gold Rate & Converter is live on Google Play under my developer account (Muhammad Salman Saleem); it is built with React Native and Expo and ships the same gold-pricing toolkit as the Goldify Pro web platform. I handle the full path from build to store listing, including Play Console setup, privacy policy and AdMob monetization.',
   },
   {
     q: "What's a typical project timeline?",

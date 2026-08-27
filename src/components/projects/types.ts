@@ -8,7 +8,13 @@ export interface Project {
   deviceTargets: string[];
   image: string;
   imageAlt?: string;   // descriptive alt text for SEO / accessibility (falls back to title)
-  screenshots: string[];
+  // App/product screens shown in the case-study gallery. Empty for projects
+  // whose single hero image is enough.
+  screenshots: Array<{
+    src: string;
+    alt: string;
+    caption: string;
+  }>;
   mockupType: string;
 
   // ── Controls how the project image is displayed in ProjectHeader ──────────

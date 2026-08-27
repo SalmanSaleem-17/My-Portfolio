@@ -58,6 +58,11 @@ body, p, span, a, li, button, input, textarea {
   --proj-primary:  #FBBF24;
   --proj-gradient: linear-gradient(135deg, #B45309 0%, #FBBF24 100%);
 }
+/* Android app — Play-store green so it reads apart from the gold web projects */
+.proj-goldify-android-app {
+  --proj-primary:  #3DDC84;
+  --proj-gradient: linear-gradient(135deg, #0F9D58 0%, #3DDC84 100%);
+}
 
 /* ── Profile image component ─────────────────────────────────────────────── */
 .pf-glow {

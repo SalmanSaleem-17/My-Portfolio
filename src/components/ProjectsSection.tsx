@@ -4,8 +4,8 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, Variants } from 'framer-motion';
-import { ArrowRight, ArrowUpRight, ExternalLink, Zap, CheckCircle } from 'lucide-react';
-import cloudinaryLoader from '@/utils/imageLoader';
+import { ArrowRight, ArrowUpRight, ExternalLink, Zap, CheckCircle, Smartphone } from 'lucide-react';
+import cloudinaryLoader, { isCloudinary } from '@/utils/imageLoader';
 import SectionBadge from '@/components/projects/SectionBadge';
 import type { Project } from '@/components/projects/types';
 
@@ -22,7 +22,7 @@ function getSlug(title: string) {
 function ProjectCard({ project, index }: { project: Project; index: number }) {
   const slug     = getSlug(project.title);
   const isLive   = project.status === 'Live Production';
-  const featured = index % 4 === 0 || index % 4 === 3;
+  const featured = index % 3 === 0;
   const num      = String(index + 1).padStart(2, '0');
 
   return (
@@ -60,6 +60,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             src={project.image}
             alt={project.imageAlt ?? project.title}
             loader={cloudinaryLoader}
+            unoptimized={!isCloudinary(project.image)}
             fill
             sizes={featured
               ? '(max-width:640px) 100vw, (max-width:1024px) 100vw, 66vw'
@@ -149,6 +150,13 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               {project.duration}
             </div>
             <div className="flex items-center gap-2">
+              {project.playStoreLink && (
+                <a href={project.playStoreLink} target="_blank" rel="noopener noreferrer"
+                  title="Get it on Google Play"
+                  className="p-1.5 rounded-lg text-emerald-500 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-all">
+                  <Smartphone className="w-3.5 h-3.5" />
+                </a>
+              )}
               {project.demoLink && (
                 <a href={project.demoLink} target="_blank" rel="noopener noreferrer"
                   title="Live Demo"
@@ -216,7 +224,8 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({
           </div>
         </motion.div>
 
-        {/* Bento grid — every 4th cycle: positions 0,3 are featured (col-span-2 in 3-col) */}
+        {/* Bento grid — every 3rd card is featured (col-span-2), so each 3-col row
+            tiles exactly: [wide, normal] / [normal, wide] / … */}
         <motion.div variants={itemVariants}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
           {projects.map((p, i) => (

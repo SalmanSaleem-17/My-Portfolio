@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 700" width="1600" height="700" role="img" aria-label="Goldify — Gold Rate &amp; Converter, Android app on Google Play">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#080808"/>
+      <stop offset="55%" stop-color="#141210"/>
+      <stop offset="100%" stop-color="#251d0b"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFE08A"/>
+      <stop offset="45%" stop-color="#F5B301"/>
+      <stop offset="100%" stop-color="#B8860B"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#F5B301" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#F5B301" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="play" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0F9D58"/>
+      <stop offset="100%" stop-color="#3DDC84"/>
+    </linearGradient>
+    <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="14"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="700" fill="url(#bg)"/>
+  <circle cx="1240" cy="330" r="430" fill="url(#glow)"/>
+
+  <!-- ── App icon: glowing gold "G" plate above a stack of gold bars ── -->
+  <g transform="translate(104 196)">
+    <rect width="252" height="252" rx="58" fill="#0B0B0B" stroke="#F5B301" stroke-opacity="0.28" stroke-width="2"/>
+    <circle cx="126" cy="118" r="86" fill="url(#glow)" filter="url(#soft)"/>
+
+    <!-- G plate -->
+    <rect x="66" y="44" width="120" height="112" rx="26" fill="none" stroke="url(#gold)" stroke-width="9"/>
+    <text x="126" y="128" font-family="Sora, Manrope, Segoe UI, sans-serif" font-size="82" font-weight="800"
+          fill="url(#gold)" text-anchor="middle">G</text>
+
+    <!-- gold bar stack -->
+    <g fill="url(#gold)">
+      <rect x="52"  y="170" width="66" height="26" rx="7"/>
+      <rect x="134" y="170" width="66" height="26" rx="7"/>
+      <rect x="93"  y="204" width="66" height="26" rx="7"/>
+    </g>
+  </g>
+
+  <!-- ── Wordmark + copy ── -->
+  <g transform="translate(408 0)">
+    <text x="0" y="288" font-family="Sora, Manrope, Segoe UI, sans-serif" font-size="88" font-weight="800" fill="#FFFFFF">Goldify</text>
+    <text x="0" y="352" font-family="Manrope, Segoe UI, sans-serif" font-size="40" font-weight="600" fill="url(#gold)">Gold Rate &amp; Converter</text>
+    <text x="0" y="408" font-family="Manrope, Segoe UI, sans-serif" font-size="25" font-weight="500" fill="#9CA3AF">
+      Live country-aware rates · Universal converters · Shop records
+    </text>
+
+    <!-- Google Play chip -->
+    <g transform="translate(0 446)">
+      <rect width="326" height="60" rx="30" fill="url(#play)" fill-opacity="0.14" stroke="#3DDC84" stroke-opacity="0.5" stroke-width="2"/>
+      <path d="M30 17 L60 30 L30 43 Z" fill="url(#play)"/>
+      <text x="80" y="39" font-family="Manrope, Segoe UI, sans-serif" font-size="24" font-weight="700" fill="#3DDC84">Live on Google Play</text>
+    </g>
+
+    <!-- tech chips -->
+    <g transform="translate(356 446)" font-family="Manrope, Segoe UI, sans-serif" font-size="22" font-weight="600" fill="#D1D5DB">
+      <rect width="196" height="60" rx="30" fill="#FFFFFF" fill-opacity="0.06" stroke="#FFFFFF" stroke-opacity="0.14"/>
+      <text x="98" y="38" text-anchor="middle">React Native</text>
+      <rect x="216" width="122" height="60" rx="30" fill="#FFFFFF" fill-opacity="0.06" stroke="#FFFFFF" stroke-opacity="0.14"/>
+      <text x="277" y="38" text-anchor="middle">Expo</text>
+    </g>
+  </g>
+
+  <rect y="694" width="1600" height="6" fill="url(#gold)"/>
+</svg>

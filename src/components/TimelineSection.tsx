@@ -2,7 +2,7 @@
 
 import { memo } from 'react';
 import { motion } from 'framer-motion';
-import { GraduationCap, Briefcase, Rocket } from 'lucide-react';
+import { GraduationCap, Briefcase, Rocket, Smartphone } from 'lucide-react';
 import { containerVariants, itemVariants } from '@/utils/animations';
 import SectionBadge from '@/components/projects/SectionBadge';
 
@@ -18,6 +18,7 @@ const TIMELINE = [
   { period: '2024',          title: 'Shipped Jewel Heaven',                             org: 'Premium e-commerce jewelry platform',                  type: 'Milestone',  icon: Rocket },
   { period: '2025',          title: 'Launched Goldify Pro & GoldPrice Converter',       org: 'Production FinTech platforms serving 100+ countries',   type: 'Milestone',  icon: Rocket },
   { period: '2026',          title: 'Released ScaleRecipe & Premium Converters',        org: '159+ tools across finance, health & everyday utilities', type: 'Milestone', icon: Rocket },
+  { period: '2026',          title: 'Published Goldify on Google Play',                 org: 'First Android app — React Native & Expo, live on the Play Store', type: 'Milestone', icon: Smartphone },
 ] as const;
 
 const TimelineSection = memo(() => (
@@ -31,7 +32,7 @@ const TimelineSection = memo(() => (
     <SectionBadge
       label="My journey"
       title="Experience & Education"
-      description="A snapshot of how I've grown — from Computer Science studies to shipping production apps used across 100+ countries."
+      description="A snapshot of how I've grown — from Computer Science studies to shipping production web platforms across 100+ countries and publishing Android apps on Google Play."
       itemVariants={itemVariants}
     />
 

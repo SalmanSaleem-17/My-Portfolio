@@ -22,6 +22,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.8,
     },
+    {
+      // Privacy policy for the PrintBridge Android app — must stay crawlable and
+      // reachable: Google Play and AdMob both verify this URL.
+      url: `${SITE.url}/privacy/printbridge`,
+      lastModified: new Date('2026-08-28'),
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
   ]
 
   const projectRoutes: MetadataRoute.Sitemap = projects.map((p) => ({

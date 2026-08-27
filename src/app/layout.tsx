@@ -3,6 +3,7 @@ import { Sora, Manrope } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
 import ThreeBackground from '@/components/ThreeBackground'
 import JsonLd from '@/components/JsonLd'
 import { ThemeProvider } from '@/context/ThemeContext'
@@ -27,7 +28,7 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: 'Salman Saleem | Full-Stack MERN Developer (React & Next.js)',
+    default: 'Salman Saleem | Full-Stack Web & Android App Developer',
     template: '%s | Salman Saleem',
   },
   description: SITE.description,
@@ -56,6 +57,14 @@ export const metadata: Metadata = {
     'Web Developer Pakistan',
     'Web Developer Lahore',
     'Frontend Developer',
+    'Android App Developer',
+    'Mobile App Developer',
+    'React Native Developer',
+    'Hire Android Developer',
+    'App Developer Pakistan',
+    'App Developer Lahore',
+    'Google Play Developer',
+    'Goldify app',
     'Portfolio',
   ],
   category: 'technology',
@@ -65,7 +74,7 @@ export const metadata: Metadata = {
     apple: '/projects/SS-logo.png',
   },
   openGraph: {
-    title: 'Salman Saleem | Full-Stack MERN Developer',
+    title: 'Salman Saleem | Full-Stack Web & Android App Developer',
     description: SITE.description,
     url: SITE.url,
     siteName: SITE.name,
@@ -75,7 +84,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Salman Saleem | Full-Stack MERN Developer',
+    title: 'Salman Saleem | Full-Stack Web & Android App Developer',
     description: SITE.description,
   },
   robots: {
@@ -137,6 +146,7 @@ export default function RootLayout({
             <main className="min-h-screen">
               {children}
             </main>
+            <Footer />
           </div>
         </ThemeProvider>
         <Analytics />

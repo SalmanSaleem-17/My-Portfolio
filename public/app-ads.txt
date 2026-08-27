@@ -1,0 +1,2 @@
+# app-ads.txt — authorizes Google AdMob to sell ad inventory in apps by this developer.
+google.com, pub-5067154930063661, DIRECT, f08c47fec0942fa0
