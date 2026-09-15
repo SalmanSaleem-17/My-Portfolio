@@ -34,6 +34,7 @@ const APPS = [
 
 const LEGAL = [
   { label: 'PrintBridge — Privacy Policy', href: '/privacy/printbridge' },
+  { label: 'Calc441 — Privacy Policy', href: '/privacy/calc441' },
 ]
 
 const SOCIAL = [

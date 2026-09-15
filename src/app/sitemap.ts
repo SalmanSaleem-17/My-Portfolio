@@ -30,6 +30,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'yearly',
       priority: 0.3,
     },
+    {
+      // Privacy policy for the Calc441 scientific calculator app — linked from the
+      // app's Settings screen and verified by Google Play / AdMob.
+      url: `${SITE.url}/privacy/calc441`,
+      lastModified: new Date('2026-09-16'),
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
   ]
 
   const projectRoutes: MetadataRoute.Sitemap = projects.map((p) => ({
