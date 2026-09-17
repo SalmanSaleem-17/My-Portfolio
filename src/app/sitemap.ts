@@ -38,6 +38,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'yearly',
       priority: 0.3,
     },
+    {
+      // Privacy policy for the Checkers Master: Draughts game - linked from the
+      // app's Settings screen and verified by Google Play / AdMob.
+      url: `${SITE.url}/privacy/checkers-master`,
+      lastModified: new Date('2026-09-17'),
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
   ]
 
   const projectRoutes: MetadataRoute.Sitemap = projects.map((p) => ({
