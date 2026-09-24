@@ -7,8 +7,10 @@ import {
   Download, ArrowLeft, ExternalLink, GraduationCap,
   Briefcase, Code2, Star, Award, CheckCircle2,
 } from 'lucide-react';
+import { SiGoogleplay } from 'react-icons/si';
 import { projects } from '@/utils/data';
 import { skills }   from '@/utils/skillsData';
+import { playApps } from '@/utils/appsData';
 
 // ── Data ────────────────────────────────────────────────────────────────────
 
@@ -63,8 +65,50 @@ function Card({ children, className = '' }: { children: React.ReactNode; classNa
 
 // ── Page ─────────────────────────────────────────────────────────────────────
 
+// Web projects and published Android apps share one shape here so the resume
+// can list the whole portfolio in a single grid. Projects carrying a
+// playStoreLink are dropped: appsData already covers those from the store side,
+// so including both would print the same app twice.
+interface ResumeWork {
+  key: string
+  title: string
+  kind: 'Web' | 'Android'
+  category: string
+  live: boolean
+  description: string
+  tags: string[]
+  href?: string
+  accent: string
+}
+
+const WORK: ResumeWork[] = [
+  ...projects
+    .filter((p) => !('playStoreLink' in p))
+    .map((p) => ({
+      key: String(p.id),
+      title: p.title,
+      kind: 'Web' as const,
+      category: p.category,
+      live: p.status === 'Live Production',
+      description: p.description,
+      tags: p.technologies.slice(0, 4),
+      href: p.demoLink,
+      accent: p.colors.primary,
+    })),
+  ...playApps.map((a) => ({
+    key: a.packageId,
+    title: a.name,
+    kind: 'Android' as const,
+    category: a.category,
+    live: true,
+    description: a.summary,
+    tags: a.chips.slice(0, 4),
+    href: a.playUrl,
+    accent: a.accent.to,
+  })),
+]
+
 export default function ResumeView() {
-  const featured      = projects.slice(0, 4);
   const skillGroups   = SKILL_CATEGORIES.map(cat => ({
     cat,
     items: skills.filter(s => s.category === cat),
@@ -172,8 +216,10 @@ export default function ResumeView() {
             </div>
           </div>
 
-          {/* ── TWO-COLUMN BODY ── */}
-          <div className="grid lg:grid-cols-[290px_1fr] gap-6 items-start">
+          {/* ── BODY ── */}
+          <div className="space-y-5">
+
+          <div className="grid lg:grid-cols-[290px_1fr] gap-5 items-start">
 
             {/* ════════════════════════════════
                 LEFT SIDEBAR
@@ -207,39 +253,6 @@ export default function ResumeView() {
                 </div>
               </Card>
 
-              {/* Technical Skills */}
-              <Card>
-                <Heading icon={Code2} title="Technical Skills" />
-                <div className="space-y-5">
-                  {skillGroups.map(({ cat, items }) => (
-                    <div key={cat}>
-                      <p className="text-[10px] font-black uppercase tracking-[0.15em] text-slate-400 dark:text-slate-500 mb-2.5">
-                        {cat}
-                      </p>
-                      <div className="space-y-2.5">
-                        {items.map(skill => {
-                          const b = BAR[skill.level];
-                          return (
-                            <div key={skill.name}>
-                              <div className="flex items-center justify-between mb-1">
-                                <span className="text-[12px] font-semibold text-slate-700 dark:text-slate-300">
-                                  {skill.name}
-                                </span>
-                                <span className={`text-[10px] font-bold ${b.label}`}>
-                                  {skill.level}
-                                </span>
-                              </div>
-                              <div className="h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
-                                <div className={`h-full ${b.bg} ${b.width} rounded-full`} />
-                              </div>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </Card>
             </div>
 
             {/* ════════════════════════════════
@@ -279,51 +292,118 @@ export default function ResumeView() {
                 </div>
               </Card>
 
-              {/* Featured Projects */}
-              <Card>
-                <Heading icon={Award} title="Featured Projects" />
-                <div className="space-y-5">
-                  {featured.map(p => (
-                    <div key={p.id}
-                      className="relative pl-4 border-l-2 border-slate-200 dark:border-slate-700/60 hover:border-purple-400 dark:hover:border-purple-500 transition-colors group">
-                      <div className="flex flex-wrap items-start justify-between gap-2 mb-1">
-                        <h4 className="font-bold text-[13px] text-slate-900 dark:text-white group-hover:text-purple-700 dark:group-hover:text-purple-400 transition-colors">
-                          {p.title}
-                        </h4>
-                        <div className="flex items-center gap-2">
-                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-200/80 dark:border-slate-700/60">
-                            {p.category}
-                          </span>
-                          {p.status === 'Live Production' && (
-                            <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/40">
-                              Live
-                            </span>
-                          )}
-                          {p.demoLink && (
-                            <a href={p.demoLink} target="_blank" rel="noopener noreferrer"
-                              aria-label={`Visit ${p.title} live site`}
-                              className="print:hidden text-slate-400 hover:text-purple-500 transition-colors">
-                              <ExternalLink className="w-3.5 h-3.5" />
-                            </a>
-                          )}
-                        </div>
-                      </div>
-                      <p className="text-[12px] text-slate-500 dark:text-slate-400 leading-relaxed mb-2">
-                        {p.description}
-                      </p>
-                      <div className="flex flex-wrap gap-1">
-                        {p.technologies.slice(0, 5).map(t => (
-                          <span key={t}
-                            className="text-[10px] px-2 py-0.5 rounded-full font-semibold bg-purple-50 dark:bg-purple-950/20 text-purple-600 dark:text-purple-400 border border-purple-100 dark:border-purple-900/30">
-                            {t}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </Card>
             </div>
+          </div>
+
+          {/* Full-width: the portfolio grid needs the room */}
+          {/* Projects & Apps — the full portfolio, web and Android */}
+          <Card>
+            <Heading icon={Award} title={`Projects & Apps · ${WORK.length}`} />
+            <div className="grid sm:grid-cols-2 xl:grid-cols-3 print:grid-cols-2 gap-3">
+              {WORK.map((w) => (
+                <div
+                  key={w.key}
+                  className="group relative overflow-hidden rounded-xl p-3.5 pl-4
+                    bg-slate-50/70 dark:bg-slate-800/40 print:bg-white
+                    border border-slate-200/70 dark:border-slate-700/50
+                    hover:border-purple-300 dark:hover:border-purple-600/60
+                    hover:shadow-md transition-all duration-200 break-inside-avoid"
+                >
+                  {/* Accent rail in the project's own colour */}
+                  <span
+                    className="absolute left-0 inset-y-0 w-1"
+                    style={{ background: w.accent }}
+                    aria-hidden="true"
+                  />
+
+                  <div className="flex items-start justify-between gap-2 mb-1.5">
+                    <h4 className="font-bold text-[13px] leading-snug text-slate-900 dark:text-white group-hover:text-purple-700 dark:group-hover:text-purple-400 transition-colors">
+                      {w.title}
+                    </h4>
+                    {w.href && (
+                      <a
+                        href={w.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`Open ${w.title}${w.kind === 'Android' ? ' on Google Play' : ''}`}
+                        className="print:hidden shrink-0 mt-0.5 text-slate-400 hover:text-purple-500 transition-colors"
+                      >
+                        {w.kind === 'Android'
+                          ? <SiGoogleplay className="w-3.5 h-3.5" aria-hidden="true" />
+                          : <ExternalLink className="w-3.5 h-3.5" />}
+                      </a>
+                    )}
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-1.5 mb-2">
+                    <span className="text-[9px] font-black uppercase tracking-[0.1em] px-1.5 py-0.5 rounded
+                      bg-slate-200/70 dark:bg-slate-700/60 text-slate-600 dark:text-slate-300">
+                      {w.kind}
+                    </span>
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-white dark:bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-200/80 dark:border-slate-700/60">
+                      {w.category}
+                    </span>
+                    {w.live && (
+                      <span className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/40">
+                        <span className="w-1 h-1 rounded-full bg-emerald-500" />
+                        Live
+                      </span>
+                    )}
+                  </div>
+
+                  <p className="text-[11.5px] text-slate-500 dark:text-slate-400 leading-relaxed mb-2 line-clamp-3">
+                    {w.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-1">
+                    {w.tags.map((t) => (
+                      <span
+                        key={t}
+                        className="text-[9.5px] px-1.5 py-0.5 rounded font-semibold bg-purple-50 dark:bg-purple-950/20 text-purple-600 dark:text-purple-400 border border-purple-100 dark:border-purple-900/30"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Card>
+
+          {/* Full-width: ~50 skills balanced across columns instead of one tall rail */}
+          {/* Technical Skills */}
+          <Card>
+            <Heading icon={Code2} title="Technical Skills" />
+            <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 print:columns-3 gap-x-8">
+              {skillGroups.map(({ cat, items }) => (
+                <div key={cat} className="break-inside-avoid mb-6">
+                  <p className="text-[10px] font-black uppercase tracking-[0.15em] text-slate-400 dark:text-slate-500 mb-2.5">
+                    {cat}
+                  </p>
+                  <div className="space-y-2.5">
+                    {items.map(skill => {
+                      const b = BAR[skill.level];
+                      return (
+                        <div key={skill.name}>
+                          <div className="flex items-center justify-between mb-1">
+                            <span className="text-[12px] font-semibold text-slate-700 dark:text-slate-300">
+                              {skill.name}
+                            </span>
+                            <span className={`text-[10px] font-bold ${b.label}`}>
+                              {skill.level}
+                            </span>
+                          </div>
+                          <div className="h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                            <div className={`h-full ${b.bg} ${b.width} rounded-full`} />
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Card>
           </div>
 
           {/* ── Footer CTAs (hidden on print) ── */}
