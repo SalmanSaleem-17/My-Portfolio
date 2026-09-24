@@ -40,8 +40,8 @@ const SERVICES = [
     title: 'Android App Development',
     desc: 'Cross-platform mobile apps built and shipped end to end — from React Native build to a live Google Play listing.',
     tags: ['React Native', 'Expo', 'Play Store'],
-    href: '/projects/goldify-android-app',
-    hrefLabel: 'See Goldify on Android',
+    href: '/#apps',
+    hrefLabel: 'See my apps on Google Play',
   },
 ] as const;
 

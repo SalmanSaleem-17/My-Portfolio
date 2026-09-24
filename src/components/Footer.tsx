@@ -21,14 +21,19 @@ const EXPLORE = [
 
 // Android apps — the Play listing and its case study, reachable from every page.
 const APPS = [
+  { label: 'All Android apps', href: '/#apps' },
   {
     label: 'Goldify — Google Play',
     href: 'https://play.google.com/store/apps/details?id=com.goldify.pro',
   },
+  {
+    label: 'Land Calc — Google Play',
+    href: 'https://play.google.com/store/apps/details?id=com.premiumconverters.landarea',
+  },
   { label: 'Goldify — Case Study', href: '/projects/goldify-android-app' },
   {
-    label: 'All apps by me',
-    href: 'https://play.google.com/store/apps/dev?id=4945636568810127963',
+    label: 'Play developer profile',
+    href: 'https://play.google.com/store/apps/developer?id=Muhammad+Salman+Saleem',
   },
 ]
 

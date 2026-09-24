@@ -209,12 +209,12 @@ export default function Calc441PrivacyPage() {
                 declared so that Google&rsquo;s advertising SDK can use the resettable
                 Android Advertising ID, as described in section&nbsp;3.
               </Term>
-              <Term label="Photos and media (write only)">
-                requested the first time you choose{' '}
+              <Term label="Storage — none">
+                the app declares no photo, media or storage permissions. When you choose{' '}
                 <strong className="text-slate-800 dark:text-white">Save image</strong> in
-                the Step-by-Step Calculation screen, so the app can save that image to
-                your gallery. The app never reads your existing photos. You can decline
-                and still share the image through other apps instead.
+                the Step-by-Step Calculation screen, Android shows its own folder picker
+                and the app writes the image only into the folder you select. It never
+                reads your existing photos or files.
               </Term>
               <Term label="Vibration">
                 for optional haptic feedback on key presses.
@@ -231,7 +231,7 @@ export default function Calc441PrivacyPage() {
               The Step-by-Step Calculation screen can turn a worked solution into an
               image. That image is generated on your device from your own calculation.
               If you tap <strong className="text-slate-800 dark:text-white">Save image</strong>, it is
-              written to your photo library; if you tap{' '}
+              written into a folder you choose through Android&rsquo;s system picker; if you tap{' '}
               <strong className="text-slate-800 dark:text-white">Share</strong>, it is handed to the
               app you pick through the Android share sheet. We never receive it.
             </p>
@@ -350,7 +350,7 @@ export default function Calc441PrivacyPage() {
               — history, variables, favourites and settings. Inside the app you can also
               clear the history, reset variables, or reset settings at any time from{' '}
               <strong className="text-slate-800 dark:text-white">Settings → Data</strong>.
-              Images you saved to your gallery remain there until you delete them.
+              Images you saved to a folder remain there until you delete them.
             </p>
             <p>
               Because we hold no copy, there is nothing for us to delete on your behalf

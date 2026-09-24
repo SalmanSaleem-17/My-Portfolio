@@ -110,7 +110,7 @@ export default function ResumeView() {
             </Link>
             <div className="flex items-center gap-2">
               <a
-                href="/CV-Salman-Saleem.pdf"
+                href="/Resume-Salman-Saleem.pdf"
                 download
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all shadow-sm"
               >
@@ -333,7 +333,7 @@ export default function ResumeView() {
               <ArrowLeft className="w-4 h-4" /> Portfolio
             </Link>
             <a
-              href="/CV-Salman-Saleem.pdf"
+              href="/Resume-Salman-Saleem.pdf"
               download
               className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-bold bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all shadow-sm"
             >

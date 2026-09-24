@@ -7,6 +7,7 @@
 
 import { projects } from '@/utils/data';
 import { skills } from '@/utils/skillsData';
+import { playApps } from '@/utils/appsData';
 
 // ── Core identity constants ──────────────────────────────────────────────────
 export const SITE = {
@@ -36,7 +37,7 @@ export const SITE = {
   sameAs: [
     'https://github.com/SalmanSaleem-17',
     // Google Play developer page — anchors the "app developer" half of the entity.
-    'https://play.google.com/store/apps/dev?id=4945636568810127963',
+    'https://play.google.com/store/apps/developer?id=Muhammad+Salman+Saleem',
     'https://www.linkedin.com/in/muhammad-salman-saleem-8a9a96266',
     'https://www.upwork.com/freelancers/salmansaleem17',
     'https://x.com/salmansaleem_17',
@@ -177,6 +178,40 @@ export function breadcrumbSchema(trail: { name: string; url: string }[]) {
   }
 }
 
+// ── Published Android apps ───────────────────────────────────────────────────
+// One MobileApplication per live Play listing, each authored by the same Person
+// @id, so Google resolves "Muhammad Salman Saleem" as the developer behind them.
+// A free `offers` block is what makes the app rich result eligible.
+export function playAppSchemas() {
+  return playApps.map((app) => ({
+    '@type': 'MobileApplication',
+    '@id': `${SITE.url}/#app-${app.packageId}`,
+    name: app.name,
+    alternateName: app.tagline,
+    description: app.summary,
+    applicationCategory: 'MobileApplication',
+    applicationSubCategory: app.category,
+    operatingSystem: 'Android',
+    url: app.playUrl,
+    installUrl: app.playUrl,
+    downloadUrl: app.playUrl,
+    image: `${SITE.url}${app.icon}`,
+    screenshot: app.screenshots.map((s) => `${SITE.url}${s.src}`),
+    dateModified: app.updatedISO,
+    inLanguage: SITE.language,
+    featureList: app.highlights,
+    author: { '@id': PERSON_ID },
+    creator: { '@id': PERSON_ID },
+    publisher: { '@id': PERSON_ID },
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+      availability: 'https://schema.org/InStock',
+    },
+  }))
+}
+
 // ── Home page: ProfilePage graph (Person + WebSite + Organization) ───────────
 export function homePageGraph() {
   return {
@@ -202,6 +237,7 @@ export function homePageGraph() {
       personSchema(),
       organizationSchema(),
       websiteSchema(),
+      ...playAppSchemas(),
     ],
   }
 }

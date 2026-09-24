@@ -9,10 +9,11 @@ import {
   ArrowLeft, ExternalLink, Github, CheckCircle2,
   Calendar, Clock, Monitor, Layers, Globe,
   Code2, Cpu, Database, Shield, Puzzle, ArrowUpRight, Sparkles,
-  Smartphone, Play, Wifi, BatteryFull, Signal,
+  Smartphone, Wifi, BatteryFull, Signal,
 } from 'lucide-react';
 import { projects } from '@/utils/data';
 import cloudinaryLoader, { isCloudinary } from '@/utils/imageLoader';
+import { SiGoogleplay } from 'react-icons/si';
 
 function getSlug(title: string) {
   return title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -133,7 +134,7 @@ export default function ProjectView({ slug }: { slug: string }) {
                     rel="noopener noreferrer"
                     className="group inline-flex items-center gap-2.5 px-7 py-3.5 rounded-2xl text-white font-bold text-sm [background:var(--proj-gradient)] hover:opacity-95 transition-all hover:scale-[1.03] hover:-translate-y-0.5 shadow-xl ring-1 ring-white/20"
                   >
-                    <Play className="w-4 h-4 fill-current" />
+                    <SiGoogleplay className="w-4 h-4" aria-hidden="true" />
                     Get it on Google Play
                     <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </a>
@@ -470,7 +471,7 @@ export default function ProjectView({ slug }: { slug: string }) {
               rel="noopener noreferrer"
               className="group inline-flex items-center gap-2.5 px-7 py-3.5 rounded-2xl text-white font-bold text-sm hover:opacity-95 transition-all hover:scale-[1.03] hover:-translate-y-0.5 shadow-xl ring-1 ring-white/20 [background:var(--proj-gradient)]"
             >
-              <Play className="w-4 h-4 fill-current" />
+              <SiGoogleplay className="w-4 h-4" aria-hidden="true" />
               Get it on Google Play
               <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>

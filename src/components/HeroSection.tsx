@@ -112,10 +112,8 @@ export default function HeroSection() {
           {/* Google Play badge */}
           <div className="mb-4 hero-rise" style={delay(450)}>
             <a
-              href="https://play.google.com/store/apps/details?id=com.goldify.pro"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Goldify on Google Play — Gold Rate &amp; Converter Android app"
+              href="/#apps"
+              aria-label="Android apps published on Google Play"
               className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full
                 bg-white/80 dark:bg-slate-800/60
                 border border-emerald-200 dark:border-emerald-500/40
@@ -123,7 +121,7 @@ export default function HeroSection() {
                 hover:border-emerald-400 dark:hover:border-emerald-400/70 transition-colors"
             >
               <Smartphone className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-              <span>Goldify — live on Google Play</span>
+              <span>2 apps live on Google Play</span>
               <ExternalLink className="w-3 h-3 opacity-60 shrink-0" />
             </a>
           </div>
@@ -179,10 +177,8 @@ export default function HeroSection() {
             {/* Google Play badge */}
             <div className="mb-6 hero-rise" style={delay(350)}>
               <a
-                href="https://play.google.com/store/apps/details?id=com.goldify.pro"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Goldify on Google Play — Gold Rate &amp; Converter Android app"
+                href="/#apps"
+                aria-label="Android apps published on Google Play"
                 className="inline-flex items-center gap-2 px-5 py-2 rounded-full
                   bg-white/80 dark:bg-slate-800/60
                   border border-emerald-200 dark:border-emerald-500/40
@@ -190,7 +186,7 @@ export default function HeroSection() {
                   hover:border-emerald-400 dark:hover:border-emerald-400/70 transition-colors"
               >
                 <Smartphone className="w-4 h-4 text-emerald-500 shrink-0" />
-                <span>Goldify — live on Google Play</span>
+                <span>2 apps live on Google Play</span>
                 <ExternalLink className="w-3.5 h-3.5 opacity-60 shrink-0" />
               </a>
             </div>

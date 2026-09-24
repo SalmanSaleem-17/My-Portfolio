@@ -36,7 +36,7 @@ const FAQS = [
   },
   {
     q: 'Do you build mobile apps as well as websites?',
-    a: 'Yes — I build and publish Android apps as well as web applications. Goldify: Gold Rate & Converter is live on Google Play under my developer account (Muhammad Salman Saleem); it is built with React Native and Expo and ships the same gold-pricing toolkit as the Goldify Pro web platform. I handle the full path from build to store listing, including Play Console setup, privacy policy and AdMob monetization.',
+    a: 'Yes — I build and publish Android apps as well as web applications. Two are live on Google Play under my own developer account (Muhammad Salman Saleem): Goldify: Gold Rate & Converter, a live gold-rate and conversion toolkit for jewellers, and Land Calc: Area Tools & Split, an offline plot-area calculator and land unit converter with PDF reports in 8 languages. I handle the full path from build to store listing, including Play Console setup, privacy policy and AdMob monetization.',
   },
   {
     q: "What's a typical project timeline?",

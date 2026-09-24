@@ -5,9 +5,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Star, ArrowUpRight, Globe, Sparkles } from 'lucide-react';
+import { SiGoogleplay } from 'react-icons/si';
 import { projects } from '@/utils/data';
 import { getSlug } from '@/utils/seo';
 import cloudinaryLoader, { isCloudinary } from '@/utils/imageLoader';
+import { playApps } from '@/utils/appsData';
 
 // Spotlight the strongest project (Goldify Pro). Metrics come straight from its
 // documented achievements.
@@ -20,6 +22,8 @@ const METRICS = [
 
 const FeaturedCaseStudy = memo(() => {
   const slug = getSlug(project.title);
+  // Goldify Pro also ships as an Android app — surface the listing here.
+  const companionApp = playApps.find((a) => a.webProjectSlug === slug);
 
   return (
     <motion.div
@@ -88,6 +92,17 @@ const FeaturedCaseStudy = memo(() => {
                     bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700
                     hover:bg-slate-50 dark:hover:bg-slate-700 transition-all hover:scale-[1.03] shadow-sm">
                   <Globe className="w-4 h-4" /> Visit Live
+                </a>
+              )}
+              {companionApp && (
+                <a href={companionApp.playUrl} target="_blank" rel="noopener noreferrer"
+                  aria-label={`${companionApp.name} on Google Play`}
+                  className="group/app inline-flex items-center gap-2 px-6 py-3 rounded-2xl font-bold text-sm
+                    bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700
+                    hover:bg-slate-50 dark:hover:bg-slate-700 transition-all hover:scale-[1.03] shadow-sm">
+                  <SiGoogleplay className="w-4 h-4 text-emerald-600 dark:text-emerald-400" aria-hidden="true" />
+                  Visit App
+                  <ArrowUpRight className="w-3.5 h-3.5 opacity-60 transition-transform group-hover/app:translate-x-0.5 group-hover/app:-translate-y-0.5" />
                 </a>
               )}
             </div>

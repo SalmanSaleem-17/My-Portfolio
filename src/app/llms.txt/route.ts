@@ -7,6 +7,7 @@
 import { projects } from '@/utils/data'
 import { skills } from '@/utils/skillsData'
 import { SITE, getSlug } from '@/utils/seo'
+import { playApps, PLAY_DEVELOPER_URL } from '@/utils/appsData'
 
 export const dynamic = 'force-static'
 
@@ -20,6 +21,13 @@ export function GET() {
     .map(
       (p) =>
         `- [${p.title}](${p.demoLink || p.link}) — ${p.category}. ${p.description}`,
+    )
+    .join('\n')
+
+  const appList = playApps
+    .map(
+      (a) =>
+        `- [${a.name}](${a.playUrl}) — Android, ${a.category}. ${a.summary}`,
     )
     .join('\n')
 
@@ -57,9 +65,10 @@ ${projectList}
 ## Case studies
 ${caseStudies}
 
-## Apps on Google Play
-- Goldify: Gold Rate & Converter — Android app (React Native + Expo) by Muhammad Salman Saleem: https://play.google.com/store/apps/details?id=com.goldify.pro
-- Google Play developer page: https://play.google.com/store/apps/dev?id=4945636568810127963
+## Android apps on Google Play
+Published under the developer account "${SITE.legalName}" — see ${SITE.url}/#apps
+${appList}
+- Google Play developer page: ${PLAY_DEVELOPER_URL}
 
 ## Profiles & links
 ${SITE.sameAs.map((u) => `- ${u}`).join('\n')}

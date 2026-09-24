@@ -13,6 +13,7 @@ import AboutSection      from "@/components/AboutSection";
 import ServicesSection   from "@/components/ServicesSection";
 import SkillsSection     from "@/components/SkillsSection";
 import TimelineSection   from "@/components/TimelineSection";
+import AppsSection       from "@/components/AppsSection";
 import FeaturedCaseStudy from "@/components/FeaturedCaseStudy";
 import ProjectsSection   from "@/components/ProjectsSection";
 import GithubSection     from "@/components/GithubSection";
@@ -60,12 +61,16 @@ export default function HomePage() {
           <StatsSection />
         </section>
 
+        <section id="apps" aria-label="Android apps on Google Play">
+          <AppsSection />
+        </section>
+
         <section id="projects" aria-label="Projects" className="space-y-16">
           <FeaturedCaseStudy />
           <ProjectsSection
             containerVariants={containerVariants}
             itemVariants={itemVariants}
-            projects={projects}
+            projects={projects.filter((p) => !('playStoreLink' in p))}
           />
         </section>
 
