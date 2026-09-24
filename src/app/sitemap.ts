@@ -46,6 +46,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'yearly',
       priority: 0.3,
     },
+    {
+      // Privacy policy for the ScanDoc document scanner app - linked from the
+      // app's Settings screen and verified by Google Play.
+      url: `${SITE.url}/privacy/scandoc`,
+      lastModified: new Date('2026-09-25'),
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
   ]
 
   const projectRoutes: MetadataRoute.Sitemap = projects.map((p) => ({
