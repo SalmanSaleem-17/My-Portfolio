@@ -7,7 +7,7 @@
 
 import type { Metadata } from 'next'
 import {
-  Smartphone, KeyRound, Megaphone, ShieldCheck, Send, Share2, Trash2,
+  Smartphone, KeyRound, Megaphone, ShieldCheck, Send, Save, Share2, Trash2,
   Lock, Baby, Scale, RefreshCw, Mail, WifiOff,
 } from 'lucide-react'
 import { SITE } from '@/utils/seo'
@@ -23,7 +23,7 @@ const UPDATED = 'November 23, 2026'
 
 export const metadata: Metadata = {
   title: `${APP} Privacy Policy`,
-  description: `Privacy policy for ${APP}, the offline Sudoku game for Android. What the app stores on your device, the permissions it needs, what a shared challenge code contains, how optional Google AdMob rewarded ads work, and how to change your ad choices.`,
+  description: `Privacy policy for ${APP}, the offline Sudoku game for Android. What the app stores on your device, the permissions it needs, what a shared challenge code or backup file contains, how optional Google AdMob rewarded ads work, and how to change your ad choices.`,
   alternates: { canonical: url },
   openGraph: {
     title: `${APP} — Privacy Policy`,
@@ -84,10 +84,10 @@ export default function SudokuStudioPrivacyPage() {
             {APP} is a Sudoku game that plays entirely offline. There are no accounts, no
             sign-up, no cloud saves, no analytics and no servers of ours. Your puzzles,
             progress, statistics and settings stay on your device; the only game data that
-            ever leaves it is a challenge code that you choose to share yourself. The game is
-            free; the only advertising is an optional rewarded video, served by Google AdMob,
-            that you can choose to watch to earn hint credits. Google AdMob is the only third
-            party involved.
+            ever leaves it is a challenge code or a backup file that you choose to share or
+            save yourself. The game is free; the only advertising is an optional rewarded
+            video, served by Google AdMob, that plays only when you ask for one. Google AdMob
+            is the only third party involved.
           </>
         }
         caption={`${APP} · Sudoku puzzles · Plays completely offline`}
@@ -95,17 +95,17 @@ export default function SudokuStudioPrivacyPage() {
         <Section icon={WifiOff} title="1. The game works offline">
           <p>
             Everything in {APP} runs on your device with no connection: the 9×9 puzzles, the
-            smaller 4×4 and 6×6 boards, the Diagonal, Killer and Irregular variants, the Daily
-            Puzzle, the Weekly stages, Speed Round, Challenge a Friend, the technique packs and
-            practice drills, statistics, achievements, notes, undo, the timer and the
-            step-by-step hints. All puzzles are bundled inside the app. The daily and weekly
+            120 Levels, the smaller 4×4 and 6×6 boards, the Diagonal, Killer and Irregular
+            variants, the Daily Puzzle, the Weekly stages, Speed Round, Challenge a Friend,
+            puzzles you type in yourself, the technique packs and practice drills, statistics,
+            achievements, notes, undo, the timer and the step-by-step hints. All puzzles are bundled inside the app. The daily and weekly
             puzzles are chosen from that bundle using your device&rsquo;s own calendar date.
           </p>
           <p>
             The app makes <B>no network requests of its own</B>. The only component that uses
             the internet is Google&rsquo;s advertising and consent software, described in
-            sections&nbsp;4 and&nbsp;5. Turn off your connection and everything except earning
-            hint credits from ads keeps working exactly as before.
+            sections&nbsp;4 and&nbsp;5. Turn off your connection and everything except the
+            optional ad offers keeps working exactly as before.
           </p>
         </Section>
 
@@ -116,17 +116,18 @@ export default function SudokuStudioPrivacyPage() {
           </p>
           <ul className={LIST}>
             <Term label="Games in progress">
-              the games you can come back to: a classic game, a daily puzzle, a weekly stage, a
-              challenge, a technique-pack puzzle, a mini game, a speed round, and your place in
-              each mini board and variant. Each is saved with the digits you have entered, your
-              pencil notes, your undo history, the time you have played, your mistake and hint
-              counts, and any time or mistake limit you chose.
+              the games you can come back to: a classic game (including a puzzle you typed in),
+              a level, a daily puzzle, a weekly stage, a challenge, a technique-pack puzzle, a
+              mini game, a speed round, and your place in each mini board and variant. Each is
+              saved with the digits you have entered, your pencil notes and colour marks, your
+              undo history, the time you have played, your mistake and hint counts, and its
+              time and mistake limits.
             </Term>
             <Term label="Completed games">
               for each game you finish: which puzzle it was, its difficulty and board size,
               your time, mistakes and hints used, when you finished it, the calendar date or
-              week it belongs to for daily and weekly puzzles, and the challenge or technique
-              pack it was part of.
+              week it belongs to for daily and weekly puzzles, the level number and stars for
+              a level, and the challenge or technique pack it was part of.
             </Term>
             <Term label="Mistake review">
               for 9×9 games, each incorrect entry you made (the cell, the digit you entered,
@@ -141,10 +142,14 @@ export default function SudokuStudioPrivacyPage() {
               your own time for each challenge, and any friend&rsquo;s result code you paste
               into the app to compare times (see section&nbsp;6).
             </Term>
-            <Term label="Hint credits">
-              your current credit balance, plus a short record of each reward earned and each
-              credit spent (a random identifier and a timestamp). These records exist only so a
-              reward or a spend can never be counted twice.
+            <Term label="Streak repairs">
+              the dates of any missed Daily Puzzle days you repaired.
+            </Term>
+            <Term label="Hint credits and rewards">
+              your current credit balance, plus a short record of each reward paid and each
+              credit spent (an identifier such as the ad attempt or the level cleared, and a
+              timestamp). These records exist only so a reward or a spend can never be counted
+              twice.
             </Term>
             <Term label="Hint explanations">
               the explanation for a hint you have already revealed, so reopening it for the
@@ -152,12 +157,14 @@ export default function SudokuStudioPrivacyPage() {
             </Term>
             <Term label="Settings">
               elapsed timer, mistake feedback, smart notes, pick number first, vibration,
-              reduce motion and board theme.
+              reduce motion, board theme, and whether the daily reminder is on and at what
+              time.
             </Term>
           </ul>
           <p>
-            Your statistics, streaks and achievements are calculated on your device from the
-            completed games above; they are not stored anywhere else.
+            Your statistics, streaks, level stars, experience, player level and achievements
+            are calculated on your device from the completed games above; they are not stored
+            anywhere else.
           </p>
           <p>
             None of this is transmitted to us or to anyone else. We operate no backend and hold
@@ -180,12 +187,20 @@ export default function SudokuStudioPrivacyPage() {
               for optional haptic feedback when you enter a digit. You can turn it off in{' '}
               <B>Settings → Comfort → Vibration</B>.
             </Term>
+            <Term label="Notifications">
+              requested only if you turn on <B>Settings → Daily reminder</B>. The reminder is
+              a notification scheduled on your own device once a day; no push service is used
+              and nothing is sent anywhere. A related entry lets the reminder be set again
+              after the phone restarts. Turn the reminder off at any time in the same place.
+            </Term>
           </ul>
           <p>
             The app does not request access to your location, contacts, camera, microphone,
-            photos, call logs or SMS, and it does not read or write your files. Some standard
-            entries are declared by the framework the app is built with (for example storage
-            access on Android&nbsp;12 and older); {APP} does not use them. Android&rsquo;s
+            photos, call logs or SMS. It touches files only when you save or restore a backup
+            (section&nbsp;7): it writes one backup file for you to save, and reads the one file
+            you pick. Some standard entries are declared by the framework the app is built with
+            (for example storage access on Android&nbsp;12 and older); {APP} does not use them
+            for anything else. Android&rsquo;s
             automatic backup is turned off for this app, so your game data is not copied to
             Google Drive.
           </p>
@@ -194,17 +209,34 @@ export default function SudokuStudioPrivacyPage() {
         <Section icon={Megaphone} title="4. Advertising (Google AdMob)">
           <p>
             {APP} shows exactly one kind of ad: an <B>optional rewarded video</B>, served
-            through <B>Google AdMob</B>. It appears only when you open the hint panel in a 9×9
-            game, choose &ldquo;Earn hint credits&rdquo; and then confirm &ldquo;Watch
-            ad&rdquo;. Finishing one ad adds two hint credits.
+            through <B>Google AdMob</B>. It plays only when you ask for it, in one of three
+            places:
+          </p>
+          <ul className={LIST}>
+            <Term label="Hint panel">
+              choose &ldquo;Earn hint credits&rdquo; and confirm &ldquo;Watch ad&rdquo; to
+              receive two hint credits.
+            </Term>
+            <Term label="Levels">
+              when a level ends because you reached its mistake limit, you may watch one ad to
+              get one more mistake and keep playing, up to twice per level attempt.
+            </Term>
+            <Term label="Daily Puzzle">
+              when you missed yesterday&rsquo;s puzzle, you may watch one ad to repair that
+              day so your streak continues.
+            </Term>
+          </ul>
+          <p>
+            Each offer is a button you have to press; declining costs you nothing but the
+            reward.
           </p>
           <p>
             There are <B>no banner ads, no full-screen ads between puzzles and no ads when the
             app opens</B>. An ad never starts on its own. No puzzle, board size, game mode,
-            daily or weekly puzzle, practice drill or result sits behind an ad. Each classic,
-            daily, weekly and challenge game includes one free hint, and the guided moves in
-            technique packs and the practice explanations are always free. Mini boards, Speed
-            Round and the variants have no hints and never show an ad.
+            level, daily or weekly puzzle, practice drill or result sits behind an ad. Each 9×9
+            game includes one free hint, hint credits are also earned simply by playing, and
+            the guided moves in technique packs and the practice explanations are always free.
+            Mini boards, Speed Round and the variants have no hints and never show an ad.
           </p>
           <p>
             To serve and measure those ads, Google and its advertising partners may collect and
@@ -300,7 +332,23 @@ export default function SudokuStudioPrivacyPage() {
           </p>
         </Section>
 
-        <Section icon={Share2} title="7. Data sharing">
+        <Section icon={Save} title="7. Backup files you choose to save">
+          <p>
+            <B>Settings → Your data → Save a backup file</B> writes your games in progress,
+            completed games and settings into a single file and opens Android&rsquo;s share
+            sheet, so you can save it wherever you like. <B>The app does not upload it
+            anywhere.</B> Hint credits are not included, because they belong to the device they
+            were earned on.
+          </p>
+          <p>
+            <B>Restore from a backup</B> reads a file you pick and replaces the games, results
+            and settings on that device with its contents. A backup file contains the same
+            game data listed in section&nbsp;2 and nothing that identifies you; once you save
+            or send it somewhere, that place handles it under its own terms.
+          </p>
+        </Section>
+
+        <Section icon={Share2} title="8. Data sharing">
           <p>
             We do not sell, rent or trade personal information. We do not share your data with
             anyone for our own purposes, because we do not receive it in the first place.
@@ -308,8 +356,8 @@ export default function SudokuStudioPrivacyPage() {
           <p>
             The only data the app itself sends anywhere is the advertising data described in
             section&nbsp;4, sent directly from the Google Mobile Ads SDK to Google. Challenge
-            codes leave your device only when you share them yourself, as described in
-            section&nbsp;6. Under the CCPA/CPRA, personalised advertising may be considered a
+            codes and backup files leave your device only when you share or save them yourself,
+            as described in sections&nbsp;6 and&nbsp;7. Under the CCPA/CPRA, personalised advertising may be considered a
             &ldquo;sale&rdquo; or &ldquo;sharing&rdquo; of personal information; you can opt
             out through the in-app privacy controls above or by deleting your advertising ID at
             the device level.
@@ -320,12 +368,14 @@ export default function SudokuStudioPrivacyPage() {
           </p>
         </Section>
 
-        <Section icon={Trash2} title="8. Retention and deletion">
+        <Section icon={Trash2} title="9. Retention and deletion">
           <p>
             App data lives on your device for as long as the app is installed.{' '}
             <B>Uninstalling {APP} permanently deletes all of it</B> — games in progress,
             completed games, statistics, achievements, challenge results, hint credits and
-            settings. You can also erase everything without uninstalling from Android:{' '}
+            settings. Inside the app, <B>Settings → Your data → Reset all progress</B> erases
+            your games, results, statistics and achievements while keeping your hint credits
+            and settings. You can also erase everything without uninstalling from Android:{' '}
             <em>Settings → Apps → {APP} → Storage → Clear storage</em>.
           </p>
           <p>
@@ -335,8 +385,8 @@ export default function SudokuStudioPrivacyPage() {
           </p>
           <p>
             Because we hold no copy, there is nothing for us to delete on your behalf and no
-            account to close. A challenge code you have already sent to someone is outside the
-            app and cannot be recalled by us. To have advertising data deleted, use
+            account to close. A challenge code you have already sent to someone, or a backup
+            file you have saved elsewhere, is outside the app and cannot be recalled by us. To have advertising data deleted, use
             Google&rsquo;s controls at{' '}
             <A href="https://myaccount.google.com/data-and-privacy">
               myaccount.google.com/data-and-privacy
@@ -345,7 +395,7 @@ export default function SudokuStudioPrivacyPage() {
           </p>
         </Section>
 
-        <Section icon={Lock} title="9. Security">
+        <Section icon={Lock} title="10. Security">
           <p>
             Local data is stored in the app&rsquo;s private sandbox directory, which Android
             isolates from other applications. The app makes no network requests of its own, and
@@ -354,7 +404,7 @@ export default function SudokuStudioPrivacyPage() {
           </p>
         </Section>
 
-        <Section icon={Baby} title="10. Children">
+        <Section icon={Baby} title="11. Children">
           <p>
             {APP} is a general-audience puzzle game. It is not directed at children under 13 and
             we do not knowingly collect personal information from children — the app collects
@@ -363,7 +413,7 @@ export default function SudokuStudioPrivacyPage() {
           </p>
         </Section>
 
-        <Section icon={Scale} title="11. Your rights">
+        <Section icon={Scale} title="12. Your rights">
           <p>
             Depending on where you live, you may have the right to access, correct, delete or
             port your personal data, to object to or restrict processing, to withdraw consent,
@@ -371,7 +421,8 @@ export default function SudokuStudioPrivacyPage() {
           </p>
           <p>
             For data held on your device, you can exercise all of these directly: everything is
-            visible in the app and is removed by uninstalling it or clearing its storage. For
+            visible in the app, can be taken with you as a backup file, and is removed by
+            resetting your progress, uninstalling the app or clearing its storage. For
             advertising data, the controller is Google — use the consent controls in
             section&nbsp;5 or Google&rsquo;s own privacy tools. Where consent is the legal basis
             (GDPR Art.&nbsp;6(1)(a)), withdrawing it is as simple as reopening the form from{' '}
@@ -379,7 +430,7 @@ export default function SudokuStudioPrivacyPage() {
           </p>
         </Section>
 
-        <Section icon={RefreshCw} title="12. Changes to this policy">
+        <Section icon={RefreshCw} title="13. Changes to this policy">
           <p>
             If this policy changes materially, the updated version will be published at this URL
             with a new &ldquo;last updated&rdquo; date. Continued use of the app after an update
@@ -388,7 +439,7 @@ export default function SudokuStudioPrivacyPage() {
           </p>
         </Section>
 
-        <Section icon={Mail} title="13. Contact">
+        <Section icon={Mail} title="14. Contact">
           <p>
             Questions, requests or privacy concerns about {APP}:{' '}
             <A href={`mailto:${CONTACT}`}>{CONTACT}</A>

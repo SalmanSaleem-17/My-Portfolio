@@ -91,9 +91,10 @@ export default function SudokuStudioTermsPage() {
 
         <Section icon={Smartphone} title="2. The app and your licence">
           <p>
-            {APP} is a single-player Sudoku game. It includes 9×9 puzzles, smaller 4×4 and 6×6
-            boards, Diagonal, Killer and Irregular variants, a Daily Puzzle, Weekly stages,
-            Speed Round, Challenge a Friend, technique packs and practice drills. It needs no
+            {APP} is a single-player Sudoku game. It includes 9×9 puzzles, 120 Levels, smaller
+            4×4 and 6×6 boards, Diagonal, Killer and Irregular variants, a Daily Puzzle, Weekly
+            stages, Speed Round, Challenge a Friend, puzzles you enter yourself, technique
+            packs and practice drills. It needs no
             account and works without an internet connection.
           </p>
           <p>
@@ -106,16 +107,27 @@ export default function SudokuStudioTermsPage() {
         <Section icon={Gift} title="3. Hints and hint credits">
           <ul className={LIST}>
             <Term label="Free hints">
-              each classic, daily, weekly and challenge game on the 9×9 board includes one free
+              each game on the 9×9 board, including Hard and Expert levels, includes one free
               step-by-step hint. The guided moves in technique packs and the practice
               explanations are always free. Mini boards, Speed Round and the variants do not
               offer hints.
             </Term>
-            <Term label="Earning credits">
+            <Term label="Earning credits by playing">
+              hint credits are paid for finishing a Daily Puzzle on its own day, for daily
+              streaks, for clearing every fifth level, for earning a badge and for reaching a
+              new player level. Each of these rewards is paid once.
+            </Term>
+            <Term label="Earning credits from ads">
               in a game that offers hints, you can choose to watch one rewarded video ad to
               receive two hint credits. One credit reveals one further hint. Credits are added
               only when the ad provider confirms the reward was earned; closing an ad early
               earns nothing.
+            </Term>
+            <Term label="Other ad rewards">
+              a rewarded ad can also add one mistake to a level attempt that has run out of
+              them (up to twice per attempt), or repair yesterday&rsquo;s missed Daily Puzzle so
+              a streak continues. These are optional too, and are applied only when the ad
+              provider confirms the reward.
             </Term>
             <Term label="No cash value">
               hint credits are a feature of the game, not money or property. They cannot be
@@ -128,21 +140,23 @@ export default function SudokuStudioTermsPage() {
             </Term>
             <Term label="Availability of ads">
               rewarded ads depend on Google, your connection and your privacy choices, and may
-              not always be available. We do not promise that an ad, or the chance to earn
-              credits, will be offered at any particular time.
+              not always be available. We do not promise that an ad, or the reward that goes
+              with it, will be offered at any particular time.
             </Term>
           </ul>
           <p>
-            We may change how hints and credits work in a future version of the app, for
-            example how many credits an ad grants.
+            We may change how hints, credits and rewards work in a future version of the app,
+            for example how many credits an ad or a badge grants.
           </p>
         </Section>
 
         <Section icon={Trophy} title="4. Challenges, scores and achievements">
           <ul className={LIST}>
             <Term label="Game rules">
-              some games let you set a time limit or a mistake limit. Reaching the limit ends
-              that game. A puzzle you start for a given day or week counts for the day or week
+              some games let you set a time limit or a mistake limit, and every level has its
+              own. Reaching the limit ends that game. Easy levels are played on 4×4 boards,
+              Medium on 6×6 and Hard and Expert on 9×9. Levels unlock in order, and a level
+              awards one to three stars for how quickly it was solved. A puzzle you start for a given day or week counts for the day or week
               it was started in.
             </Term>
             <Term label="Challenge a Friend">
@@ -157,9 +171,14 @@ export default function SudokuStudioTermsPage() {
               harass or spam anyone.
             </Term>
             <Term label="No cash value">
-              scores, times, streaks, statistics, badges and achievements are for your own
-              enjoyment. They have no monetary value, are stored only on your device, and are
+              scores, times, stars, streaks, statistics, experience, player levels, badges and
+              achievements are for your own enjoyment. They have no monetary value, are stored only on your device, and are
               lost if you uninstall the app or clear its data.
+            </Term>
+            <Term label="Backups and resets">
+              you can save a backup file and restore it later; keeping that file safe is up to
+              you. Hint credits are not part of a backup. Resetting your progress erases games
+              and results permanently, and rewards already paid are not paid again.
             </Term>
           </ul>
         </Section>
