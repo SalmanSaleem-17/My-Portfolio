@@ -42,8 +42,8 @@ const LEGAL = [
   { label: 'Calc441 — Privacy Policy', href: '/privacy/calc441' },
   { label: 'Checkers Master — Privacy Policy', href: '/privacy/checkers-master' },
   { label: 'ScanDoc — Privacy Policy', href: '/privacy/scandoc' },
-  { label: 'Sudoku Studio — Privacy Policy', href: '/privacy/sudoku-studio' },
-  { label: 'Sudoku Studio — Terms of Service', href: '/terms/sudoku-studio' },
+  { label: 'Sudoku Vault — Privacy Policy', href: '/privacy/sudoku-studio' },
+  { label: 'Sudoku Vault — Terms of Service', href: '/terms/sudoku-studio' },
 ]
 
 const SOCIAL = [

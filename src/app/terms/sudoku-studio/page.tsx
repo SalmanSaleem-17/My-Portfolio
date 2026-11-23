@@ -1,5 +1,6 @@
 // src/app/terms/sudoku-studio/page.tsx
-// Terms of Service for the Sudoku Studio Android app. Linked from the app's
+// Terms of Service for the Sudoku Vault: Logical Puzzles Android app (first named Sudoku Studio,
+// which is why the URL says sudoku-studio; that URL is registered in the Play Console). Linked from the app's
 // Settings → About and privacy → Terms of service row and from the Google Play
 // Console (App content → Trader status and Terms of Service).
 //
@@ -15,7 +16,10 @@ import JsonLd from '@/components/JsonLd'
 import { A, B, LIST, LegalPage, Section, Term } from '@/components/legal/LegalPrimitives'
 
 const url = `${SITE.url}/terms/sudoku-studio`
-const APP = 'Sudoku Studio'
+// The name used in running text, the full store title, and the name the app was first listed under.
+const APP = 'Sudoku Vault'
+const FULL_NAME = 'Sudoku Vault: Logical Puzzles'
+const FORMERLY = 'Sudoku Studio'
 const PACKAGE = 'com.sudoku.studio'
 const CONTACT = 'contact@salmansaleem.dev'
 const EFFECTIVE = 'November 22, 2026'
@@ -23,7 +27,7 @@ const UPDATED = 'November 23, 2026'
 
 export const metadata: Metadata = {
   title: `${APP} Terms of Service`,
-  description: `Terms of Service for ${APP}, the offline Sudoku game for Android: your licence to use the app, how hint credits and optional rewarded ads work, challenges and scores, acceptable use, and the limits of our liability.`,
+  description: `Terms of Service for ${FULL_NAME}, the offline Sudoku game for Android: your licence to use the app, how hint credits and optional rewarded ads work, challenges and scores, acceptable use, and the limits of our liability.`,
   alternates: { canonical: url },
   openGraph: {
     title: `${APP} — Terms of Service`,
@@ -35,7 +39,7 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 }
 
-export default function SudokuStudioTermsPage() {
+export default function SudokuVaultTermsPage() {
   return (
     <>
       <JsonLd
@@ -45,7 +49,7 @@ export default function SudokuStudioTermsPage() {
           '@id': `${url}/#webpage`,
           url,
           name: `${APP} — Terms of Service`,
-          description: `Terms of Service for the ${APP} Android application.`,
+          description: `Terms of Service for the ${FULL_NAME} Android application.`,
           inLanguage: SITE.language,
           isPartOf: { '@id': `${SITE.url}/#website` },
           datePublished: '2026-11-22',
@@ -61,12 +65,13 @@ export default function SudokuStudioTermsPage() {
         updated={UPDATED}
         appliesTo={
           <>
-            Applies to {APP} (<code className="font-mono">{PACKAGE}</code>) on Google Play.
+            Applies to {FULL_NAME} (<code className="font-mono">{PACKAGE}</code>) on Google Play,
+            previously named {FORMERLY}.
           </>
         }
         summary={
           <>
-            {APP} is a free Sudoku game you play on your own device. You may use it for
+            {FULL_NAME} (&ldquo;{APP}&rdquo;) is a free Sudoku game you play on your own device. You may use it for
             personal enjoyment; please do not copy, resell or tamper with it. Hint credits,
             scores and achievements are part of the game, have no cash value, and live only on
             your device. Challenge results are produced on each player&rsquo;s own device and
@@ -124,10 +129,15 @@ export default function SudokuStudioTermsPage() {
               earns nothing.
             </Term>
             <Term label="Other ad rewards">
-              a rewarded ad can also add one mistake to a level attempt that has run out of
-              them (up to twice per attempt), or repair yesterday&rsquo;s missed Daily Puzzle so
-              a streak continues. These are optional too, and are applied only when the ad
-              provider confirms the reward.
+              a rewarded ad can also add one mistake or some extra time to a level attempt
+              that has run out of either (each up to twice per attempt), add one mistake to a
+              Play Now game that reached its mistake limit (up to twice per game), extend a
+              finished Speed Round by 30 seconds (once per round), pay a finished game&rsquo;s
+              hint credits a second time (once per game), pay a daily gift of three hint
+              credits (once per day), unlock a board theme, or repair yesterday&rsquo;s missed
+              Daily Puzzle so a streak continues. These are optional too, and are applied only
+              when the ad provider confirms the reward. Three board themes are always free;
+              an unlocked theme stays unlocked on that device only.
             </Term>
             <Term label="No cash value">
               hint credits are a feature of the game, not money or property. They cannot be
@@ -177,7 +187,7 @@ export default function SudokuStudioTermsPage() {
             </Term>
             <Term label="Backups and resets">
               you can save a backup file and restore it later; keeping that file safe is up to
-              you. Hint credits are not part of a backup. Resetting your progress erases games
+              you. Hint credits and unlocked board themes are not part of a backup. Resetting your progress erases games
               and results permanently, and rewards already paid are not paid again.
             </Term>
           </ul>

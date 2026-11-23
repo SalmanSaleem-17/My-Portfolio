@@ -1,5 +1,6 @@
 // src/app/privacy/sudoku-studio/page.tsx
-// Privacy policy for the Sudoku Studio Android app. Required by Google Play
+// Privacy policy for the Sudoku Vault: Logical Puzzles Android app (first named Sudoku Studio,
+// which is why the URL says sudoku-studio; that URL is registered in the Play Console). Required by Google Play
 // (Data safety + App content) and by AdMob, and linked from the app's
 // Settings → About and privacy → Privacy policy row.
 //
@@ -15,7 +16,10 @@ import JsonLd from '@/components/JsonLd'
 import { A, B, LIST, LegalPage, Section, Term } from '@/components/legal/LegalPrimitives'
 
 const url = `${SITE.url}/privacy/sudoku-studio`
-const APP = 'Sudoku Studio'
+// The name used in running text, the full store title, and the name the app was first listed under.
+const APP = 'Sudoku Vault'
+const FULL_NAME = 'Sudoku Vault: Logical Puzzles'
+const FORMERLY = 'Sudoku Studio'
 const PACKAGE = 'com.sudoku.studio'
 const CONTACT = 'contact@salmansaleem.dev'
 const EFFECTIVE = 'November 22, 2026'
@@ -23,7 +27,7 @@ const UPDATED = 'November 23, 2026'
 
 export const metadata: Metadata = {
   title: `${APP} Privacy Policy`,
-  description: `Privacy policy for ${APP}, the offline Sudoku game for Android. What the app stores on your device, the permissions it needs, what a shared challenge code or backup file contains, how optional Google AdMob rewarded ads work, and how to change your ad choices.`,
+  description: `Privacy policy for ${FULL_NAME}, the offline Sudoku game for Android. What the app stores on your device, the permissions it needs, what a shared challenge code or backup file contains, how optional Google AdMob rewarded ads work, and how to change your ad choices.`,
   alternates: { canonical: url },
   openGraph: {
     title: `${APP} — Privacy Policy`,
@@ -35,7 +39,7 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 }
 
-export default function SudokuStudioPrivacyPage() {
+export default function SudokuVaultPrivacyPage() {
   return (
     <>
       <JsonLd
@@ -47,7 +51,7 @@ export default function SudokuStudioPrivacyPage() {
               '@id': `${url}/#webpage`,
               url,
               name: `${APP} — Privacy Policy`,
-              description: `Privacy policy for the ${APP} Android application.`,
+              description: `Privacy policy for the ${FULL_NAME} Android application.`,
               inLanguage: SITE.language,
               isPartOf: { '@id': `${SITE.url}/#website` },
               about: { '@id': `${url}/#app` },
@@ -58,7 +62,8 @@ export default function SudokuStudioPrivacyPage() {
             {
               '@type': 'SoftwareApplication',
               '@id': `${url}/#app`,
-              name: APP,
+              name: FULL_NAME,
+              alternateName: [APP, FORMERLY],
               applicationCategory: 'GameApplication',
               applicationSubCategory: 'Puzzle Game',
               operatingSystem: 'Android',
@@ -76,12 +81,13 @@ export default function SudokuStudioPrivacyPage() {
         updated={UPDATED}
         appliesTo={
           <>
-            Applies to {APP} (<code className="font-mono">{PACKAGE}</code>) on Google Play.
+            Applies to {FULL_NAME} (<code className="font-mono">{PACKAGE}</code>) on Google Play,
+            previously named {FORMERLY}.
           </>
         }
         summary={
           <>
-            {APP} is a Sudoku game that plays entirely offline. There are no accounts, no
+            {FULL_NAME} (&ldquo;{APP}&rdquo;) is a Sudoku game that plays entirely offline. There are no accounts, no
             sign-up, no cloud saves, no analytics and no servers of ours. Your puzzles,
             progress, statistics and settings stay on your device; the only game data that
             ever leaves it is a challenge code or a backup file that you choose to share or
@@ -147,9 +153,10 @@ export default function SudokuStudioPrivacyPage() {
             </Term>
             <Term label="Hint credits and rewards">
               your current credit balance, plus a short record of each reward paid and each
-              credit spent (an identifier such as the ad attempt or the level cleared, and a
-              timestamp). These records exist only so a reward or a spend can never be counted
-              twice.
+              credit spent (an identifier such as the ad attempt, the level cleared, the board
+              theme unlocked or the date of a daily gift, and a timestamp). These records exist
+              only so a reward or a spend can never be counted twice, and so an unlocked board
+              theme stays unlocked.
             </Term>
             <Term label="Hint explanations">
               the explanation for a hint you have already revealed, so reopening it for the
@@ -209,8 +216,8 @@ export default function SudokuStudioPrivacyPage() {
         <Section icon={Megaphone} title="4. Advertising (Google AdMob)">
           <p>
             {APP} shows exactly one kind of ad: an <B>optional rewarded video</B>, served
-            through <B>Google AdMob</B>. It plays only when you ask for it, in one of three
-            places:
+            through <B>Google AdMob</B>. It plays only when you ask for it, in the places
+            listed here:
           </p>
           <ul className={LIST}>
             <Term label="Hint panel">
@@ -218,8 +225,29 @@ export default function SudokuStudioPrivacyPage() {
               receive two hint credits.
             </Term>
             <Term label="Levels">
-              when a level ends because you reached its mistake limit, you may watch one ad to
-              get one more mistake and keep playing, up to twice per level attempt.
+              when a level ends because you reached its mistake limit or ran out of time, you
+              may watch one ad to get one more mistake or some extra time and keep playing,
+              each up to twice per level attempt.
+            </Term>
+            <Term label="Play Now">
+              when a game with a mistake limit ends on that limit, you may watch one ad to get
+              one more mistake, up to twice per game.
+            </Term>
+            <Term label="Speed Round">
+              when a round ends, you may watch one ad to play it for 30 more seconds, once per
+              round.
+            </Term>
+            <Term label="Results">
+              when a finished game paid hint credits, you may watch one ad to receive the same
+              number again, once per game.
+            </Term>
+            <Term label="Daily gift">
+              once a day, from the home screen or Settings, you may watch one ad to receive
+              three hint credits.
+            </Term>
+            <Term label="Board themes">
+              three board themes are free; each of the others can be unlocked on your device
+              by watching one ad.
             </Term>
             <Term label="Daily Puzzle">
               when you missed yesterday&rsquo;s puzzle, you may watch one ad to repair that
@@ -337,8 +365,8 @@ export default function SudokuStudioPrivacyPage() {
             <B>Settings → Your data → Save a backup file</B> writes your games in progress,
             completed games and settings into a single file and opens Android&rsquo;s share
             sheet, so you can save it wherever you like. <B>The app does not upload it
-            anywhere.</B> Hint credits are not included, because they belong to the device they
-            were earned on.
+            anywhere.</B> Hint credits and unlocked board themes are not included, because they
+            belong to the device they were earned on.
           </p>
           <p>
             <B>Restore from a backup</B> reads a file you pick and replaces the games, results
@@ -372,14 +400,14 @@ export default function SudokuStudioPrivacyPage() {
           <p>
             App data lives on your device for as long as the app is installed.{' '}
             <B>Uninstalling {APP} permanently deletes all of it</B> — games in progress,
-            completed games, statistics, achievements, challenge results, hint credits and
-            settings. Inside the app, <B>Settings → Your data → Reset all progress</B> erases
-            your games, results, statistics and achievements while keeping your hint credits
-            and settings. You can also erase everything without uninstalling from Android:{' '}
+            completed games, statistics, achievements, challenge results, hint credits, unlocked
+            board themes and settings. Inside the app, <B>Settings → Your data → Reset all progress</B> erases
+            your games, results, statistics and achievements while keeping your hint credits,
+            unlocked board themes and settings. You can also erase everything without uninstalling from Android:{' '}
             <em>Settings → Apps → {APP} → Storage → Clear storage</em>.
           </p>
           <p>
-            Hint credits exist only on your device. They are not linked to any account, cannot
+            Hint credits and unlocked board themes exist only on your device. They are not linked to any account, cannot
             be transferred to another device, and cannot be restored by us after they are
             deleted.
           </p>
