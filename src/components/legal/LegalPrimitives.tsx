@@ -72,6 +72,7 @@ export function LegalPage({
   app,
   document,
   effective,
+  updated,
   appliesTo,
   summary,
   caption,
@@ -80,6 +81,8 @@ export function LegalPage({
   app: string
   document: string
   effective: string
+  /** Date of the latest revision; defaults to the effective date. */
+  updated?: string
   appliesTo: React.ReactNode
   summary: React.ReactNode
   caption: string
@@ -109,7 +112,7 @@ export function LegalPage({
               </span>
             </h1>
             <p className="text-sm font-bold text-slate-500 dark:text-slate-400">
-              Effective {effective} · Last updated {effective}
+              Effective {effective} · Last updated {updated ?? effective}
             </p>
             <p className="mt-1 text-[13px] font-medium text-slate-400 dark:text-slate-500">{appliesTo}</p>
 

@@ -1,13 +1,13 @@
 // src/app/terms/sudoku-studio/page.tsx
 // Terms of Service for the Sudoku Studio Android app. Linked from the app's
-// Settings → Terms of service row and from the Google Play Console
-// (App content → Trader status and Terms of Service).
+// Settings → About and privacy → Terms of service row and from the Google Play
+// Console (App content → Trader status and Terms of Service).
 //
 // Static server component — no interactivity, so it renders and caches as HTML.
 
 import type { Metadata } from 'next'
 import {
-  FileText, Smartphone, Gift, Megaphone, Ban, Copyright, Wrench,
+  FileText, Smartphone, Gift, Trophy, Megaphone, Ban, Copyright, Wrench,
   TriangleAlert, Scale, Power, Gavel, RefreshCw, Mail,
 } from 'lucide-react'
 import { SITE } from '@/utils/seo'
@@ -19,10 +19,11 @@ const APP = 'Sudoku Studio'
 const PACKAGE = 'com.sudoku.studio'
 const CONTACT = 'contact@salmansaleem.dev'
 const EFFECTIVE = 'November 22, 2026'
+const UPDATED = 'November 23, 2026'
 
 export const metadata: Metadata = {
   title: `${APP} Terms of Service`,
-  description: `Terms of Service for ${APP}, the offline classic 9×9 Sudoku game for Android: your licence to use the app, how hint credits and optional rewarded ads work, acceptable use, and the limits of our liability.`,
+  description: `Terms of Service for ${APP}, the offline Sudoku game for Android: your licence to use the app, how hint credits and optional rewarded ads work, challenges and scores, acceptable use, and the limits of our liability.`,
   alternates: { canonical: url },
   openGraph: {
     title: `${APP} — Terms of Service`,
@@ -48,7 +49,7 @@ export default function SudokuStudioTermsPage() {
           inLanguage: SITE.language,
           isPartOf: { '@id': `${SITE.url}/#website` },
           datePublished: '2026-11-22',
-          dateModified: '2026-11-22',
+          dateModified: '2026-11-23',
           publisher: { '@id': `${SITE.url}/#person` },
         }}
       />
@@ -57,6 +58,7 @@ export default function SudokuStudioTermsPage() {
         app={APP}
         document="Terms of Service"
         effective={EFFECTIVE}
+        updated={UPDATED}
         appliesTo={
           <>
             Applies to {APP} (<code className="font-mono">{PACKAGE}</code>) on Google Play.
@@ -65,13 +67,14 @@ export default function SudokuStudioTermsPage() {
         summary={
           <>
             {APP} is a free Sudoku game you play on your own device. You may use it for
-            personal enjoyment; please do not copy, resell or tamper with it. Hint credits are
-            an in-game convenience with no cash value, and they live only on your device. The
-            app is provided as it is, without guarantees. Your legal rights as a consumer are
-            not reduced by anything here.
+            personal enjoyment; please do not copy, resell or tamper with it. Hint credits,
+            scores and achievements are part of the game, have no cash value, and live only on
+            your device. Challenge results are produced on each player&rsquo;s own device and
+            are not checked by us. The app is provided as it is, without guarantees. Your legal
+            rights as a consumer are not reduced by anything here.
           </>
         }
-        caption={`${APP} · Classic 9×9 Sudoku · Plays completely offline`}
+        caption={`${APP} · Sudoku puzzles · Plays completely offline`}
       >
         <Section icon={FileText} title="1. Agreement to these terms">
           <p>
@@ -88,8 +91,10 @@ export default function SudokuStudioTermsPage() {
 
         <Section icon={Smartphone} title="2. The app and your licence">
           <p>
-            {APP} is a single-player, classic 9×9 Sudoku game. It needs no account and works
-            without an internet connection.
+            {APP} is a single-player Sudoku game. It includes 9×9 puzzles, smaller 4×4 and 6×6
+            boards, Diagonal, Killer and Irregular variants, a Daily Puzzle, Weekly stages,
+            Speed Round, Challenge a Friend, technique packs and practice drills. It needs no
+            account and works without an internet connection.
           </p>
           <p>
             We grant you a personal, non-exclusive, non-transferable, revocable licence to
@@ -101,13 +106,16 @@ export default function SudokuStudioTermsPage() {
         <Section icon={Gift} title="3. Hints and hint credits">
           <ul className={LIST}>
             <Term label="Free hints">
-              every puzzle includes one free step-by-step hint, and the practice explanations
-              are always free.
+              each classic, daily, weekly and challenge game on the 9×9 board includes one free
+              step-by-step hint. The guided moves in technique packs and the practice
+              explanations are always free. Mini boards, Speed Round and the variants do not
+              offer hints.
             </Term>
             <Term label="Earning credits">
-              you can choose to watch one rewarded video ad to receive two hint credits. One
-              credit reveals one further hint. Credits are added only when the ad provider
-              confirms the reward was earned; closing an ad early earns nothing.
+              in a game that offers hints, you can choose to watch one rewarded video ad to
+              receive two hint credits. One credit reveals one further hint. Credits are added
+              only when the ad provider confirms the reward was earned; closing an ad early
+              earns nothing.
             </Term>
             <Term label="No cash value">
               hint credits are a feature of the game, not money or property. They cannot be
@@ -130,7 +138,33 @@ export default function SudokuStudioTermsPage() {
           </p>
         </Section>
 
-        <Section icon={Megaphone} title="4. Advertising and third-party services">
+        <Section icon={Trophy} title="4. Challenges, scores and achievements">
+          <ul className={LIST}>
+            <Term label="Game rules">
+              some games let you set a time limit or a mistake limit. Reaching the limit ends
+              that game. A puzzle you start for a given day or week counts for the day or week
+              it was started in.
+            </Term>
+            <Term label="Challenge a Friend">
+              the app creates challenge and result codes on your device, and you decide whom to
+              send them to. There is no online play and no server of ours involved. Results are
+              produced on each player&rsquo;s own device and are <B>not verified by us</B>; we
+              run no leaderboard and cannot settle disagreements between players.
+            </Term>
+            <Term label="Sharing responsibly">
+              you are responsible for where you send a code and for following the rules of the
+              app or service you share it through. Please do not use challenge messages to
+              harass or spam anyone.
+            </Term>
+            <Term label="No cash value">
+              scores, times, streaks, statistics, badges and achievements are for your own
+              enjoyment. They have no monetary value, are stored only on your device, and are
+              lost if you uninstall the app or clear its data.
+            </Term>
+          </ul>
+        </Section>
+
+        <Section icon={Megaphone} title="5. Advertising and third-party services">
           <p>
             The only ads in {APP} are the optional rewarded videos described above, served by{' '}
             <B>Google AdMob</B>. We do not control the content of those ads and are not
@@ -143,7 +177,7 @@ export default function SudokuStudioTermsPage() {
           </p>
         </Section>
 
-        <Section icon={Ban} title="5. Acceptable use">
+        <Section icon={Ban} title="6. Acceptable use">
           <p>You agree not to:</p>
           <ul className={LIST}>
             <li>copy, resell, rent, sublicense or redistribute the app or any part of it;</li>
@@ -155,11 +189,12 @@ export default function SudokuStudioTermsPage() {
               interfere with the advertising in the app, including using automated means to
               request, view or click ads, or tampering with how rewards are granted;
             </li>
+            <li>create or alter challenge or result codes to misrepresent a result;</li>
             <li>use the app in any way that breaks the law.</li>
           </ul>
         </Section>
 
-        <Section icon={Copyright} title="6. Intellectual property">
+        <Section icon={Copyright} title="7. Intellectual property">
           <p>
             The app, including its design, code, artwork, icon, text and its collection of
             puzzles, belongs to us or our licensors and is protected by copyright and other
@@ -168,32 +203,33 @@ export default function SudokuStudioTermsPage() {
           </p>
         </Section>
 
-        <Section icon={Wrench} title="7. Updates and availability">
+        <Section icon={Wrench} title="8. Updates and availability">
           <p>
-            We may update the app to fix problems, add or remove features, or keep it
-            compatible with new versions of Android. We may also stop offering or supporting
-            the app at any time. We are not obliged to provide any particular update, and an
-            update may be required for the app to keep working on your device.
+            We may update the app to fix problems, add or remove features or game modes, or
+            keep it compatible with new versions of Android. We may also stop offering or
+            supporting the app at any time. We are not obliged to provide any particular
+            update, and an update may be required for the app to keep working on your device.
           </p>
         </Section>
 
-        <Section icon={TriangleAlert} title="8. No warranty">
+        <Section icon={TriangleAlert} title="9. No warranty">
           <p>
             {APP} is provided <B>&ldquo;as is&rdquo; and &ldquo;as available&rdquo;</B>, free of
             charge and for entertainment. To the fullest extent the law allows, we make no
             promises that it will be error-free, uninterrupted, or fit for any particular
-            purpose, or that your saved progress, statistics or hint credits will never be
-            lost. Hints are generated by the app&rsquo;s own logic and are offered as a playing
-            aid only.
+            purpose, or that your saved progress, statistics, achievements or hint credits will
+            never be lost. Hints are generated by the app&rsquo;s own logic and are offered as
+            a playing aid only.
           </p>
         </Section>
 
-        <Section icon={Scale} title="9. Limitation of liability">
+        <Section icon={Scale} title="10. Limitation of liability">
           <p>
             To the fullest extent the law allows, we are not liable for any indirect,
             incidental or consequential loss arising from your use of the app, or for the loss
-            of game data or hint credits. Because the app is free, our total liability to you
-            for any claim relating to it is limited to the amount you paid us for it, if any.
+            of game data, scores or hint credits. Because the app is free, our total liability
+            to you for any claim relating to it is limited to the amount you paid us for it, if
+            any.
           </p>
           <p>
             <B>Nothing in these terms limits or excludes any right you have under consumer
@@ -202,16 +238,16 @@ export default function SudokuStudioTermsPage() {
           </p>
         </Section>
 
-        <Section icon={Power} title="10. Ending these terms">
+        <Section icon={Power} title="11. Ending these terms">
           <p>
             You can end this agreement at any time by uninstalling the app. Your licence ends
             automatically if you break these terms, in which case you must stop using the app
-            and remove it from your devices. Sections&nbsp;6, 8, 9 and 11 continue to apply
+            and remove it from your devices. Sections&nbsp;7, 9, 10 and 12 continue to apply
             after the agreement ends.
           </p>
         </Section>
 
-        <Section icon={Gavel} title="11. Governing law">
+        <Section icon={Gavel} title="12. Governing law">
           <p>
             These terms are governed by the laws of {SITE.location.country}. If you are a
             consumer, you also keep the protection of any mandatory laws of the country where
@@ -220,15 +256,15 @@ export default function SudokuStudioTermsPage() {
           </p>
         </Section>
 
-        <Section icon={RefreshCw} title="12. Changes to these terms">
+        <Section icon={RefreshCw} title="13. Changes to these terms">
           <p>
             We may revise these terms from time to time. The updated version will be published
-            at this URL with a new effective date. Continued use of the app after an update
-            constitutes acceptance of the revised terms.
+            at this URL with a new &ldquo;last updated&rdquo; date. Continued use of the app
+            after an update constitutes acceptance of the revised terms.
           </p>
         </Section>
 
-        <Section icon={Mail} title="13. Contact">
+        <Section icon={Mail} title="14. Contact">
           <p>
             Questions about these terms or about {APP}:{' '}
             <A href={`mailto:${CONTACT}`}>{CONTACT}</A>

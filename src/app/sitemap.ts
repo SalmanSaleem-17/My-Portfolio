@@ -58,7 +58,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       // Privacy policy for the Sudoku Studio game - linked from the app's
       // Settings screen and verified by Google Play / AdMob.
       url: `${SITE.url}/privacy/sudoku-studio`,
-      lastModified: new Date('2026-11-22'),
+      lastModified: new Date('2026-11-23'),
       changeFrequency: 'yearly',
       priority: 0.3,
     },
@@ -66,7 +66,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       // Terms of Service for the Sudoku Studio game - linked from the app's
       // Settings screen and from Google Play's App content declaration.
       url: `${SITE.url}/terms/sudoku-studio`,
-      lastModified: new Date('2026-11-22'),
+      lastModified: new Date('2026-11-23'),
       changeFrequency: 'yearly',
       priority: 0.3,
     },
