@@ -42,7 +42,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
       // Privacy policy for the Checkers Master: Draughts game - linked from the
       // app's Settings screen and verified by Google Play / AdMob.
       url: `${SITE.url}/privacy/checkers-master`,
-      lastModified: new Date('2026-09-17'),
+      lastModified: new Date('2026-11-27'),
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
+    {
+      // Terms of Service for the Checkers Master: Draughts game - linked from its
+      // privacy policy and from Google Play's App content declaration.
+      url: `${SITE.url}/terms/checkers-master`,
+      lastModified: new Date('2026-11-27'),
       changeFrequency: 'yearly',
       priority: 0.3,
     },

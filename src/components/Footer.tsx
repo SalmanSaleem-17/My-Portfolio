@@ -41,6 +41,7 @@ const LEGAL = [
   { label: 'PrintBridge — Privacy Policy', href: '/privacy/printbridge' },
   { label: 'Calc441 — Privacy Policy', href: '/privacy/calc441' },
   { label: 'Checkers Master — Privacy Policy', href: '/privacy/checkers-master' },
+  { label: 'Checkers Master — Terms of Service', href: '/terms/checkers-master' },
   { label: 'ScanDoc — Privacy Policy', href: '/privacy/scandoc' },
   { label: 'Sudoku Vault — Privacy Policy', href: '/privacy/sudoku-studio' },
   { label: 'Sudoku Vault — Terms of Service', href: '/terms/sudoku-studio' },
